@@ -103,6 +103,7 @@ func (s *scraper) scrapeJobDetails(url string) (*job.Job, error) {
 	defer collectorPool.Put(NewCollector())
 
 	j := job.New()
+	j.Link = url
 	c.OnHTML("a[class^='JobDescriptionLeftColumn_name__']", func(e *colly.HTMLElement) {
 		j.Company = e.ChildText("h2")
 		fmt.Printf("Company: %s\n", j.Company)
