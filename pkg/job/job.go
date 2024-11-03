@@ -46,3 +46,37 @@ func (info *Info) MarshalJSON() ([]byte, error) {
 		"Tags":           info.Tags,
 	})
 }
+
+func (info *Info) UnmarshalJSON(data []byte) error {
+	var v map[string]interface{}
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	for key, value := range v {
+		switch key {
+		case "EmploymentType":
+			info.EmploymentType = NewEmploymentType(value.(string))
+		case "Seniority":
+			info.Seniority = NewSeniority(value.(string))
+		case "Location":
+			info.Location = value.(string)
+		case "NumberToHire":
+			info.NumberToHire = int(value.(float64))
+		case "Experience":
+			info.Experience = value.(string)
+		case "Salary":
+			info.Salary = value.(string)
+		case "Remote":
+			info.Remote = NewRemote(value.(string))
+		case "Tags":
+			info.Tags = func() []string {
+				tags := []string{}
+				for _, tag := range value.([]interface{}) {
+					tags = append(tags, tag.(string))
+				}
+				return tags
+			}()
+		}
+	}
+	return nil
+}
