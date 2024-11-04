@@ -1,12 +1,14 @@
 package main
 
 import (
+	"cake-scraper/pkg/deeplx"
 	"cake-scraper/pkg/htmlparser"
 	"cake-scraper/pkg/job"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 func readJobs() ([]*job.Job, error) {
@@ -24,24 +26,39 @@ func readJobs() ([]*job.Job, error) {
 	return jobs, nil
 }
 
+func preprocess(jobs []*job.Job) {
+	for _, j := range jobs[5:6] {
+		var err error
+		jd := htmlparser.Parse(j.Contents["Job Description"])
+		reqs := htmlparser.Parse(j.Contents["Requirements"])
+		jd, err = deeplx.Translate(jd, "ZH-TW", "EN")
+		if err != nil {
+			log.Fatalf("Failed to translate: %v", err)
+		}
+		reqs, err = deeplx.Translate(reqs, "ZH-TW", "EN")
+		if err != nil {
+			log.Fatalf("Failed to translate: %v", err)
+		}
+		j.Contents["Job Description"] = jd
+		j.Contents["Requirements"] = reqs
+	}
+}
+
 func main() {
 	jobs, _ := readJobs()
-	summaries := map[string]string{}
+	preprocess(jobs)
+	analyzer := job.NewJobAnalyzer()
+	summaries := make([]string, len(jobs))
 	for _, j := range jobs {
-		j.Contents["Job Description"] = htmlparser.Parse(j.Contents["Job Description"])
-		j.Contents["Requirements"] = htmlparser.Parse(j.Contents["Requirements"])
-		analyzer := job.NewJobAnalyzer()
 		summary, err := analyzer.Analyze(j)
 		if err != nil {
 			log.Fatalf("Failed to analyze job: %v", err)
 		}
-		summaries[fmt.Sprintf("%s - %s", j.Company, j.Title)] = summary
+		fmt.Println(summary)
+		summaries = append(summaries, summary)
 	}
-	summariesJSON, err := json.MarshalIndent(summaries, "", "  ")
-	if err != nil {
-		log.Fatalf("Failed to marshal summaries: %v", err)
-	}
-	if err := os.WriteFile("summaries.json", summariesJSON, 0644); err != nil {
-		log.Fatalf("Failed to write summaries: %v", err)
+	jsonData := "[\n" + strings.Join(summaries, ",\n") + "\n]"
+	if err := os.WriteFile("summaries.json", []byte(jsonData), 0644); err != nil {
+		log.Fatalf("Failed to write jobs: %v", err)
 	}
 }

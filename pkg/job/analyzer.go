@@ -2,15 +2,16 @@ package job
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"strings"
 
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/llms/ollama"
 )
 
 const (
-	model        = "llama3"
-	systemPrompt = "You are now a professional headhunter who is very good at analyzing jobs."
+	model        = "llama3.2"
+	systemPrompt = "You are an experienced Software Engineer who is very good at look for jobs."
 )
 
 type JobAnalyzer struct {
@@ -30,8 +31,27 @@ func NewJobAnalyzer() *JobAnalyzer {
 	}
 }
 
+func extractResponseJson(response string) string {
+	beginPattern := "{\n"
+	endPattern := "\n}"
+	begin := strings.Index(response, beginPattern)
+	end := strings.LastIndex(response, endPattern)
+	if begin == -1 || end == -1 {
+		return response
+	}
+	response = response[begin+len(beginPattern) : end]
+	return strings.Trim(response, " \n")
+}
+
 func (ja *JobAnalyzer) Analyze(j *Job) (string, error) {
+	provideData := j.Contents
+	provideData["Company"] = j.Company
+	provideData["Title"] = j.Title
 	ctx := context.Background()
+	jsonData, err := json.MarshalIndent(provideData, "", "    ")
+	if err != nil {
+		return "", err
+	}
 	resp, err := ja.llm.GenerateContent(
 		ctx,
 		[]llms.MessageContent{
@@ -39,16 +59,20 @@ func (ja *JobAnalyzer) Analyze(j *Job) (string, error) {
 				Role: llms.ChatMessageTypeHuman,
 				Parts: []llms.ContentPart{
 					llms.TextContent{
-						Text: fmt.Sprintf(
-							`I am analyzing the job: %s\n
-							Here is the job description: %s\n
-							Here are the job requirements: %s\n
-							Please provide a summary of the job.
-							`,
-							j.Title,
-							j.Contents["Job Description"],
-							j.Contents["Requirements"],
-						),
+						Text: `
+Organize the key details from the provided job information in JSON format as follows:
+
+{
+	"Company": "",
+	"Title": "",
+	"Programming Languages": [],
+	"Required Skills": [],
+	"Preferred Skills": []
+}
+
+If any information is missing, use "Unknown" as the placeholder. Do not add or modify any fields other than the ones listed above.
+Job information:
+` + "```json\n" + string(jsonData) + "\n```",
 					},
 				},
 			},
@@ -58,5 +82,5 @@ func (ja *JobAnalyzer) Analyze(j *Job) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return resp.Choices[0].Content, nil
+	return extractResponseJson(resp.Choices[0].Content), nil
 }
