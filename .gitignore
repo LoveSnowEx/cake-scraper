@@ -27,11 +27,11 @@ go.work
 # End of https://www.toptal.com/developers/gitignore/api/go
 
 # Direnv and Devenv
-
 .devenv
 .direnv
 
 # Generated files
+out/
 
-jobs.json
-summaries.json
+# .env file
+.env
