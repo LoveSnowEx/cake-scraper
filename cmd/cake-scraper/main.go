@@ -24,7 +24,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := os.WriteFile("jobs.json", jobsJson, 0644); err != nil {
+	os.MkdirAll("out", 0755)
+	if err := os.WriteFile("out/jobs.json", jobsJson, 0644); err != nil {
 		log.Fatal(err)
 	}
 }
