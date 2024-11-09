@@ -14,19 +14,17 @@ type JobTestSuite struct {
 
 func (s *JobTestSuite) TestMarshalJSONAndUnmarshalJSON() {
 	j := &job.Job{
-		Company: "Google",
-		Title:   "Software Engineer",
-		Link:    "https://google.com",
-		Info: job.Info{
-			EmploymentType: job.FullTime,
-			Seniority:      job.MidSeniorLevel,
-			Location:       "Mountain View, CA",
-			NumberToHire:   10,
-			Experience:     "Mid-Level",
-			Salary:         "$100,000",
-			Remote:         job.FullRemote,
-			Tags:           []string{"Go", "Python"},
-		},
+		Company:        "Google",
+		Title:          "Software Engineer",
+		Link:           "https://google.com",
+		EmploymentType: job.FullTime,
+		Seniority:      job.MidSeniorLevel,
+		Location:       "Mountain View, CA",
+		NumberToHire:   10,
+		Experience:     "Mid-Level",
+		Salary:         "$100,000",
+		Remote:         job.FullRemote,
+		Tags:           []string{"Go", "Python"},
 		Contents: job.Content{
 			"Job Description": "This is a job description",
 			"Requirements":    "This is a job requirement",
@@ -37,6 +35,8 @@ func (s *JobTestSuite) TestMarshalJSONAndUnmarshalJSON() {
 	if !s.NoError(err) {
 		return
 	}
+
+	s.T().Logf("JSON: %s", string(data))
 
 	j2 := &job.Job{}
 	if !s.NoError(json.Unmarshal(data, j2)) {

@@ -12,15 +12,12 @@ const jobListUrl = "https://www.cake.me/jobs?location_list%5B0%5D=Taipei%20City%
 
 func main() {
 	scraper := sc.NewScraper()
+	scraper.AddUrl(jobListUrl)
 
-	jobs, err := scraper.Scrape(jobListUrl)
-	if err != nil {
-		log.Fatal(err)
-	}
+	jobs := scraper.Run()
 
 	for _, job := range jobs {
 		fmt.Printf("Company: %s\nTitle: %s\nLink: %s\n", job.Company, job.Title, job.Link)
-		fmt.Printf("%+v\n", job.Info)
 	}
 
 	jobsJson, err := json.MarshalIndent(jobs, "", "    ")

@@ -1,5 +1,7 @@
 package job
 
+import "encoding/json"
+
 type EmploymentType int
 type Seniority int
 type Remote int
@@ -54,40 +56,6 @@ func NewEmploymentType(s string) EmploymentType {
 	}
 }
 
-func NewSeniority(s string) Seniority {
-	switch s {
-	case "Entry level":
-		return EntryLevel
-	case "Mid-Senior level":
-		return MidSeniorLevel
-	case "Intern":
-		return Intern
-	case "Assistant":
-		return Assistant
-	case "Director":
-		return Director
-	case "Executive (VP, GM, C-Level)":
-		return Executive
-	default:
-		return InvalidSeniority
-	}
-}
-
-func NewRemote(s string) Remote {
-	switch s {
-	case "Full remote":
-		return FullRemote
-	case "Partial remote":
-		return PartialRemote
-	case "Optional remote":
-		return OptionalRemote
-	case "No remote":
-		return NoRemote
-	default:
-		return InvalidRemote
-	}
-}
-
 func (et EmploymentType) String() string {
 	switch et {
 	case FullTime:
@@ -106,6 +74,39 @@ func (et EmploymentType) String() string {
 		return "Freelance"
 	default:
 		return "Invalid"
+	}
+}
+
+func (et EmploymentType) MarshalJSON() ([]byte, error) {
+	return []byte(`"` + et.String() + `"`), nil
+}
+
+func (et *EmploymentType) UnmarshalJSON(data []byte) error {
+	var str string
+	err := json.Unmarshal(data, &str)
+	if err != nil {
+		return err
+	}
+	*et = NewEmploymentType(str)
+	return nil
+}
+
+func NewSeniority(s string) Seniority {
+	switch s {
+	case "Entry level":
+		return EntryLevel
+	case "Mid-Senior level":
+		return MidSeniorLevel
+	case "Intern":
+		return Intern
+	case "Assistant":
+		return Assistant
+	case "Director":
+		return Director
+	case "Executive (VP, GM, C-Level)":
+		return Executive
+	default:
+		return InvalidSeniority
 	}
 }
 
@@ -128,17 +129,60 @@ func (s Seniority) String() string {
 	}
 }
 
+func (s *Seniority) MarshalJSON() ([]byte, error) {
+	return []byte(`"` + s.String() + `"`), nil
+}
+
+func (s *Seniority) UnmarshalJSON(data []byte) error {
+	var str string
+	err := json.Unmarshal(data, &str)
+	if err != nil {
+		return err
+	}
+	*s = NewSeniority(str)
+	return nil
+}
+
+func NewRemote(s string) Remote {
+	switch s {
+	case "100% Remote Work":
+		return FullRemote
+	case "Partial Remote Work":
+		return PartialRemote
+	case "Optional Remote Work":
+		return OptionalRemote
+	case "No Remote Work":
+		return NoRemote
+	default:
+		return InvalidRemote
+	}
+}
+
 func (r Remote) String() string {
 	switch r {
 	case FullRemote:
-		return "Full remote"
+		return "100% Remote Work"
 	case PartialRemote:
-		return "Partial remote"
+		return "Partial Remote Work"
 	case OptionalRemote:
-		return "Optional remote"
+		return "Optional Remote Work"
 	case NoRemote:
-		return "No remote"
+		return "No Remote Work"
 	default:
 		return "Invalid"
 	}
+}
+
+func (r Remote) MarshalJSON() ([]byte, error) {
+	return []byte(`"` + r.String() + `"`), nil
+}
+
+func (r *Remote) UnmarshalJSON(data []byte) error {
+	var str string
+	err := json.Unmarshal(data, &str)
+	if err != nil {
+		return err
+	}
+	*r = NewRemote(str)
+	return nil
 }
