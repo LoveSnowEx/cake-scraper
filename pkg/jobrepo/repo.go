@@ -59,14 +59,11 @@ func NewJobRepo(db *sqlx.DB) *jobRepoImpl {
 }
 
 func (r *jobRepoImpl) Init() (err error) {
-	// Enable foreign key constraints
-	_, err = r.db.Exec("PRAGMA foreign_keys = ON;")
-	if err != nil {
-		return fmt.Errorf("failed to enable foreign key constraints: %w", err)
-	}
-	// Create jobs table
-	_, err = r.db.Exec(`
-		CREATE TABLE IF NOT EXISTS jobs (
+	queries := map[string]string{
+		// Enable foreign key constraints
+		"PRAGMA foreign_keys = ON;": "failed to enable foreign key constraints",
+		// Create jobs table
+		`CREATE TABLE IF NOT EXISTS jobs (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			company_id TEXT NOT NULL,
 			title_id TEXT NOT NULL,
@@ -81,47 +78,31 @@ func (r *jobRepoImpl) Init() (err error) {
 			experience TEXT NOT NULL DEFAULT '',
 			salary TEXT NOT NULL DEFAULT '',
 			remote INTEGER NOT NULL DEFAULT -1
-		);
-	`)
-	if err != nil {
-		return fmt.Errorf("failed to create jobs table: %w", err)
-	}
-	_, err = r.db.Exec("CREATE UNIQUE INDEX IF NOT EXISTS uq_jobs_company_id_title_id ON jobs (company_id, title_id);")
-	if err != nil {
-		return fmt.Errorf("failed to create unique index on jobs: %w", err)
-	}
-	// Create job_tags table
-	_, err = r.db.Exec(`
-		CREATE TABLE IF NOT EXISTS job_tags (
+		);`: "failed to create jobs table",
+		"CREATE UNIQUE INDEX IF NOT EXISTS uq_jobs_company_id_title_id ON jobs (company_id, title_id);": "failed to create unique index on jobs",
+		// Create job_tags table
+		`CREATE TABLE IF NOT EXISTS job_tags (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			job_id INTEGER NOT NULL,
 			tag TEXT NOT NULL DEFAULT '',
 			FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE
-		);
-	`)
-	if err != nil {
-		return fmt.Errorf("failed to create job_tags table: %w", err)
-	}
-	_, err = r.db.Exec("CREATE UNIQUE INDEX IF NOT EXISTS uq_job_tags_job_id_tag ON job_tags (job_id, tag);")
-	if err != nil {
-		return fmt.Errorf("failed to create unique index on job_tags: %w", err)
-	}
-	// Create job_contents table
-	_, err = r.db.Exec(`
-		CREATE TABLE IF NOT EXISTS job_contents (
+		);`: "failed to create job_tags table",
+		"CREATE UNIQUE INDEX IF NOT EXISTS uq_job_tags_job_id_tag ON job_tags (job_id, tag);": "failed to create unique index on job_tags",
+		// Create job_contents table
+		`CREATE TABLE IF NOT EXISTS job_contents (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			job_id INTEGER NOT NULL,
 			type TEXT NOT NULL,
 			content TEXT NOT NULL DEFAULT '',
 			FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE
-		);
-	`)
-	if err != nil {
-		return fmt.Errorf("failed to create job_contents table: %w", err)
+		);`: "failed to create job_contents table",
+		"CREATE UNIQUE INDEX IF NOT EXISTS uq_job_contents_job_id_type ON job_contents (job_id, type);": "failed to create unique index on job_contents",
 	}
-	_, err = r.db.Exec("CREATE UNIQUE INDEX IF NOT EXISTS uq_job_contents_job_id_type ON job_contents (job_id, type);")
-	if err != nil {
-		return fmt.Errorf("failed to create unique index on job_contents: %w", err)
+	for query, errMsg := range queries {
+		_, err = r.db.Exec(query)
+		if err != nil {
+			return fmt.Errorf("%s: %w", errMsg, err)
+		}
 	}
 	return nil
 }
