@@ -12,10 +12,8 @@ type Job struct {
 	Salary         string
 	Remote         Remote
 	Tags           []string
-	Contents       Content
+	Contents       map[string]string
 }
-
-type Content map[string]string
 
 func New() *Job {
 	return &Job{
