@@ -55,8 +55,9 @@ func NewScraper() *scraper {
 	return s
 }
 
-func (s *scraper) Init() {
-	s.repo.Init()
+func (s *scraper) init() {
+	err := s.repo.Init()
+	util.PanicError(err)
 
 	// Scrape job list
 	s.collector.OnHTML("a[class^='JobSearchItem_jobTitle__']", func(e *colly.HTMLElement) {
@@ -298,7 +299,7 @@ func (s *scraper) Run() []*job.Job {
 	db := sqlx.MustConnect(sqliteshim.ShimName, "file::memory:?cache=shared")
 	s.repo = jobrepo.NewJobRepo(db)
 	defer db.Close()
-	s.Init()
+	s.init()
 	for _, url := range s.urls {
 		_ = s.collector.Visit(url)
 	}

@@ -2,6 +2,7 @@ package jobrepo
 
 import (
 	"cake-scraper/pkg/job"
+	"fmt"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
@@ -58,13 +59,14 @@ func NewJobRepo(db *sqlx.DB) *jobRepoImpl {
 }
 
 func (r *jobRepoImpl) Init() (err error) {
-	// Create jobs table
-	_, err = r.db.Exec("DROP TABLE IF EXISTS jobs;")
+	// Enable foreign key constraints
+	_, err = r.db.Exec("PRAGMA foreign_keys = ON;")
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to enable foreign key constraints: %w", err)
 	}
+	// Create jobs table
 	_, err = r.db.Exec(`
-		CREATE TABLE jobs (
+		CREATE TABLE IF NOT EXISTS jobs (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			company_id TEXT NOT NULL,
 			title_id TEXT NOT NULL,
@@ -82,52 +84,44 @@ func (r *jobRepoImpl) Init() (err error) {
 		);
 	`)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to create jobs table: %w", err)
 	}
-	_, err = r.db.Exec("CREATE UNIQUE INDEX uq_jobs_company_id_title_id ON jobs (company_id, title_id);")
+	_, err = r.db.Exec("CREATE UNIQUE INDEX IF NOT EXISTS uq_jobs_company_id_title_id ON jobs (company_id, title_id);")
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to create unique index on jobs: %w", err)
 	}
 	// Create job_tags table
-	_, err = r.db.Exec("DROP TABLE IF EXISTS job_tags;")
-	if err != nil {
-		return err
-	}
 	_, err = r.db.Exec(`
-		CREATE TABLE job_tags (
+		CREATE TABLE IF NOT EXISTS job_tags (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			job_id INTEGER NOT NULL,
-			tag TEXT NOT NULL DEFAULT ''
-			CONSTRAINT fk_job_id REFERENCES jobs (id) ON DELETE CASCADE
+			tag TEXT NOT NULL DEFAULT '',
+			FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE
 		);
 	`)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to create job_tags table: %w", err)
 	}
-	_, err = r.db.Exec("CREATE UNIQUE INDEX uq_job_tags_job_id_tag ON job_tags (job_id, tag);")
+	_, err = r.db.Exec("CREATE UNIQUE INDEX IF NOT EXISTS uq_job_tags_job_id_tag ON job_tags (job_id, tag);")
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to create unique index on job_tags: %w", err)
 	}
 	// Create job_contents table
-	_, err = r.db.Exec("DROP TABLE IF EXISTS job_contents")
-	if err != nil {
-		return err
-	}
 	_, err = r.db.Exec(`
-		CREATE TABLE job_contents (
+		CREATE TABLE IF NOT EXISTS job_contents (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			job_id INTEGER NOT NULL,
 			type TEXT NOT NULL,
-			content TEXT NOT NULL DEFAULT ''
-			CONSTRAINT fk_job_id REFERENCES jobs (id) ON DELETE CASCADE
+			content TEXT NOT NULL DEFAULT '',
+			FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE
 		);
 	`)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to create job_contents table: %w", err)
 	}
-	_, err = r.db.Exec("CREATE UNIQUE INDEX uq_job_contents_job_id_type ON job_contents (job_id, type);")
+	_, err = r.db.Exec("CREATE UNIQUE INDEX IF NOT EXISTS uq_job_contents_job_id_type ON job_contents (job_id, type);")
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to create unique index on job_contents: %w", err)
 	}
 	return nil
 }
@@ -174,23 +168,20 @@ func (r *jobRepoImpl) FindAllJobs() ([]*job.Job, error) {
 func (r *jobRepoImpl) RecreateJob(companyID, titleID, link string) (int64, error) {
 	err := r.DeleteJob(map[string]interface{}{"company_id": companyID, "title_id": titleID})
 	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("failed to delete job: %w", err)
 	}
 	sql, args, err := sq.Insert("jobs").
 		Columns("company_id", "title_id", "link").
 		Values(companyID, titleID, link).
-		Suffix("ON CONFLICT(company_id, title_id) DO UPDATE SET link = EXCLUDED.link").
+		Suffix("RETURNING id").
 		ToSql()
 	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("failed to build insert job sql: %w", err)
 	}
-	_, err = r.db.Exec(sql, args...)
+	var job JobPo
+	err = r.db.Get(&job, sql, args...)
 	if err != nil {
-		return 0, err
-	}
-	job, err := r.findJobPo(map[string]interface{}{"company_id": companyID, "title_id": titleID})
-	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("failed to insert job: %w", err)
 	}
 	return job.ID, nil
 }
