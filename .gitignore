@@ -26,15 +26,15 @@ go.work
 
 # End of https://www.toptal.com/developers/gitignore/api/go
 
-# Direnv and Devenv
+# Dot files
+.DS_Store
+.vscode/
 .devenv/
 .direnv/
+.env
 
 # Generated files
 out/
 
-# .env file
-.env
-
-# VS Code
-.vscode/
+# Temporary files
+tmp/
