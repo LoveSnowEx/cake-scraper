@@ -1,6 +1,7 @@
 package scraper
 
 import (
+	"cake-scraper/pkg/htmlparser"
 	"cake-scraper/pkg/job"
 	"cake-scraper/pkg/jobrepo"
 	"cake-scraper/pkg/util"
@@ -247,6 +248,10 @@ func (s *scraper) Init() {
 	s.collector.OnHTML("div[class^='ContentSection_contentSection__']", func(e *colly.HTMLElement) {
 		contentType := e.ChildText("h3[class^='ContentSection_title__']")
 		content, _ := e.DOM.Find("div[class^='RailsHtml_container__']").Html()
+		content = htmlparser.Parse(content)
+		if content == "" {
+			return
+		}
 		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
 		err := s.repo.AddJobContent(
 			map[string]interface{}{
