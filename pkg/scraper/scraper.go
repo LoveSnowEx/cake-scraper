@@ -67,6 +67,25 @@ func (s *scraper) Init() {
 		_ = s.collector.Visit(link)
 	})
 
+	// Scrape breadcrumbs
+	s.collector.OnHTML("div[class^='Breadcrumbs_wrapper__']", func(e *colly.HTMLElement) {
+		breadcrumbs := []string{}
+		e.ForEach("a > span", func(_ int, span *colly.HTMLElement) {
+			breadcrumbs = append(breadcrumbs, span.Text)
+		})
+		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
+		err := s.repo.UpdateJob(
+			map[string]interface{}{
+				"company_id": companyID,
+				"title_id":   titleID,
+			},
+			map[string]interface{}{
+				"breadcrumbs": strings.Join(breadcrumbs, " > "),
+			},
+		)
+		util.PanicError(err)
+	})
+
 	// Scrape company name
 	s.collector.OnHTML("div[class^='JobDescriptionLeftColumn_companyInfo__']", func(e *colly.HTMLElement) {
 		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())

@@ -16,6 +16,7 @@ type JobPo struct {
 	Company        string `db:"company"`
 	Title          string `db:"title"`
 	Link           string `db:"link"`
+	Breadcrumbs    string `db:"breadcrumbs"`
 	EmploymentType int64  `db:"employment_type"`
 	Seniority      int64  `db:"seniority"`
 	Location       string `db:"location"`
@@ -70,6 +71,7 @@ func (r *jobRepoImpl) Init() (err error) {
 			company TEXT NOT NULL DEFAULT '',
 			title TEXT NOT NULL DEFAULT '',
 			link TEXT NOT NULL DEFAULT '',
+			breadcrumbs TEXT NOT NULL DEFAULT '',
 			employment_type INTEGER NOT NULL DEFAULT -1,
 			seniority INTEGER NOT NULL DEFAULT -1,
 			location TEXT NOT NULL DEFAULT '',
