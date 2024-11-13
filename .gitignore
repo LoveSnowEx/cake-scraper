@@ -38,3 +38,9 @@ out/
 
 # Temporary files
 tmp/
+
+# Log files
+log/*.log
+
+# Database files
+*.db

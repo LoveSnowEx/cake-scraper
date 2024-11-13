@@ -3,6 +3,9 @@ package jobrepo
 import (
 	"cake-scraper/pkg/job"
 	"fmt"
+	"log"
+	"os"
+	"time"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
@@ -10,27 +13,36 @@ import (
 
 var _ JobRepo = (*jobRepoImpl)(nil)
 
+type Time time.Time
+
 type JobPo struct {
-	ID             int64  `db:"id"`
-	CompanyID      string `db:"company_id"`
-	TitleID        string `db:"title_id"`
-	Company        string `db:"company"`
-	Title          string `db:"title"`
-	Link           string `db:"link"`
-	Breadcrumbs    string `db:"breadcrumbs"`
-	EmploymentType int64  `db:"employment_type"`
-	Seniority      int64  `db:"seniority"`
-	Location       string `db:"location"`
-	NumberToHire   int64  `db:"number_to_hire"`
-	Experience     string `db:"experience"`
-	Salary         string `db:"salary"`
-	Remote         int64  `db:"remote"`
+	ID               int64  `db:"id"`
+	Link             string `db:"link"`
+	Company          string `db:"company"`
+	Title            string `db:"title"`
+	Breadcrumbs      string `db:"breadcrumbs"`
+	EmploymentType   int64  `db:"employment_type"`
+	Seniority        int64  `db:"seniority"`
+	Location         string `db:"location"`
+	NumberToHire     int64  `db:"number_to_hire"`
+	Experience       string `db:"experience"`
+	Salary           string `db:"salary"`
+	Remote           int64  `db:"remote"`
+	InterviewProcess string `db:"interview_process"`
+	JobDescription   string `db:"job_description"`
+	Requirements     string `db:"requirements"`
+	CreatedAt        Time   `db:"created_at"`
+	UpdatedAt        Time   `db:"updated_at"`
+}
+
+type TagPo struct {
+	ID  int64  `db:"id"`
+	Tag string `db:"tag"`
 }
 
 type JobTagPo struct {
-	ID    int64  `db:"id"`
-	JobID int64  `db:"job_id"`
-	Tag   string `db:"tag"`
+	JobID int64 `db:"job_id"`
+	TagID int64 `db:"tag_id"`
 }
 
 type JobContentPo struct {
@@ -42,16 +54,30 @@ type JobContentPo struct {
 
 type JobRepo interface {
 	Init() error
-	FindAllJobs() ([]*job.Job, error)
-	RecreateJob(companyID, titleID, link string) (int64, error)
-	UpdateJob(conditions map[string]interface{}, values map[string]interface{}) error
-	AddJobTags(condition map[string]interface{}, tags []string) error
-	AddJobContent(condition map[string]interface{}, content map[string]string) error
-	DeleteJob(conditions map[string]interface{}) error
+	Find(conditions map[string]interface{}) ([]*job.Job, error)
+	Save(j *job.Job) error
+	Delete(conditions map[string]interface{}) error
 }
 
 type jobRepoImpl struct {
 	db *sqlx.DB
+}
+
+func (t Time) Value() (time.Time, error) {
+	return time.Time(t), nil
+}
+
+func (t *Time) Scan(v interface{}) error {
+	if v == nil {
+		*t = Time(time.Time{})
+		return nil
+	}
+	tp, err := time.Parse(time.DateTime, v.(string))
+	if err != nil {
+		return err
+	}
+	*t = Time(tp)
+	return nil
 }
 
 func NewJobRepo(db *sqlx.DB) *jobRepoImpl {
@@ -59,233 +85,172 @@ func NewJobRepo(db *sqlx.DB) *jobRepoImpl {
 }
 
 func (r *jobRepoImpl) Init() (err error) {
-	queries := map[string]string{
-		// Enable foreign key constraints
-		"PRAGMA foreign_keys = ON;": "failed to enable foreign key constraints",
-		// Create jobs table
-		`CREATE TABLE IF NOT EXISTS jobs (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			company_id TEXT NOT NULL,
-			title_id TEXT NOT NULL,
-			company TEXT NOT NULL DEFAULT '',
-			title TEXT NOT NULL DEFAULT '',
-			link TEXT NOT NULL DEFAULT '',
-			breadcrumbs TEXT NOT NULL DEFAULT '',
-			employment_type INTEGER NOT NULL DEFAULT -1,
-			seniority INTEGER NOT NULL DEFAULT -1,
-			location TEXT NOT NULL DEFAULT '',
-			number_to_hire INTEGER NOT NULL DEFAULT 0,
-			experience TEXT NOT NULL DEFAULT '',
-			salary TEXT NOT NULL DEFAULT '',
-			remote INTEGER NOT NULL DEFAULT -1
-		);`: "failed to create jobs table",
-		"CREATE UNIQUE INDEX IF NOT EXISTS uq_jobs_company_id_title_id ON jobs (company_id, title_id);": "failed to create unique index on jobs",
-		// Create job_tags table
-		`CREATE TABLE IF NOT EXISTS job_tags (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			job_id INTEGER NOT NULL,
-			tag TEXT NOT NULL DEFAULT '',
-			FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE
-		);`: "failed to create job_tags table",
-		"CREATE UNIQUE INDEX IF NOT EXISTS uq_job_tags_job_id_tag ON job_tags (job_id, tag);": "failed to create unique index on job_tags",
-		// Create job_contents table
-		`CREATE TABLE IF NOT EXISTS job_contents (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			job_id INTEGER NOT NULL,
-			type TEXT NOT NULL,
-			content TEXT NOT NULL DEFAULT '',
-			FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE
-		);`: "failed to create job_contents table",
-		"CREATE UNIQUE INDEX IF NOT EXISTS uq_job_contents_job_id_type ON job_contents (job_id, type);": "failed to create unique index on job_contents",
+	f, err := os.ReadFile("sql/schema.sql")
+	if err != nil {
+		return fmt.Errorf("failed to read schema.sql: %w", err)
 	}
-	for query, errMsg := range queries {
-		_, err = r.db.Exec(query)
-		if err != nil {
-			return fmt.Errorf("%s: %w", errMsg, err)
-		}
+	_, err = r.db.Exec(string(f))
+	if err != nil {
+		return fmt.Errorf("failed to execute schema.sql: %w", err)
 	}
 	return nil
 }
 
-func (r *jobRepoImpl) FindAllJobs() ([]*job.Job, error) {
-	sql, args, err := sq.Select("*").From("jobs").ToSql()
+func (r *jobRepoImpl) Find(conditions map[string]interface{}) ([]*job.Job, error) {
+	if conditions == nil {
+		conditions = map[string]interface{}{}
+	}
+	sql, args, err := sq.Select("*").
+		From("jobs").
+		Where(conditions).
+		ToSql()
 	if err != nil {
 		return nil, err
 	}
 	var jobPos []*JobPo
 	err = r.db.Select(&jobPos, sql, args...)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to select jobs: %w", err)
 	}
 	var result []*job.Job
 	for _, jobPo := range jobPos {
-		j := &job.Job{
-			Company:        jobPo.Company,
-			Title:          jobPo.Title,
-			Link:           jobPo.Link,
-			EmploymentType: job.EmploymentType(jobPo.EmploymentType),
-			Seniority:      job.Seniority(jobPo.Seniority),
-			Location:       jobPo.Location,
-			NumberToHire:   int(jobPo.NumberToHire),
-			Experience:     jobPo.Experience,
-			Salary:         jobPo.Salary,
-			Remote:         job.Remote(jobPo.Remote),
-		}
-		tags, err := r.findJobTags(jobPo.ID)
+		j := job.New()
+		j.Company = jobPo.Company
+		j.Title = jobPo.Title
+		j.Link = jobPo.Link
+		j.EmploymentType = job.EmploymentType(jobPo.EmploymentType)
+		j.Seniority = job.Seniority(jobPo.Seniority)
+		j.Location = jobPo.Location
+		j.NumberToHire = int(jobPo.NumberToHire)
+		j.Experience = jobPo.Experience
+		j.Salary = jobPo.Salary
+		j.Remote = job.Remote(jobPo.Remote)
+		j.InterviewProcess = jobPo.InterviewProcess
+		j.JobDescription = jobPo.JobDescription
+		j.Requirements = jobPo.Requirements
+		sql, args, err := sq.Select("tag").
+			From("jobs_tags").
+			Join("tags ON jobs_tags.tag_id = tags.id").
+			Where(sq.Eq{"job_id": jobPo.ID}).
+			ToSql()
 		if err != nil {
 			return nil, err
 		}
-		j.Tags = tags
-		contents, err := r.findJobContents(jobPo.ID)
+		err = r.db.Select(&j.Tags, sql, args...)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to select tags: %w", err)
 		}
-		j.Contents = contents
 		result = append(result, j)
 	}
 	return result, nil
 }
 
-func (r *jobRepoImpl) RecreateJob(companyID, titleID, link string) (int64, error) {
-	err := r.DeleteJob(map[string]interface{}{"company_id": companyID, "title_id": titleID})
-	if err != nil {
-		return 0, fmt.Errorf("failed to delete job: %w", err)
-	}
+func (r *jobRepoImpl) Save(j *job.Job) (err error) {
+	tx := r.db.MustBegin()
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+			return
+		}
+		err = tx.Commit()
+	}()
+	// Save job
 	sql, args, err := sq.Insert("jobs").
-		Columns("company_id", "title_id", "link").
-		Values(companyID, titleID, link).
+		SetMap(map[string]interface{}{
+			"link":              j.Link,
+			"company":           j.Company,
+			"title":             j.Title,
+			"breadcrumbs":       "",
+			"employment_type":   j.EmploymentType,
+			"seniority":         j.Seniority,
+			"location":          j.Location,
+			"number_to_hire":    j.NumberToHire,
+			"experience":        j.Experience,
+			"salary":            j.Salary,
+			"remote":            j.Remote,
+			"interview_process": j.InterviewProcess,
+			"job_description":   j.JobDescription,
+			"requirements":      j.Requirements,
+		}).
+		Suffix(`
+			ON CONFLICT(link) DO UPDATE SET
+				title = EXCLUDED.title,
+				breadcrumbs = EXCLUDED.breadcrumbs,
+				employment_type = EXCLUDED.employment_type,
+				seniority = EXCLUDED.seniority,
+				location = EXCLUDED.location,
+				number_to_hire = EXCLUDED.number_to_hire,
+				experience = EXCLUDED.experience,
+				salary = EXCLUDED.salary,
+				remote = EXCLUDED.remote,
+				interview_process = EXCLUDED.interview_process,
+				job_description = EXCLUDED.job_description,
+				requirements = EXCLUDED.requirements,
+				updated_at = CURRENT_TIMESTAMP
+		`).
 		Suffix("RETURNING id").
 		ToSql()
 	if err != nil {
-		return 0, fmt.Errorf("failed to build insert job sql: %w", err)
-	}
-	var job JobPo
-	err = r.db.Get(&job, sql, args...)
-	if err != nil {
-		return 0, fmt.Errorf("failed to insert job: %w", err)
-	}
-	return job.ID, nil
-}
-
-func (r *jobRepoImpl) UpdateJob(conditions map[string]interface{}, values map[string]interface{}) error {
-	builder := sq.Update("jobs")
-	for k, v := range conditions {
-		builder = builder.Where(sq.Eq{k: v})
-	}
-	for k, v := range values {
-		builder = builder.Set(k, v)
-	}
-	sql, args, err := builder.ToSql()
-	if err != nil {
 		return err
 	}
-	_, err = r.db.Exec(sql, args...)
-	return err
-}
-
-func (r *jobRepoImpl) AddJobTags(condition map[string]interface{}, tags []string) error {
-	job, err := r.findJobPo(condition)
-	if err != nil {
-		return err
+	row := tx.QueryRowx(sql, args...)
+	var jobID int64
+	if err = row.Scan(&jobID); err != nil {
+		return fmt.Errorf("failed to insert job: %w", err)
 	}
-	for _, tag := range tags {
-		sql, args, err := sq.Insert("job_tags").
-			Columns("job_id", "tag").
-			Values(job.ID, tag).
-			Suffix("ON CONFLICT(job_id, tag) DO NOTHING").
-			ToSql()
-		if err != nil {
-			return err
-		}
-		_, err = r.db.Exec(sql, args...)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (r *jobRepoImpl) AddJobContent(condition map[string]interface{}, content map[string]string) error {
-	job, err := r.findJobPo(condition)
-	if err != nil {
-		return err
-	}
-	for k, v := range content {
-		sql, args, err := sq.Insert("job_contents").
-			Columns("job_id", "type", "content").
-			Values(job.ID, k, v).
-			Suffix("ON CONFLICT(job_id, type) DO UPDATE SET content = EXCLUDED.content").
-			ToSql()
-		if err != nil {
-			return err
-		}
-		_, err = r.db.Exec(sql, args...)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (r *jobRepoImpl) DeleteJob(conditions map[string]interface{}) error {
-	builder := sq.Delete("jobs")
-	for k, v := range conditions {
-		builder = builder.Where(sq.Eq{k: v})
-	}
-	sql, args, err := builder.ToSql()
-	if err != nil {
-		return err
-	}
-	_, err = r.db.Exec(sql, args...)
-	return err
-}
-
-func (r *jobRepoImpl) findJobPo(conditions map[string]interface{}) (*JobPo, error) {
-	builder := sq.Select("*").From("jobs")
-	for k, v := range conditions {
-		builder = builder.Where(sq.Eq{k: v})
-	}
-	sql, args, err := builder.ToSql()
-	if err != nil {
-		return nil, err
-	}
-	var job JobPo
-	err = r.db.Get(&job, sql, args...)
-	if err != nil {
-		return nil, err
-	}
-	return &job, nil
-}
-
-func (r *jobRepoImpl) findJobTags(jobID int64) ([]string, error) {
-	sql, args, err := sq.Select("tag").From("job_tags").Where(sq.Eq{"job_id": jobID}).ToSql()
-	if err != nil {
-		return nil, err
-	}
-	var tags []string
-	err = r.db.Select(&tags, sql, args...)
-	if err != nil {
-		return nil, err
-	}
-	return tags, nil
-}
-
-func (r *jobRepoImpl) findJobContents(jobID int64) (map[string]string, error) {
-	sql, args, err := sq.Select("type", "content").
-		From("job_contents").
+	// Save tags
+	sql, args, err = sq.Delete("jobs_tags").
 		Where(sq.Eq{"job_id": jobID}).
 		ToSql()
 	if err != nil {
-		return nil, err
+		return err
 	}
-	var contentPos []*JobContentPo
-	err = r.db.Select(&contentPos, sql, args...)
+	_, err = tx.Exec(sql, args...)
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("failed to delete jobs_tags: %w", err)
 	}
-	result := map[string]string{}
-	for _, contentPo := range contentPos {
-		result[contentPo.Type] = contentPo.Content
+	for _, tag := range j.Tags {
+		sql, args, err := sq.Insert("tags").
+			Columns("tag").
+			Values(tag).
+			Suffix("ON CONFLICT(tag) DO UPDATE SET tag = EXCLUDED.tag").
+			Suffix("RETURNING id").
+			ToSql()
+		if err != nil {
+			return err
+		}
+		row = tx.QueryRowx(sql, args...)
+		var tagID int64
+		if err = row.Scan(&tagID); err != nil {
+			return fmt.Errorf("failed to insert tag: %w", err)
+		}
+		sql, args, err = sq.Insert("jobs_tags").
+			Columns("job_id", "tag_id").
+			Values(jobID, tagID).
+			Suffix("ON CONFLICT DO UPDATE SET job_id = EXCLUDED.job_id, tag_id = EXCLUDED.tag_id").
+			ToSql()
+		if err != nil {
+			return err
+		}
+		_, err = tx.Exec(sql, args...)
+		if err != nil {
+			log.Println(sql, args)
+			return fmt.Errorf("failed to insert jobs_tags: %w", err)
+		}
 	}
-	return result, nil
+	return nil
+}
+
+func (r *jobRepoImpl) Delete(conditions map[string]interface{}) error {
+	sql, args, err := sq.Delete("jobs").
+		Where(conditions).
+		ToSql()
+	if err != nil {
+		return err
+	}
+	_, err = r.db.Exec(sql, args...)
+	if err != nil {
+		return fmt.Errorf("failed to delete jobs: %w", err)
+	}
+	return nil
 }

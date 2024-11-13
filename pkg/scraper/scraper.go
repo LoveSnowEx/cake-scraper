@@ -5,306 +5,241 @@ import (
 	"cake-scraper/pkg/job"
 	"cake-scraper/pkg/jobrepo"
 	"cake-scraper/pkg/util"
+	"fmt"
+	"log"
+	"log/slog"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"sync/atomic"
+	"time"
 
 	"github.com/gocolly/colly/v2"
 	"github.com/jmoiron/sqlx"
 	"github.com/uptrace/bun/driver/sqliteshim"
 )
 
-var (
-	jobListUrlRegex   = regexp.MustCompile(`^https://www.cake.me/jobs.*$`)
-	jobDetailUrlRegex = regexp.MustCompile(`^https://www.cake.me/companies/(.*)/jobs/(.*)$`)
+const (
+	BackendDeveloper  Profession = "it_back-end-engineer"
+	DataEngineer      Profession = "it_data-engineer"
+	FrontendDeveloper Profession = "it_front-end-engineer"
+	maxChanSize       int        = 100
+	rateLimit                    = 30
 )
 
-// Parser job detail url to company and title
-func parseJobDetailUrl(url string) (companyID string, titleID string) {
-	matches := jobDetailUrlRegex.FindStringSubmatch(url)
-	return matches[1], matches[2]
-}
+var (
+	_                 Scraper = (*scraper)(nil)
+	jobListUrlRegex           = regexp.MustCompile(`^https://www.cake.me/jobs.*$`)
+	jobDetailUrlRegex         = regexp.MustCompile(`^https://www.cake.me/companies/(.*)/jobs/(.*)$`)
+	pagePattern               = regexp.MustCompile(`https://www.cake.me/jobs\?.*?page=(\d+)`)
+
+	Cnt atomic.Int64
+)
+
+type Profession string
 
 func NewCollector() *colly.Collector {
 	c := colly.NewCollector(
-		colly.URLFilters(jobDetailUrlRegex, jobListUrlRegex),
+		// colly.URLFilters(jobDetailUrlRegex, jobListUrlRegex),
 		colly.Async(true),
+		colly.AllowURLRevisit(),
 	)
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("Cookie", "locale=en")
 	})
+	c.Limit(&colly.LimitRule{
+		DomainGlob:  "*",
+		RandomDelay: time.Millisecond * 200,
+		Parallelism: rateLimit,
+	})
 	return c
 }
 
+func (p Profession) String() string {
+	return string(p)
+}
+
+func buildJobListUrl(profession Profession, page int) string {
+	return fmt.Sprintf("https://www.cake.me/jobs?location_list%%5B0%%5D=Taiwan&profession%%5B0%%5D=%s&order=latest&page=%d", profession, page)
+}
+
+func parsePageNumber(url string) int {
+	matches := pagePattern.FindStringSubmatch(url)
+	if len(matches) < 2 {
+		return 1
+	}
+	page, err := strconv.Atoi(matches[1])
+	if err != nil {
+		util.PanicError(err)
+	}
+	return page
+}
+
 type Scraper interface {
-	AddUrl(url string)
-	Run() []*job.Job
+	Query(conditions map[string]interface{}) []*job.Job
+	Update() error
 }
 
 type scraper struct {
-	collector *colly.Collector
-	urls      []string
-	repo      jobrepo.JobRepo
+	Professions     []Profession
+	MaxPage         int
+	linkCollector   *colly.Collector
+	detailCollector *colly.Collector
+	jobRepo         jobrepo.JobRepo
+	logger          *log.Logger
 }
 
-func NewScraper() *scraper {
+func NewScraper(MaxPage int, Professions ...Profession) *scraper {
+	db := sqlx.MustConnect(sqliteshim.ShimName, "file:cake.db?cache=shared&_fk=1")
+	// db := sqlx.MustConnect(sqliteshim.ShimName, "file::memory:?cache=shared&_fk=1")
 	s := &scraper{
-		collector: NewCollector(),
-		urls:      []string{},
+		MaxPage:         MaxPage,
+		Professions:     Professions,
+		linkCollector:   NewCollector(),
+		detailCollector: NewCollector(),
+		jobRepo:         jobrepo.NewJobRepo(db),
 	}
+	s.Init()
 	return s
 }
 
-func (s *scraper) init() {
-	err := s.repo.Init()
-	util.PanicError(err)
-
-	// Scrape job list
-	s.collector.OnHTML("a[class^='JobSearchItem_jobTitle__']", func(e *colly.HTMLElement) {
-		link := e.Request.AbsoluteURL(e.Attr("href"))
-		companyID, titleID := parseJobDetailUrl(link)
-		_, err := s.repo.RecreateJob(companyID, titleID, link)
-		util.PanicError(err)
-		_ = s.collector.Visit(link)
-	})
-
-	// Scrape breadcrumbs
-	s.collector.OnHTML("div[class^='Breadcrumbs_wrapper__']", func(e *colly.HTMLElement) {
-		breadcrumbs := []string{}
-		e.ForEach("a > span", func(_ int, span *colly.HTMLElement) {
-			breadcrumbs = append(breadcrumbs, span.Text)
-		})
-		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
-		err := s.repo.UpdateJob(
-			map[string]interface{}{
-				"company_id": companyID,
-				"title_id":   titleID,
-			},
-			map[string]interface{}{
-				"breadcrumbs": strings.Join(breadcrumbs, " > "),
-			},
+func (s *scraper) Init() {
+	{
+		_ = os.MkdirAll("log", 0755)
+		logFile, err := os.OpenFile("log/scraper.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+		if err != nil {
+			util.PanicError(err)
+		}
+		s.logger = slog.NewLogLogger(
+			slog.NewJSONHandler(
+				logFile,
+				&slog.HandlerOptions{
+					AddSource: true,
+				},
+			),
+			slog.LevelInfo,
 		)
+	}
+	if err := s.jobRepo.Init(); err != nil {
 		util.PanicError(err)
-	})
-
-	// Scrape company name
-	s.collector.OnHTML("div[class^='JobDescriptionLeftColumn_companyInfo__']", func(e *colly.HTMLElement) {
-		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
-		comapny := e.ChildText("h2")
-		err := s.repo.UpdateJob(
-			map[string]interface{}{
-				"company_id": companyID,
-				"title_id":   titleID,
-			},
-			map[string]interface{}{
-				"company": comapny,
-			},
-		)
-		util.PanicError(err)
-	})
-
-	// Scrape job title
-	s.collector.OnHTML("h1[class^='JobDescriptionLeftColumn_title__']", func(e *colly.HTMLElement) {
-		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
-		title := e.Text
-		err := s.repo.UpdateJob(
-			map[string]interface{}{
-				"company_id": companyID,
-				"title_id":   titleID,
-			},
-			map[string]interface{}{
-				"title": title,
-			},
-		)
-		util.PanicError(err)
-	})
-
-	// Scrape job info
-	s.collector.OnHTML("div[class^='JobDescriptionRightColumn_jobInfo__'] > div[class^='JobDescriptionRightColumn_row__']", func(e *colly.HTMLElement) {
-		var icons, anchors, spans []string
-		e.ForEach("i", func(_ int, icon *colly.HTMLElement) {
-			classes := strings.Split(icon.Attr("class"), " ")
-			classes = util.Filter(classes, func(class string) bool {
-				return class != ""
-			})
-			icons = append(icons, classes...)
+	}
+	s.linkCollector.OnHTML("div[class^='JobSearchHits_list__']", func(e *colly.HTMLElement) {
+		hrefs := e.ChildAttrs("a[class^='JobSearchItem_jobTitle__']", "href")
+		hrefs = util.Filter(hrefs, func(href string) bool {
+			return href != ""
 		})
-		e.ForEach("a", func(_ int, anchor *colly.HTMLElement) {
-			anchors = append(anchors, anchor.Text)
+		links := util.Map(hrefs, func(href string) string {
+			return e.Request.AbsoluteURL(href)
 		})
-		e.ForEach("span", func(_ int, span *colly.HTMLElement) {
-			spans = append(spans, span.Text)
-		})
-		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
-		if len(icons) == 0 {
-			// EmploymentType, Seniority, Tags
-			for _, anchor := range anchors {
-				if employmentType := job.NewEmploymentType(anchor); employmentType != job.InvalidEmploymentType {
-					err := s.repo.UpdateJob(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						map[string]interface{}{
-							"employment_type": employmentType,
-						},
-					)
-					util.PanicError(err)
-				} else if seniority := job.NewSeniority(anchor); seniority != job.InvalidSeniority {
-					err := s.repo.UpdateJob(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						map[string]interface{}{
-							"seniority": seniority,
-						},
-					)
-					util.PanicError(err)
-				} else {
-					tag := anchor
-					err := s.repo.AddJobTags(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						[]string{tag},
-					)
-					util.PanicError(err)
-				}
-			}
-		} else {
-			for _, icon := range icons {
-				switch icon {
-				case "fa-map-marker-alt":
-					location := anchors[0]
-					err := s.repo.UpdateJob(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						map[string]interface{}{
-							"location": location,
-						},
-					)
-					util.PanicError(err)
-				case "fa-user":
-					numberToHire, _ := strconv.Atoi(spans[0])
-					err := s.repo.UpdateJob(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						map[string]interface{}{
-							"number_to_hire": numberToHire,
-						},
-					)
-					util.PanicError(err)
-				case "fa-business-time":
-					experience := spans[0]
-					err := s.repo.UpdateJob(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						map[string]interface{}{
-							"experience": experience,
-						},
-					)
-					util.PanicError(err)
-				case "fa-dollar-sign":
-					salary := spans[0]
-					err := s.repo.UpdateJob(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						map[string]interface{}{
-							"salary": salary,
-						},
-					)
-					util.PanicError(err)
-				case "fa-house":
-					if spans[0] == "" {
-						remote := job.NoRemote
-						err := s.repo.UpdateJob(
-							map[string]interface{}{
-								"company_id": companyID,
-								"title_id":   titleID,
-							},
-							map[string]interface{}{
-								"remote": remote,
-							},
-						)
-						util.PanicError(err)
-					} else if remote := job.NewRemote(spans[0]); remote != job.InvalidRemote {
-						err := s.repo.UpdateJob(
-							map[string]interface{}{
-								"company_id": companyID,
-								"title_id":   titleID,
-							},
-							map[string]interface{}{
-								"remote": remote,
-							},
-						)
-						util.PanicError(err)
-					}
-				case "fa-ellipsis-h":
-					tag := anchors[0]
-					err := s.repo.AddJobTags(
-						map[string]interface{}{
-							"company_id": companyID,
-							"title_id":   titleID,
-						},
-						[]string{tag},
-					)
-					util.PanicError(err)
-				}
-			}
+		for _, link := range links {
+			s.handleScrapedLink(link)
 		}
 	})
-
-	// Scrape job contents
-	s.collector.OnHTML("div[class^='ContentSection_contentSection__']", func(e *colly.HTMLElement) {
-		contentType := e.ChildText("h3[class^='ContentSection_title__']")
-		content, _ := e.DOM.Find("div[class^='RailsHtml_container__']").Html()
-		content = htmlparser.Parse(content)
-		if content == "" {
+	s.detailCollector.OnHTML("body", func(e *colly.HTMLElement) {
+		Cnt.Add(1)
+		j := job.New()
+		j.Company = e.ChildText("div[class^='JobDescriptionLeftColumn_companyInfo__'] > a > h2")
+		j.Title = e.ChildText("h1[class^='JobDescriptionLeftColumn_title__']")
+		j.Link = e.Request.URL.String()
+		j.Remote = job.NoRemote
+		// Job Info
+		e.ForEach("div[class^='JobDescriptionRightColumn_jobInfo__'] > div[class^='JobDescriptionRightColumn_row__']", func(_ int, row *colly.HTMLElement) {
+			icons := util.Filter(strings.Split(row.ChildAttr("i", "class"), " "), func(str string) bool {
+				return str != ""
+			})
+			anchors := row.ChildTexts("a")
+			spans := row.ChildTexts("span")
+			if len(icons) == 0 {
+				// EmploymentType, Seniority, Tags
+				for _, anchor := range anchors {
+					if employmentType := job.NewEmploymentType(anchor); employmentType != job.InvalidEmploymentType {
+						j.EmploymentType = employmentType
+					} else if seniority := job.NewSeniority(anchor); seniority != job.InvalidSeniority {
+						j.Seniority = seniority
+					} else {
+						j.Tags = append(j.Tags, anchor)
+					}
+				}
+			} else {
+				// Location, NumberToHire, Experience, Salary, Remote, Tags
+				for _, icon := range icons {
+					switch icon {
+					case "fa-map-marker-alt":
+						j.Location = anchors[0]
+					case "fa-user":
+						j.NumberToHire, _ = strconv.Atoi(spans[0])
+					case "fa-business-time":
+						j.Experience = spans[0]
+					case "fa-dollar-sign":
+						j.Salary = spans[0]
+					case "fa-house":
+						j.Remote = job.NewRemote(spans[0])
+					case "fa-ellipsis-h":
+						j.Tags = append(j.Tags, anchors[0])
+					}
+				}
+			}
+		})
+		// Job Content
+		e.ForEach("div[class^='ContentSection_contentSection__']", func(_ int, section *colly.HTMLElement) {
+			contentType := section.ChildText("h3[class^='ContentSection_title__']")
+			content, _ := section.DOM.Find("div[class^='RailsHtml_container__']").Html()
+			content = htmlparser.Parse(content)
+			if content == "" {
+				return
+			}
+			switch contentType {
+			case "Interview process":
+				j.InterviewProcess = content
+			case "Job Description":
+				j.JobDescription = content
+			case "Requirements":
+				j.Requirements = content
+			}
+		})
+		s.handleScrapedJob(j)
+	})
+	s.linkCollector.OnError(func(r *colly.Response, err error) {
+		if r.StatusCode == 404 {
 			return
 		}
-		companyID, titleID := parseJobDetailUrl(e.Request.URL.String())
-		err := s.repo.AddJobContent(
-			map[string]interface{}{
-				"company_id": companyID,
-				"title_id":   titleID,
-			},
-			map[string]string{
-				contentType: content,
-			},
-		)
-		util.PanicError(err)
+		s.logger.Printf("URL: %s, Code: %d, Error: %s\n", r.Request.URL, r.StatusCode, err)
+	})
+	s.detailCollector.OnError(func(r *colly.Response, err error) {
+		s.logger.Printf("URL: %s, Code: %d, Error: %s\n", r.Request.URL, r.StatusCode, err)
 	})
 }
 
-// Query all jobs
-func (s *scraper) queryJobs() ([]*job.Job, error) {
-	return s.repo.FindAllJobs()
-}
-
-func (s *scraper) AddUrl(url string) {
-	s.urls = append(s.urls, url)
-}
-
-func (s *scraper) Run() []*job.Job {
-	db := sqlx.MustConnect(sqliteshim.ShimName, "file::memory:?cache=shared")
-	s.repo = jobrepo.NewJobRepo(db)
-	defer db.Close()
-	s.init()
-	for _, url := range s.urls {
-		_ = s.collector.Visit(url)
+func (s *scraper) handleScrapedLink(link string) {
+	if err := s.detailCollector.Visit(link); err != nil {
+		util.PanicError(err)
 	}
-	s.collector.Wait()
-	jobs, err := s.queryJobs()
-	util.PanicError(err)
+}
+
+func (s *scraper) handleScrapedJob(j *job.Job) {
+	if err := s.jobRepo.Save(j); err != nil {
+		util.PanicError(err)
+	}
+}
+
+func (s *scraper) Query(conditions map[string]interface{}) []*job.Job {
+	jobs, err := s.jobRepo.Find(conditions)
+	if err != nil {
+		util.PanicError(err)
+	}
 	return jobs
+}
+
+func (s *scraper) Update() error {
+	for _, profession := range s.Professions {
+		for page := 1; page <= s.MaxPage; page++ {
+			if err := s.linkCollector.Visit(buildJobListUrl(profession, page)); err != nil {
+				return err
+			}
+		}
+	}
+	s.linkCollector.Wait()
+	s.detailCollector.Wait()
+	return nil
 }

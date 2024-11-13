@@ -24,11 +24,9 @@ func (s *JobTestSuite) TestMarshalJSONAndUnmarshalJSON() {
 		Experience:     "Mid-Level",
 		Salary:         "$100,000",
 		Remote:         job.FullRemote,
+		JobDescription: "This is a job description",
+		Requirements:   "This is a job requirement",
 		Tags:           []string{"Go", "Python"},
-		Contents: map[string]string{
-			"Job Description": "This is a job description",
-			"Requirements":    "This is a job requirement",
-		},
 	}
 
 	data, err := json.Marshal(j)
