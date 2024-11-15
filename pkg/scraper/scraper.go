@@ -3,7 +3,7 @@ package scraper
 import (
 	"cake-scraper/pkg/htmlparser"
 	"cake-scraper/pkg/job"
-	"cake-scraper/pkg/jobrepo"
+	"cake-scraper/pkg/repo/jobrepo"
 	"cake-scraper/pkg/util"
 	"fmt"
 	"log/slog"
