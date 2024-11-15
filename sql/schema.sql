@@ -29,7 +29,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_tags_tag ON tags (tag);
 
 CREATE TABLE IF NOT EXISTS jobs_tags (
     job_id INTEGER NOT NULL,
-    tag_id TEXT NOT NULL,
+    tag_id INTEGER NOT NULL,
     FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE,
     PRIMARY KEY (job_id, tag_id)
