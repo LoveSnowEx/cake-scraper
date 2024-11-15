@@ -6,9 +6,7 @@ import (
 	"cake-scraper/pkg/jobrepo"
 	"cake-scraper/pkg/util"
 	"fmt"
-	"log"
 	"log/slog"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -16,8 +14,8 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
-	"github.com/jmoiron/sqlx"
-	"github.com/uptrace/bun/driver/sqliteshim"
+
+	_ "cake-scraper/pkg/logger"
 )
 
 const (
@@ -87,43 +85,23 @@ type scraper struct {
 	linkCollector   *colly.Collector
 	detailCollector *colly.Collector
 	jobRepo         jobrepo.JobRepo
-	logger          *log.Logger
+	logger          *slog.Logger
 }
 
 func NewScraper(MaxPage int, Professions ...Profession) *scraper {
-	db := sqlx.MustConnect(sqliteshim.ShimName, "file:cake.db?cache=shared&_fk=1")
-	// db := sqlx.MustConnect(sqliteshim.ShimName, "file::memory:?cache=shared&_fk=1")
 	s := &scraper{
 		MaxPage:         MaxPage,
 		Professions:     Professions,
 		linkCollector:   NewCollector(),
 		detailCollector: NewCollector(),
-		jobRepo:         jobrepo.NewJobRepo(db),
+		jobRepo:         jobrepo.NewJobRepo(),
 	}
 	s.Init()
 	return s
 }
 
 func (s *scraper) Init() {
-	{
-		_ = os.MkdirAll("log", 0755)
-		logFile, err := os.OpenFile("log/scraper.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
-		if err != nil {
-			util.PanicError(err)
-		}
-		s.logger = slog.NewLogLogger(
-			slog.NewJSONHandler(
-				logFile,
-				&slog.HandlerOptions{
-					AddSource: true,
-				},
-			),
-			slog.LevelInfo,
-		)
-	}
-	if err := s.jobRepo.Init(); err != nil {
-		util.PanicError(err)
-	}
+	s.logger = slog.Default().WithGroup("scraper")
 	s.linkCollector.OnHTML("div[class^='JobSearchHits_list__']", func(e *colly.HTMLElement) {
 		hrefs := e.ChildAttrs("a[class^='JobSearchItem_jobTitle__']", "href")
 		hrefs = util.Filter(hrefs, func(href string) bool {
@@ -204,10 +182,10 @@ func (s *scraper) Init() {
 		if r.StatusCode == 404 {
 			return
 		}
-		s.logger.Printf("URL: %s, Code: %d, Error: %s\n", r.Request.URL, r.StatusCode, err)
+		s.logger.Error("linkCollector on err:", "URL", r.Request.URL, "Code", r.StatusCode, "Error", err)
 	})
 	s.detailCollector.OnError(func(r *colly.Response, err error) {
-		s.logger.Printf("URL: %s, Code: %d, Error: %s\n", r.Request.URL, r.StatusCode, err)
+		s.logger.Error("detailCollector on err:", "URL", r.Request.URL, "Code", r.StatusCode, "Error", err)
 	})
 }
 

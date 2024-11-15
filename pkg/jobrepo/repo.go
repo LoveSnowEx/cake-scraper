@@ -1,14 +1,14 @@
 package jobrepo
 
 import (
+	"cake-scraper/pkg/database"
 	"cake-scraper/pkg/job"
+	"cake-scraper/pkg/util"
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/jmoiron/sqlx"
 )
 
 var _ JobRepo = (*jobRepoImpl)(nil)
@@ -53,14 +53,13 @@ type JobContentPo struct {
 }
 
 type JobRepo interface {
-	Init() error
 	Find(conditions map[string]interface{}) ([]*job.Job, error)
 	Save(j *job.Job) error
 	Delete(conditions map[string]interface{}) error
 }
 
 type jobRepoImpl struct {
-	db *sqlx.DB
+	db *database.DB
 }
 
 func (t Time) Value() (time.Time, error) {
@@ -80,20 +79,10 @@ func (t *Time) Scan(v interface{}) error {
 	return nil
 }
 
-func NewJobRepo(db *sqlx.DB) *jobRepoImpl {
+func NewJobRepo() *jobRepoImpl {
+	db, err := database.Connect()
+	util.PanicError(err)
 	return &jobRepoImpl{db: db}
-}
-
-func (r *jobRepoImpl) Init() (err error) {
-	f, err := os.ReadFile("sql/schema.sql")
-	if err != nil {
-		return fmt.Errorf("failed to read schema.sql: %w", err)
-	}
-	_, err = r.db.Exec(string(f))
-	if err != nil {
-		return fmt.Errorf("failed to execute schema.sql: %w", err)
-	}
-	return nil
 }
 
 func (r *jobRepoImpl) Find(conditions map[string]interface{}) ([]*job.Job, error) {
