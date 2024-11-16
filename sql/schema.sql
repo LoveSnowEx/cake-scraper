@@ -1,5 +1,6 @@
 PRAGMA foreign_keys = ON;
 
+-- Create jobs table
 CREATE TABLE IF NOT EXISTS jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     company TEXT NOT NULL DEFAULT '',
@@ -21,12 +22,14 @@ CREATE TABLE IF NOT EXISTS jobs (
 );
 CREATE UNIQUE INDEX IF NOT EXISTS uq_jobs_link ON jobs (link);
 
+-- Create tags table
 CREATE TABLE IF NOT EXISTS tags (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tag TEXT NOT NULL DEFAULT ''
 );
 CREATE UNIQUE INDEX IF NOT EXISTS uq_tags_tag ON tags (tag);
 
+-- Create jobs_tags table
 CREATE TABLE IF NOT EXISTS jobs_tags (
     job_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,
