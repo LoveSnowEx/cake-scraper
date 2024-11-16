@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"bufio"
 	"log"
 	"log/slog"
 	"os"
@@ -13,9 +12,8 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	w := bufio.NewWriter(file)
 	slog.SetDefault(slog.New(
-		slog.NewJSONHandler(w, &slog.HandlerOptions{
+		slog.NewJSONHandler(file, &slog.HandlerOptions{
 			AddSource: true,
 		}),
 	))
