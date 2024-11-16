@@ -37,3 +37,14 @@ CREATE TABLE IF NOT EXISTS jobs_tags (
     FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE,
     PRIMARY KEY (job_id, tag_id)
 );
+
+-- Create locations table
+CREATE TABLE IF NOT EXISTS locations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    address TEXT NOT NULL DEFAULT '',
+    country TEXT NOT NULL DEFAULT '',
+    city TEXT NOT NULL DEFAULT '',
+    area TEXT NOT NULL DEFAULT '',
+    zip_code TEXT NOT NULL DEFAULT ''
+);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_locations_address ON locations (address);
