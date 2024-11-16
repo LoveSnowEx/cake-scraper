@@ -3,6 +3,7 @@ package locationrepo
 import (
 	"cake-scraper/pkg/database"
 	"cake-scraper/pkg/location"
+	"log/slog"
 
 	sq "github.com/Masterminds/squirrel"
 )
@@ -21,8 +22,10 @@ type LocationPo struct {
 }
 
 type LocationRepo interface {
+	Init() error
 	Find(conditions map[string]interface{}) ([]*location.Location, error)
 	Save(l *location.Location) error
+	SaveAll(locations []*location.Location) error
 }
 
 type locationRepoImpl struct {
@@ -35,6 +38,14 @@ func NewLocationRepo() *locationRepoImpl {
 		panic(err)
 	}
 	return &locationRepoImpl{db: db}
+}
+
+func (r *locationRepoImpl) Init() error {
+	locations := location.LoadLocations()
+	if err := r.SaveAll(locations); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *locationRepoImpl) Find(conditions map[string]interface{}) ([]*location.Location, error) {
@@ -70,6 +81,39 @@ func (r *locationRepoImpl) Save(l *location.Location) error {
 	}
 	if _, err := r.db.Exec(sql, args...); err != nil {
 		return err
+	}
+	return nil
+}
+
+func (r *locationRepoImpl) SaveAll(locations []*location.Location) error {
+	tx, err := r.db.Beginx()
+	if err != nil {
+		slog.Error("failed to start transaction", err)
+		return err
+	}
+	defer func() {
+		if err != nil {
+			tx.Rollback()
+		}
+		tx.Commit()
+	}()
+	for _, l := range locations {
+		sql, args, err := sq.Insert("locations").
+			Columns("address", "country", "city", "area", "zip_code").
+			Values(l.Address(), l.Country, l.City, l.Area, l.ZipCode).
+			Suffix(`ON CONFLICT (address) DO UPDATE SET
+			country = EXCLUDED.country,
+			city = EXCLUDED.city,
+			area = EXCLUDED.area,
+			zip_code = EXCLUDED.zip_code
+		`).
+			ToSql()
+		if err != nil {
+			return err
+		}
+		if _, err := tx.Exec(sql, args...); err != nil {
+			return err
+		}
 	}
 	return nil
 }
