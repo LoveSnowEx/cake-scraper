@@ -4,8 +4,10 @@ go 1.23.2
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
+	github.com/agnivade/levenshtein v1.2.0
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/jmoiron/sqlx v1.4.0
+	github.com/lithammer/fuzzysearch v1.1.8
 	github.com/stretchr/testify v1.9.0
 	github.com/tidwall/gjson v1.14.4
 	github.com/uptrace/bun/driver/sqliteshim v1.2.5
