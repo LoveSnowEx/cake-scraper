@@ -66,7 +66,7 @@ func (suite *MatcherTestSuite) TestFindBestMatch() {
 		},
 	}
 	for _, tc := range testcases {
-		suite.Equal(tc.want, location.FindBestMatch(tc.target))
+		suite.Equal(tc.want, location.FindBestMatch(tc.target).Address())
 	}
 }
 

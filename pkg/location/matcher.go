@@ -1,7 +1,6 @@
 package location
 
 import (
-	"cake-scraper/pkg/util"
 	"strings"
 
 	"github.com/lithammer/fuzzysearch/fuzzy"
@@ -35,18 +34,13 @@ func evalScore(targetTokens, locationTokens []string) float64 {
 	return score
 }
 
-func FindBestMatch(target string) string {
+func FindBestMatch(target string) *Location {
 	targetTokens := strings.Split(target, ", ")
-	locations := util.Map(
-		LoadLocations(),
-		func(location *Location) string {
-			return location.Address()
-		},
-	)
+	locations := LoadLocations()
 	maxScore := 0.0
-	bestMatch := ""
+	var bestMatch *Location
 	for _, location := range locations {
-		locationTokens := strings.Split(location, ", ")
+		locationTokens := strings.Split(location.Address(), ", ")
 		score := evalScore(targetTokens, locationTokens)
 		if score > maxScore {
 			maxScore = score
@@ -56,5 +50,5 @@ func FindBestMatch(target string) string {
 	if maxScore >= ratio {
 		return bestMatch
 	}
-	return ""
+	return nil
 }

@@ -32,6 +32,9 @@ func NewLocation(country, city, area, zipCode string) *Location {
 }
 
 func (l *Location) Address() string {
+	if l == nil {
+		return ""
+	}
 	return strings.Join(
 		util.Filter(
 			[]string{l.Area, l.City, l.Country},
