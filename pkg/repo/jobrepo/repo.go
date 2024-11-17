@@ -3,9 +3,9 @@ package jobrepo
 import (
 	"cake-scraper/pkg/database"
 	"cake-scraper/pkg/job"
+	"cake-scraper/pkg/location"
 	"cake-scraper/pkg/util"
 	"fmt"
-	"log"
 	"time"
 
 	sq "github.com/Masterminds/squirrel"
@@ -182,9 +182,8 @@ func (r *jobRepoImpl) Save(j *job.Job) (err error) {
 	if err != nil {
 		return err
 	}
-	row := tx.QueryRowx(sql, args...)
 	var jobID int64
-	if err = row.Scan(&jobID); err != nil {
+	if err = tx.Get(&jobID, sql, args...); err != nil {
 		return fmt.Errorf("failed to insert job: %w", err)
 	}
 	// Save tags
@@ -208,23 +207,58 @@ func (r *jobRepoImpl) Save(j *job.Job) (err error) {
 		if err != nil {
 			return err
 		}
-		row = tx.QueryRowx(sql, args...)
 		var tagID int64
-		if err = row.Scan(&tagID); err != nil {
+		if err = tx.Get(&tagID, sql, args...); err != nil {
 			return fmt.Errorf("failed to insert tag: %w", err)
 		}
 		sql, args, err = sq.Insert("jobs_tags").
 			Columns("job_id", "tag_id").
 			Values(jobID, tagID).
-			Suffix("ON CONFLICT DO UPDATE SET job_id = EXCLUDED.job_id, tag_id = EXCLUDED.tag_id").
+			Suffix("ON CONFLICT DO NOTHING").
 			ToSql()
 		if err != nil {
 			return err
 		}
 		_, err = tx.Exec(sql, args...)
 		if err != nil {
-			log.Println(sql, args)
 			return fmt.Errorf("failed to insert jobs_tags: %w", err)
+		}
+	}
+	// Save location
+	sql, args, err = sq.Delete("jobs_locations").
+		Where(sq.Eq{"job_id": jobID}).
+		ToSql()
+	if err != nil {
+		return err
+	}
+	_, err = tx.Exec(sql, args...)
+	if err != nil {
+		return fmt.Errorf("failed to delete jobs_locations: %w", err)
+	}
+	matchedLocation := location.FindBestMatch(j.Location)
+	if matchedLocation != nil {
+		var locationID int64
+		sql, args, err := sq.Select("id").
+			From("locations").
+			Where(sq.Eq{"address": matchedLocation.Address()}).
+			ToSql()
+		if err != nil {
+			return err
+		}
+		if err := tx.Get(&locationID, sql, args...); err != nil {
+			return fmt.Errorf("failed to select location: %w", err)
+		}
+		sql, args, err = sq.Insert("jobs_locations").
+			Columns("job_id", "location_id").
+			Values(jobID, locationID).
+			Suffix("ON CONFLICT DO NOTHING").
+			ToSql()
+		if err != nil {
+			return err
+		}
+		_, err = tx.Exec(sql, args...)
+		if err != nil {
+			return fmt.Errorf("failed to insert jobs_locations: %w", err)
 		}
 	}
 	return nil

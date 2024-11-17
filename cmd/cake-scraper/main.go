@@ -2,10 +2,14 @@ package main
 
 import (
 	"cake-scraper/pkg/scraper"
+	"cake-scraper/pkg/util"
 	"encoding/json"
 	"log"
 	"os"
+	"path/filepath"
 )
+
+var jobJsonPath = filepath.Join(util.ProjectRoot, "out/jobs.json")
 
 func main() {
 	const maxPage = 100
@@ -21,8 +25,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	_ = os.MkdirAll("out", 0755)
-	if err := os.WriteFile("out/jobs.json", jobsJson, 0644); err != nil {
+	_ = os.MkdirAll(filepath.Dir(jobJsonPath), 0755)
+	if err := os.WriteFile(jobJsonPath, jobsJson, 0644); err != nil {
 		log.Fatal(err)
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"cake-scraper/pkg/htmlparser"
 	"cake-scraper/pkg/job"
 	"cake-scraper/pkg/repo/jobrepo"
+	"cake-scraper/pkg/repo/locationrepo"
 	"cake-scraper/pkg/util"
 	"fmt"
 	"log/slog"
@@ -71,6 +72,7 @@ type scraper struct {
 	linkCollector   *colly.Collector
 	detailCollector *colly.Collector
 	jobRepo         jobrepo.JobRepo
+	locationRepo    locationrepo.LocationRepo
 	logger          *slog.Logger
 }
 
@@ -81,6 +83,7 @@ func NewScraper(MaxPage int, Professions ...Profession) *scraper {
 		linkCollector:   NewCollector(),
 		detailCollector: NewCollector(),
 		jobRepo:         jobrepo.NewJobRepo(),
+		locationRepo:    locationrepo.NewLocationRepo(),
 	}
 	s.Init()
 	return s
@@ -88,6 +91,9 @@ func NewScraper(MaxPage int, Professions ...Profession) *scraper {
 
 func (s *scraper) Init() {
 	s.logger = slog.Default().WithGroup("scraper")
+	if err := s.locationRepo.Init(); err != nil {
+		util.PanicError(err)
+	}
 	s.linkCollector.OnHTML("div[class^='JobSearchHits_list__']", func(e *colly.HTMLElement) {
 		hrefs := e.ChildAttrs("a[class^='JobSearchItem_jobTitle__']", "href")
 		hrefs = util.Filter(hrefs, func(href string) bool {
