@@ -40,11 +40,6 @@ type TagPo struct {
 	Tag string `db:"tag"`
 }
 
-type JobTagPo struct {
-	JobID int64 `db:"job_id"`
-	TagID int64 `db:"tag_id"`
-}
-
 type JobContentPo struct {
 	ID      int64  `db:"id"`
 	JobID   int64  `db:"job_id"`
