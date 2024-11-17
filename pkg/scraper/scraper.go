@@ -10,7 +10,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"sync/atomic"
 	"time"
 
 	"github.com/gocolly/colly/v2"
@@ -30,27 +29,26 @@ var (
 	_                 Scraper = (*scraper)(nil)
 	jobListUrlRegex           = regexp.MustCompile(`^https://www.cake.me/jobs.*$`)
 	jobDetailUrlRegex         = regexp.MustCompile(`^https://www.cake.me/companies/(.*)/jobs/(.*)$`)
-	pagePattern               = regexp.MustCompile(`https://www.cake.me/jobs\?.*?page=(\d+)`)
-
-	Cnt atomic.Int64
 )
 
 type Profession string
 
 func NewCollector() *colly.Collector {
 	c := colly.NewCollector(
-		// colly.URLFilters(jobDetailUrlRegex, jobListUrlRegex),
+		colly.URLFilters(jobDetailUrlRegex, jobListUrlRegex),
 		colly.Async(true),
 		colly.AllowURLRevisit(),
 	)
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("Cookie", "locale=en")
 	})
-	c.Limit(&colly.LimitRule{
+	if err := c.Limit(&colly.LimitRule{
 		DomainGlob:  "*",
 		RandomDelay: time.Millisecond * 200,
 		Parallelism: rateLimit,
-	})
+	}); err != nil {
+		util.PanicError(err)
+	}
 	return c
 }
 
@@ -60,18 +58,6 @@ func (p Profession) String() string {
 
 func buildJobListUrl(profession Profession, page int) string {
 	return fmt.Sprintf("https://www.cake.me/jobs?location_list%%5B0%%5D=Taiwan&profession%%5B0%%5D=%s&order=latest&page=%d", profession, page)
-}
-
-func parsePageNumber(url string) int {
-	matches := pagePattern.FindStringSubmatch(url)
-	if len(matches) < 2 {
-		return 1
-	}
-	page, err := strconv.Atoi(matches[1])
-	if err != nil {
-		util.PanicError(err)
-	}
-	return page
 }
 
 type Scraper interface {
@@ -115,7 +101,6 @@ func (s *scraper) Init() {
 		}
 	})
 	s.detailCollector.OnHTML("body", func(e *colly.HTMLElement) {
-		Cnt.Add(1)
 		j := job.New()
 		j.Company = e.ChildText("div[class^='JobDescriptionLeftColumn_companyInfo__'] > a > h2")
 		j.Title = e.ChildText("h1[class^='JobDescriptionLeftColumn_title__']")

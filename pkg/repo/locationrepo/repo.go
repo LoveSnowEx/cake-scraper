@@ -88,14 +88,15 @@ func (r *locationRepoImpl) Save(l *location.Location) error {
 func (r *locationRepoImpl) SaveAll(locations []*location.Location) error {
 	tx, err := r.db.Beginx()
 	if err != nil {
-		slog.Error("failed to start transaction", err)
+		slog.Error("failed to start transaction", "error", err)
 		return err
 	}
 	defer func() {
 		if err != nil {
-			tx.Rollback()
+			slog.Error("failed to commit transaction", "error", err)
+			err = tx.Rollback()
 		}
-		tx.Commit()
+		err = tx.Commit()
 	}()
 	for _, l := range locations {
 		sql, args, err := sq.Insert("locations").
