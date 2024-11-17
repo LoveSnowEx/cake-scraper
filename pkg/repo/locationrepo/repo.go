@@ -51,7 +51,14 @@ func (r *locationRepoImpl) Init() error {
 func (r *locationRepoImpl) Find(conditions map[string]interface{}) ([]*location.Location, error) {
 	var locations []*location.Location
 	var pos []*LocationPo
-	if err := r.db.Select(&pos, "SELECT * FROM location WHERE country = ?", conditions["country"]); err != nil {
+	sql, args, err := sq.Select("*").
+		From("location").
+		Where(conditions).
+		ToSql()
+	if err != nil {
+		return nil, err
+	}
+	if err := r.db.Select(&pos, sql, args...); err != nil {
 		return nil, err
 	}
 	for _, po := range pos {
