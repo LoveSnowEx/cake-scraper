@@ -11,7 +11,7 @@ import (
 var logPath = filepath.Join(util.ProjectRoot, "log/scraper.log")
 
 func init() {
-	_ = os.MkdirAll("log", 0755)
+	_ = os.MkdirAll(filepath.Dir(logPath), 0755)
 	file, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal(err)
