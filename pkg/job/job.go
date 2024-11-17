@@ -4,6 +4,8 @@ type Job struct {
 	Company          string
 	Title            string
 	Link             string
+	MainCategory     string
+	SubCategory      string
 	EmploymentType   EmploymentType
 	Seniority        Seniority
 	Location         string

@@ -112,6 +112,17 @@ func (s *scraper) Init() {
 		j.Title = e.ChildText("h1[class^='JobDescriptionLeftColumn_title__']")
 		j.Link = e.Request.URL.String()
 		j.Remote = job.NoRemote
+		// Job Category
+		e.ForEach("div[class^='Breadcrumbs_wrapper__']", func(_ int, div *colly.HTMLElement) {
+			categories := div.ChildTexts("a > span")
+			switch len(categories) {
+			case 1:
+				j.MainCategory = categories[0]
+			case 2:
+				j.MainCategory = categories[0]
+				j.SubCategory = categories[1]
+			}
+		})
 		// Job Info
 		e.ForEach("div[class^='JobDescriptionRightColumn_jobInfo__'] > div[class^='JobDescriptionRightColumn_row__']", func(_ int, row *colly.HTMLElement) {
 			icons := util.Filter(strings.Split(row.ChildAttr("i", "class"), " "), func(str string) bool {

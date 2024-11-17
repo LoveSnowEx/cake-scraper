@@ -20,7 +20,6 @@ type JobPo struct {
 	Link             string `db:"link"`
 	Company          string `db:"company"`
 	Title            string `db:"title"`
-	Breadcrumbs      string `db:"breadcrumbs"`
 	EmploymentType   int64  `db:"employment_type"`
 	Seniority        int64  `db:"seniority"`
 	Location         string `db:"location"`
@@ -144,7 +143,6 @@ func (r *jobRepoImpl) Save(j *job.Job) (err error) {
 			"link":              j.Link,
 			"company":           j.Company,
 			"title":             j.Title,
-			"breadcrumbs":       "",
 			"employment_type":   j.EmploymentType,
 			"seniority":         j.Seniority,
 			"location":          j.Location,
@@ -159,7 +157,6 @@ func (r *jobRepoImpl) Save(j *job.Job) (err error) {
 		Suffix(`
 			ON CONFLICT(link) DO UPDATE SET
 				title = EXCLUDED.title,
-				breadcrumbs = EXCLUDED.breadcrumbs,
 				employment_type = EXCLUDED.employment_type,
 				seniority = EXCLUDED.seniority,
 				location = EXCLUDED.location,
@@ -180,6 +177,42 @@ func (r *jobRepoImpl) Save(j *job.Job) (err error) {
 	var jobID int64
 	if err = tx.Get(&jobID, sql, args...); err != nil {
 		return fmt.Errorf("failed to insert job: %w", err)
+	}
+	// Save categories
+	sql, args, err = sq.Delete("jobs_categories").
+		Where(sq.Eq{"job_id": jobID}).
+		ToSql()
+	if err != nil {
+		return err
+	}
+	_, err = tx.Exec(sql, args...)
+	if err != nil {
+		return fmt.Errorf("failed to delete jobs_categories: %w", err)
+	}
+	sql, args, err = sq.Insert("categories").
+		Columns("main", "sub").
+		Values(j.MainCategory, j.SubCategory).
+		Suffix("ON CONFLICT(main, sub) DO UPDATE SET main = EXCLUDED.main, sub = EXCLUDED.sub").
+		Suffix("RETURNING id").
+		ToSql()
+	if err != nil {
+		return err
+	}
+	var categoryID int64
+	if err = tx.Get(&categoryID, sql, args...); err != nil {
+		return fmt.Errorf("failed to insert category: %w", err)
+	}
+	sql, args, err = sq.Insert("jobs_categories").
+		Columns("job_id", "category_id").
+		Values(jobID, categoryID).
+		Suffix("ON CONFLICT DO NOTHING").
+		ToSql()
+	if err != nil {
+		return err
+	}
+	_, err = tx.Exec(sql, args...)
+	if err != nil {
+		return fmt.Errorf("failed to insert jobs_categories: %w", err)
 	}
 	// Save tags
 	sql, args, err = sq.Delete("jobs_tags").
