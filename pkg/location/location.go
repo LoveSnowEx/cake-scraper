@@ -4,6 +4,7 @@ import (
 	"cake-scraper/pkg/util"
 	"log/slog"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/tidwall/gjson"
@@ -11,7 +12,7 @@ import (
 	_ "cake-scraper/pkg/logger"
 )
 
-const jsonPath = "json/address.json"
+var jsonPath = filepath.Join(util.ProjectRoot, "json/address.json")
 
 var locations []*Location
 
