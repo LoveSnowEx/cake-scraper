@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS jobs (
     company TEXT NOT NULL DEFAULT '',
     title TEXT NOT NULL DEFAULT '',
     link TEXT NOT NULL DEFAULT '',
-    breadcrumbs TEXT NOT NULL DEFAULT '',
     employment_type INTEGER NOT NULL DEFAULT -1,
     seniority INTEGER NOT NULL DEFAULT -1,
     location TEXT NOT NULL DEFAULT '',
@@ -25,7 +24,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_jobs_link ON jobs (link);
 -- Create tags table
 CREATE TABLE IF NOT EXISTS tags (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    tag TEXT NOT NULL DEFAULT ''
+    tag TEXT NOT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS uq_tags_tag ON tags (tag);
 
@@ -56,4 +55,21 @@ CREATE TABLE IF NOT EXISTS jobs_locations (
     FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE,
     FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE,
     PRIMARY KEY (job_id, location_id)
+);
+
+-- Create categories table
+CREATE TABLE IF NOT EXISTS categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    main TEXT NOT NULL,
+    sub TEXT NOT NULL DEFAULT ''
+);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_categories_main_sub ON categories (main, sub);
+
+-- Create jobs_categories table
+CREATE TABLE IF NOT EXISTS jobs_categories (
+    job_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE,
+    PRIMARY KEY (job_id, category_id)
 );
