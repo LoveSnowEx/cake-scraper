@@ -1,2015 +1,2006 @@
 [
     {
-        "city_name": "臺北市",
-        "city_name_en": "Taipei City",
-        "area_list": [
-            {
-                "zip_code": "100",
-                "area_name": "中正區",
-                "area_name_en": "Zhongzheng District"
-            },
-            {
-                "zip_code": "103",
-                "area_name": "大同區",
-                "area_name_en": "Datong District"
-            },
-            {
-                "zip_code": "104",
-                "area_name": "中山區",
-                "area_name_en": "Zhongshan District"
-            },
-            {
-                "zip_code": "105",
-                "area_name": "松山區",
-                "area_name_en": "Songshan District"
-            },
-            {
-                "zip_code": "106",
-                "area_name": "大安區",
-                "area_name_en": "Da’an District"
-            },
-            {
-                "zip_code": "108",
-                "area_name": "萬華區",
-                "area_name_en": "Wanhua District"
-            },
-            {
-                "zip_code": "110",
-                "area_name": "信義區",
-                "area_name_en": "Xinyi District"
-            },
-            {
-                "zip_code": "111",
-                "area_name": "士林區",
-                "area_name_en": "Shilin District"
-            },
-            {
-                "zip_code": "112",
-                "area_name": "北投區",
-                "area_name_en": "Beitou District"
-            },
-            {
-                "zip_code": "114",
-                "area_name": "內湖區",
-                "area_name_en": "Neihu District"
-            },
-            {
-                "zip_code": "115",
-                "area_name": "南港區",
-                "area_name_en": "Nangang District"
-            },
-            {
-                "zip_code": "116",
-                "area_name": "文山區",
-                "area_name_en": "Wenshan District"
-            }
-        ]
+        "country_name": "日本",
+        "country_name_en": "Japan"
     },
     {
-        "city_name": "基隆市",
-        "city_name_en": "Keelung City",
-        "area_list": [
-            {
-                "zip_code": "200",
-                "area_name": "仁愛區",
-                "area_name_en": "Ren’ai District"
-            },
-            {
-                "zip_code": "201",
-                "area_name": "信義區",
-                "area_name_en": "Xinyi District"
-            },
-            {
-                "zip_code": "202",
-                "area_name": "中正區",
-                "area_name_en": "Zhongzheng District"
-            },
-            {
-                "zip_code": "203",
-                "area_name": "中山區",
-                "area_name_en": "Zhongshan District"
-            },
-            {
-                "zip_code": "204",
-                "area_name": "安樂區",
-                "area_name_en": "Anle District"
-            },
-            {
-                "zip_code": "205",
-                "area_name": "暖暖區",
-                "area_name_en": "Nuannuan District"
-            },
-            {
-                "zip_code": "206",
-                "area_name": "七堵區",
-                "area_name_en": "Qidu District"
-            }
-        ]
+        "country_name": "美國",
+        "country_name_en": "United States"
     },
     {
-        "city_name": "新北市",
-        "city_name_en": "New Taipei City",
-        "area_list": [
-            {
-                "zip_code": "207",
-                "area_name": "萬里區",
-                "area_name_en": "Wanli District"
-            },
-            {
-                "zip_code": "208",
-                "area_name": "金山區",
-                "area_name_en": "Jinshan District"
-            },
-            {
-                "zip_code": "220",
-                "area_name": "板橋區",
-                "area_name_en": "Banqiao District"
-            },
-            {
-                "zip_code": "221",
-                "area_name": "汐止區",
-                "area_name_en": "Xizhi District"
-            },
-            {
-                "zip_code": "222",
-                "area_name": "深坑區",
-                "area_name_en": "Shenkeng District"
-            },
-            {
-                "zip_code": "223",
-                "area_name": "石碇區",
-                "area_name_en": "Shiding District"
-            },
-            {
-                "zip_code": "224",
-                "area_name": "瑞芳區",
-                "area_name_en": "Ruifang District"
-            },
-            {
-                "zip_code": "226",
-                "area_name": "平溪區",
-                "area_name_en": "Pingxi District"
-            },
-            {
-                "zip_code": "227",
-                "area_name": "雙溪區",
-                "area_name_en": "Shuangxi District"
-            },
-            {
-                "zip_code": "228",
-                "area_name": "貢寮區",
-                "area_name_en": "Gongliao District"
-            },
-            {
-                "zip_code": "231",
-                "area_name": "新店區",
-                "area_name_en": "Xindian District"
-            },
-            {
-                "zip_code": "232",
-                "area_name": "坪林區",
-                "area_name_en": "Pinglin District"
-            },
-            {
-                "zip_code": "233",
-                "area_name": "烏來區",
-                "area_name_en": "Wulai District"
-            },
-            {
-                "zip_code": "234",
-                "area_name": "永和區",
-                "area_name_en": "Yonghe District"
-            },
-            {
-                "zip_code": "235",
-                "area_name": "中和區",
-                "area_name_en": "Zhonghe District"
-            },
-            {
-                "zip_code": "236",
-                "area_name": "土城區",
-                "area_name_en": "Tucheng District"
-            },
-            {
-                "zip_code": "237",
-                "area_name": "三峽區",
-                "area_name_en": "Sanxia District"
-            },
-            {
-                "zip_code": "238",
-                "area_name": "樹林區",
-                "area_name_en": "Shulin District"
-            },
-            {
-                "zip_code": "239",
-                "area_name": "鶯歌區",
-                "area_name_en": "Yingge District"
-            },
-            {
-                "zip_code": "241",
-                "area_name": "三重區",
-                "area_name_en": "Sanchong District"
-            },
-            {
-                "zip_code": "242",
-                "area_name": "新莊區",
-                "area_name_en": "Xinzhuang District"
-            },
-            {
-                "zip_code": "243",
-                "area_name": "泰山區",
-                "area_name_en": "Taishan District"
-            },
-            {
-                "zip_code": "244",
-                "area_name": "林口區",
-                "area_name_en": "Linkou District"
-            },
-            {
-                "zip_code": "247",
-                "area_name": "蘆洲區",
-                "area_name_en": "Luzhou District"
-            },
-            {
-                "zip_code": "248",
-                "area_name": "五股區",
-                "area_name_en": "Wugu District"
-            },
-            {
-                "zip_code": "249",
-                "area_name": "八里區",
-                "area_name_en": "Bali District"
-            },
-            {
-                "zip_code": "251",
-                "area_name": "淡水區",
-                "area_name_en": "Tamsui District"
-            },
-            {
-                "zip_code": "252",
-                "area_name": "三芝區",
-                "area_name_en": "Sanzhi District"
-            },
-            {
-                "zip_code": "253",
-                "area_name": "石門區",
-                "area_name_en": "Shimen District"
-            }
-        ]
+        "country_name": "香港",
+        "country_name_en": "Hong Kong"
     },
     {
-        "city_name": "連江縣",
-        "city_name_en": "Lienchiang County",
-        "area_list": [
-            {
-                "zip_code": "209",
-                "area_name": "南竿鄉",
-                "area_name_en": "Nangan Township"
-            },
-            {
-                "zip_code": "210",
-                "area_name": "北竿鄉",
-                "area_name_en": "Beigan Township"
-            },
-            {
-                "zip_code": "211",
-                "area_name": "莒光鄉",
-                "area_name_en": "Juguang Township"
-            },
-            {
-                "zip_code": "212",
-                "area_name": "東引鄉",
-                "area_name_en": "Dongyin Township"
-            }
-        ]
-    },
-    {
-        "city_name": "宜蘭縣",
-        "city_name_en": "Yilan County",
-        "area_list": [
-            {
-                "zip_code": "260",
-                "area_name": "宜蘭市",
-                "area_name_en": "Yilan City"
-            },
-            {
-                "zip_code": "263",
-                "area_name": "壯圍鄉",
-                "area_name_en": "Zhuangwei Township"
-            },
-            {
-                "zip_code": "261",
-                "area_name": "頭城鎮",
-                "area_name_en": "Toucheng Township"
-            },
-            {
-                "zip_code": "262",
-                "area_name": "礁溪鄉",
-                "area_name_en": "Jiaoxi Township"
-            },
-            {
-                "zip_code": "264",
-                "area_name": "員山鄉",
-                "area_name_en": "Yuanshan Township"
-            },
-            {
-                "zip_code": "265",
-                "area_name": "羅東鎮",
-                "area_name_en": "Luodong Township"
-            },
-            {
-                "zip_code": "266",
-                "area_name": "三星鄉",
-                "area_name_en": "Sanxing Township"
-            },
-            {
-                "zip_code": "267",
-                "area_name": "大同鄉",
-                "area_name_en": "Datong Township"
-            },
-            {
-                "zip_code": "268",
-                "area_name": "五結鄉",
-                "area_name_en": "Wujie Township"
-            },
-            {
-                "zip_code": "269",
-                "area_name": "冬山鄉",
-                "area_name_en": "Dongshan Township"
-            },
-            {
-                "zip_code": "270",
-                "area_name": "蘇澳鎮",
-                "area_name_en": "Su’ao Township"
-            },
-            {
-                "zip_code": "272",
-                "area_name": "南澳鄉",
-                "area_name_en": "Nan’ao Township"
-            },
-            {
-                "zip_code": "290",
-                "area_name": "釣魚臺",
-                "area_name_en": "Diaoyutai"
-            }
-        ]
-    },
-    {
-        "city_name": "釣魚臺",
-        "city_name_en": "Diauyutai",
-        "area_list": [
-            {
-                "zip_code": "290",
-                "area_name": "釣魚臺",
-                "area_name_en": "Diaoyutai"
-            }
-        ]
-    },
-    {
-        "city_name": "新竹市",
-        "city_name_en": "Hsinchu City",
-        "area_list": [
-            {
-                "zip_code": "300",
-                "area_name": "東區",
-                "area_name_en": "East District"
-            },
-            {
-                "zip_code": "300",
-                "area_name": "北區",
-                "area_name_en": "North District"
-            },
-            {
-                "zip_code": "300",
-                "area_name": "香山區",
-                "area_name_en": "Xiangshan District"
-            }
-        ]
-    },
-    {
-        "city_name": "新竹縣",
-        "city_name_en": "Hsinchu County",
-        "area_list": [
-            {
-                "zip_code": "308",
-                "area_name": "寶山鄉",
-                "area_name_en": "Baoshan Township"
-            },
-            {
-                "zip_code": "302",
-                "area_name": "竹北市",
-                "area_name_en": "Zhubei City"
-            },
-            {
-                "zip_code": "303",
-                "area_name": "湖口鄉",
-                "area_name_en": "Hukou Township"
-            },
-            {
-                "zip_code": "304",
-                "area_name": "新豐鄉",
-                "area_name_en": "Xinfeng Township"
-            },
-            {
-                "zip_code": "305",
-                "area_name": "新埔鎮",
-                "area_name_en": "Xinpu Township"
-            },
-            {
-                "zip_code": "306",
-                "area_name": "關西鎮",
-                "area_name_en": "Guanxi Township"
-            },
-            {
-                "zip_code": "307",
-                "area_name": "芎林鄉",
-                "area_name_en": "Qionglin Township"
-            },
-            {
-                "zip_code": "310",
-                "area_name": "竹東鎮",
-                "area_name_en": "Zhudong Township"
-            },
-            {
-                "zip_code": "311",
-                "area_name": "五峰鄉",
-                "area_name_en": "Wufeng Township"
-            },
-            {
-                "zip_code": "312",
-                "area_name": "橫山鄉",
-                "area_name_en": "Hengshan Township"
-            },
-            {
-                "zip_code": "313",
-                "area_name": "尖石鄉",
-                "area_name_en": "Jianshi Township"
-            },
-            {
-                "zip_code": "314",
-                "area_name": "北埔鄉",
-                "area_name_en": "Beipu Township"
-            },
-            {
-                "zip_code": "315",
-                "area_name": "峨眉鄉",
-                "area_name_en": "Emei Township"
-            }
-        ]
-    },
-    {
-        "city_name": "桃園市",
-        "city_name_en": "Taoyuan City",
-        "area_list": [
-            {
-                "zip_code": "320",
-                "area_name": "中壢區",
-                "area_name_en": "Zhongli District"
-            },
-            {
-                "zip_code": "324",
-                "area_name": "平鎮區",
-                "area_name_en": "Pingzhen District"
-            },
-            {
-                "zip_code": "325",
-                "area_name": "龍潭區",
-                "area_name_en": "Longtan District"
-            },
-            {
-                "zip_code": "326",
-                "area_name": "楊梅區",
-                "area_name_en": "Yangmei District"
-            },
-            {
-                "zip_code": "327",
-                "area_name": "新屋區",
-                "area_name_en": "Xinwu District"
-            },
-            {
-                "zip_code": "328",
-                "area_name": "觀音區",
-                "area_name_en": "Guanyin District"
-            },
-            {
-                "zip_code": "330",
-                "area_name": "桃園區",
-                "area_name_en": "Taoyuan District"
-            },
-            {
-                "zip_code": "333",
-                "area_name": "龜山區",
-                "area_name_en": "Guishan District"
-            },
-            {
-                "zip_code": "334",
-                "area_name": "八德區",
-                "area_name_en": "Bade District"
-            },
-            {
-                "zip_code": "335",
-                "area_name": "大溪區",
-                "area_name_en": "Daxi District"
-            },
-            {
-                "zip_code": "336",
-                "area_name": "復興區",
-                "area_name_en": "Fuxing District"
-            },
-            {
-                "zip_code": "337",
-                "area_name": "大園區",
-                "area_name_en": "Dayuan District"
-            },
-            {
-                "zip_code": "338",
-                "area_name": "蘆竹區",
-                "area_name_en": "Luzhu District"
-            }
-        ]
-    },
-    {
-        "city_name": "苗栗縣",
-        "city_name_en": "Miaoli County",
-        "area_list": [
-            {
-                "zip_code": "350",
-                "area_name": "竹南鎮",
-                "area_name_en": "Zhunan Township"
-            },
-            {
-                "zip_code": "351",
-                "area_name": "頭份市",
-                "area_name_en": "Toufen City"
-            },
-            {
-                "zip_code": "352",
-                "area_name": "三灣鄉",
-                "area_name_en": "Sanwan Township"
-            },
-            {
-                "zip_code": "353",
-                "area_name": "南庄鄉",
-                "area_name_en": "Nanzhuang Township"
-            },
-            {
-                "zip_code": "354",
-                "area_name": "獅潭鄉",
-                "area_name_en": "Shitan Township"
-            },
-            {
-                "zip_code": "356",
-                "area_name": "後龍鎮",
-                "area_name_en": "Houlong Township"
-            },
-            {
-                "zip_code": "357",
-                "area_name": "通霄鎮",
-                "area_name_en": "Tongxiao Township"
-            },
-            {
-                "zip_code": "358",
-                "area_name": "苑裡鎮",
-                "area_name_en": "Yuanli Township"
-            },
-            {
-                "zip_code": "360",
-                "area_name": "苗栗市",
-                "area_name_en": "Miaoli City"
-            },
-            {
-                "zip_code": "361",
-                "area_name": "造橋鄉",
-                "area_name_en": "Zaoqiao Township"
-            },
-            {
-                "zip_code": "362",
-                "area_name": "頭屋鄉",
-                "area_name_en": "Touwu Township"
-            },
-            {
-                "zip_code": "363",
-                "area_name": "公館鄉",
-                "area_name_en": "Gongguan Township"
-            },
-            {
-                "zip_code": "364",
-                "area_name": "大湖鄉",
-                "area_name_en": "Dahu Township"
-            },
-            {
-                "zip_code": "365",
-                "area_name": "泰安鄉",
-                "area_name_en": "Tai’an Township"
-            },
-            {
-                "zip_code": "366",
-                "area_name": "銅鑼鄉",
-                "area_name_en": "Tongluo Township"
-            },
-            {
-                "zip_code": "367",
-                "area_name": "三義鄉",
-                "area_name_en": "Sanyi Township"
-            },
-            {
-                "zip_code": "368",
-                "area_name": "西湖鄉",
-                "area_name_en": "Xihu Township"
-            },
-            {
-                "zip_code": "369",
-                "area_name": "卓蘭鎮",
-                "area_name_en": "Zhuolan Township"
-            }
-        ]
-    },
-    {
-        "city_name": "臺中市",
-        "city_name_en": "Taichung City",
-        "area_list": [
-            {
-                "zip_code": "400",
-                "area_name": "中區",
-                "area_name_en": "Central District"
-            },
-            {
-                "zip_code": "401",
-                "area_name": "東區",
-                "area_name_en": "East District"
-            },
-            {
-                "zip_code": "402",
-                "area_name": "南區",
-                "area_name_en": "South District"
-            },
-            {
-                "zip_code": "403",
-                "area_name": "西區",
-                "area_name_en": "West District"
-            },
-            {
-                "zip_code": "404",
-                "area_name": "北區",
-                "area_name_en": "North District"
-            },
-            {
-                "zip_code": "406",
-                "area_name": "北屯區",
-                "area_name_en": "Beitun District"
-            },
-            {
-                "zip_code": "407",
-                "area_name": "西屯區",
-                "area_name_en": "Xitun District"
-            },
-            {
-                "zip_code": "408",
-                "area_name": "南屯區",
-                "area_name_en": "Nantun District"
-            },
-            {
-                "zip_code": "411",
-                "area_name": "太平區",
-                "area_name_en": "Taiping District"
-            },
-            {
-                "zip_code": "412",
-                "area_name": "大里區",
-                "area_name_en": "Dali District"
-            },
-            {
-                "zip_code": "413",
-                "area_name": "霧峰區",
-                "area_name_en": "Wufeng District"
-            },
-            {
-                "zip_code": "414",
-                "area_name": "烏日區",
-                "area_name_en": "Wuri District"
-            },
-            {
-                "zip_code": "420",
-                "area_name": "豐原區",
-                "area_name_en": "Fengyuan District"
-            },
-            {
-                "zip_code": "421",
-                "area_name": "后里區",
-                "area_name_en": "Houli District"
-            },
-            {
-                "zip_code": "422",
-                "area_name": "石岡區",
-                "area_name_en": "Shigang District"
-            },
-            {
-                "zip_code": "423",
-                "area_name": "東勢區",
-                "area_name_en": "Dongshi District"
-            },
-            {
-                "zip_code": "424",
-                "area_name": "和平區",
-                "area_name_en": "Heping District"
-            },
-            {
-                "zip_code": "426",
-                "area_name": "新社區",
-                "area_name_en": "Xinshe District"
-            },
-            {
-                "zip_code": "427",
-                "area_name": "潭子區",
-                "area_name_en": "Tanzi District"
-            },
-            {
-                "zip_code": "428",
-                "area_name": "大雅區",
-                "area_name_en": "Daya District"
-            },
-            {
-                "zip_code": "429",
-                "area_name": "神岡區",
-                "area_name_en": "Shengang District"
-            },
-            {
-                "zip_code": "432",
-                "area_name": "大肚區",
-                "area_name_en": "Dadu District"
-            },
-            {
-                "zip_code": "433",
-                "area_name": "沙鹿區",
-                "area_name_en": "Shalu District"
-            },
-            {
-                "zip_code": "434",
-                "area_name": "龍井區",
-                "area_name_en": "Longjing District"
-            },
-            {
-                "zip_code": "435",
-                "area_name": "梧棲區",
-                "area_name_en": "Wuqi District"
-            },
-            {
-                "zip_code": "436",
-                "area_name": "清水區",
-                "area_name_en": "Qingshui District"
-            },
-            {
-                "zip_code": "437",
-                "area_name": "大甲區",
-                "area_name_en": "Dajia District"
-            },
-            {
-                "zip_code": "438",
-                "area_name": "外埔區",
-                "area_name_en": "Waipu District"
-            },
-            {
-                "zip_code": "439",
-                "area_name": "大安區",
-                "area_name_en": "Da’an District"
-            }
-        ]
-    },
-    {
-        "city_name": "彰化縣",
-        "city_name_en": "Changhua County",
-        "area_list": [
-            {
-                "zip_code": "500",
-                "area_name": "彰化市",
-                "area_name_en": "Changhua City"
-            },
-            {
-                "zip_code": "502",
-                "area_name": "芬園鄉",
-                "area_name_en": "Fenyuan Township"
-            },
-            {
-                "zip_code": "503",
-                "area_name": "花壇鄉",
-                "area_name_en": "Huatan Township"
-            },
-            {
-                "zip_code": "504",
-                "area_name": "秀水鄉",
-                "area_name_en": "Xiushui Township"
-            },
-            {
-                "zip_code": "505",
-                "area_name": "鹿港鎮",
-                "area_name_en": "Lukang Township"
-            },
-            {
-                "zip_code": "506",
-                "area_name": "福興鄉",
-                "area_name_en": "Fuxing Township"
-            },
-            {
-                "zip_code": "507",
-                "area_name": "線西鄉",
-                "area_name_en": "Xianxi Township"
-            },
-            {
-                "zip_code": "508",
-                "area_name": "和美鎮",
-                "area_name_en": "Hemei Township"
-            },
-            {
-                "zip_code": "509",
-                "area_name": "伸港鄉",
-                "area_name_en": "Shengang Township"
-            },
-            {
-                "zip_code": "510",
-                "area_name": "員林市",
-                "area_name_en": "Yuanlin City"
-            },
-            {
-                "zip_code": "511",
-                "area_name": "社頭鄉",
-                "area_name_en": "Shetou Township"
-            },
-            {
-                "zip_code": "512",
-                "area_name": "永靖鄉",
-                "area_name_en": "Yongjing Township"
-            },
-            {
-                "zip_code": "513",
-                "area_name": "埔心鄉",
-                "area_name_en": "Puxin Township"
-            },
-            {
-                "zip_code": "514",
-                "area_name": "溪湖鎮",
-                "area_name_en": "Xihu Township"
-            },
-            {
-                "zip_code": "515",
-                "area_name": "大村鄉",
-                "area_name_en": "Dacun Township"
-            },
-            {
-                "zip_code": "516",
-                "area_name": "埔鹽鄉",
-                "area_name_en": "Puyan Township"
-            },
-            {
-                "zip_code": "520",
-                "area_name": "田中鎮",
-                "area_name_en": "Tianzhong Township"
-            },
-            {
-                "zip_code": "521",
-                "area_name": "北斗鎮",
-                "area_name_en": "Beidou Township"
-            },
-            {
-                "zip_code": "522",
-                "area_name": "田尾鄉",
-                "area_name_en": "Tianwei Township"
-            },
-            {
-                "zip_code": "523",
-                "area_name": "埤頭鄉",
-                "area_name_en": "Pitou Township"
-            },
-            {
-                "zip_code": "524",
-                "area_name": "溪州鄉",
-                "area_name_en": "Xizhou Township"
-            },
-            {
-                "zip_code": "525",
-                "area_name": "竹塘鄉",
-                "area_name_en": "Zhutang Township"
-            },
-            {
-                "zip_code": "526",
-                "area_name": "二林鎮",
-                "area_name_en": "Erlin Township"
-            },
-            {
-                "zip_code": "527",
-                "area_name": "大城鄉",
-                "area_name_en": "Dacheng Township"
-            },
-            {
-                "zip_code": "528",
-                "area_name": "芳苑鄉",
-                "area_name_en": "Fangyuan Township"
-            },
-            {
-                "zip_code": "530",
-                "area_name": "二水鄉",
-                "area_name_en": "Ershui Township"
-            }
-        ]
-    },
-    {
-        "city_name": "南投縣",
-        "city_name_en": "Nantou County",
-        "area_list": [
-            {
-                "zip_code": "540",
-                "area_name": "南投市",
-                "area_name_en": "Nantou City"
-            },
-            {
-                "zip_code": "541",
-                "area_name": "中寮鄉",
-                "area_name_en": "Zhongliao Township"
-            },
-            {
-                "zip_code": "542",
-                "area_name": "草屯鎮",
-                "area_name_en": "Caotun Township"
-            },
-            {
-                "zip_code": "544",
-                "area_name": "國姓鄉",
-                "area_name_en": "Guoxing Township"
-            },
-            {
-                "zip_code": "545",
-                "area_name": "埔里鎮",
-                "area_name_en": "Puli Township"
-            },
-            {
-                "zip_code": "546",
-                "area_name": "仁愛鄉",
-                "area_name_en": "Ren’ai Township"
-            },
-            {
-                "zip_code": "551",
-                "area_name": "名間鄉",
-                "area_name_en": "Mingjian Township"
-            },
-            {
-                "zip_code": "552",
-                "area_name": "集集鎮",
-                "area_name_en": "Jiji Township"
-            },
-            {
-                "zip_code": "553",
-                "area_name": "水里鄉",
-                "area_name_en": "Shuili Township"
-            },
-            {
-                "zip_code": "555",
-                "area_name": "魚池鄉",
-                "area_name_en": "Yuchi Township"
-            },
-            {
-                "zip_code": "556",
-                "area_name": "信義鄉",
-                "area_name_en": "Xinyi Township"
-            },
-            {
-                "zip_code": "557",
-                "area_name": "竹山鎮",
-                "area_name_en": "Zhushan Township"
-            },
-            {
-                "zip_code": "558",
-                "area_name": "鹿谷鄉",
-                "area_name_en": "Lugu Township"
-            }
-        ]
-    },
-    {
-        "city_name": "嘉義市",
-        "city_name_en": "Chiayi City",
-        "area_list": [
-            {
-                "zip_code": "600",
-                "area_name": "西區",
-                "area_name_en": "West District"
-            },
-            {
-                "zip_code": "600",
-                "area_name": "東區",
-                "area_name_en": "East District"
-            }
-        ]
-    },
-    {
-        "city_name": "嘉義縣",
-        "city_name_en": "Chiayi County",
-        "area_list": [
-            {
-                "zip_code": "602",
-                "area_name": "番路鄉",
-                "area_name_en": "Fanlu Township"
-            },
-            {
-                "zip_code": "603",
-                "area_name": "梅山鄉",
-                "area_name_en": "Meishan Township"
-            },
-            {
-                "zip_code": "604",
-                "area_name": "竹崎鄉",
-                "area_name_en": "Zhuqi Township"
-            },
-            {
-                "zip_code": "605",
-                "area_name": "阿里山鄉",
-                "area_name_en": "Alishan Township"
-            },
-            {
-                "zip_code": "606",
-                "area_name": "中埔鄉",
-                "area_name_en": "Zhongpu Township"
-            },
-            {
-                "zip_code": "607",
-                "area_name": "大埔鄉",
-                "area_name_en": "Dapu Township"
-            },
-            {
-                "zip_code": "608",
-                "area_name": "水上鄉",
-                "area_name_en": "Shuishang Township"
-            },
-            {
-                "zip_code": "611",
-                "area_name": "鹿草鄉",
-                "area_name_en": "Lucao Township"
-            },
-            {
-                "zip_code": "612",
-                "area_name": "太保市",
-                "area_name_en": "Taibao City"
-            },
-            {
-                "zip_code": "613",
-                "area_name": "朴子市",
-                "area_name_en": "Puzi City"
-            },
-            {
-                "zip_code": "614",
-                "area_name": "東石鄉",
-                "area_name_en": "Dongshi Township"
-            },
-            {
-                "zip_code": "615",
-                "area_name": "六腳鄉",
-                "area_name_en": "Liujiao Township"
-            },
-            {
-                "zip_code": "616",
-                "area_name": "新港鄉",
-                "area_name_en": "Xingang Township"
-            },
-            {
-                "zip_code": "621",
-                "area_name": "民雄鄉",
-                "area_name_en": "Minxiong Township"
-            },
-            {
-                "zip_code": "622",
-                "area_name": "大林鎮",
-                "area_name_en": "Dalin Township"
-            },
-            {
-                "zip_code": "623",
-                "area_name": "溪口鄉",
-                "area_name_en": "Xikou Township"
-            },
-            {
-                "zip_code": "624",
-                "area_name": "義竹鄉",
-                "area_name_en": "Yizhu Township"
-            },
-            {
-                "zip_code": "625",
-                "area_name": "布袋鎮",
-                "area_name_en": "Budai Township"
-            }
-        ]
-    },
-    {
-        "city_name": "雲林縣",
-        "city_name_en": "Yunlin County",
-        "area_list": [
-            {
-                "zip_code": "630",
-                "area_name": "斗南鎮",
-                "area_name_en": "Dounan Township"
-            },
-            {
-                "zip_code": "631",
-                "area_name": "大埤鄉",
-                "area_name_en": "Dapi Township"
-            },
-            {
-                "zip_code": "632",
-                "area_name": "虎尾鎮",
-                "area_name_en": "Huwei Township"
-            },
-            {
-                "zip_code": "633",
-                "area_name": "土庫鎮",
-                "area_name_en": "Tuku Township"
-            },
-            {
-                "zip_code": "634",
-                "area_name": "褒忠鄉",
-                "area_name_en": "Baozhong Township"
-            },
-            {
-                "zip_code": "635",
-                "area_name": "東勢鄉",
-                "area_name_en": "Dongshi Township"
-            },
-            {
-                "zip_code": "636",
-                "area_name": "臺西鄉",
-                "area_name_en": "Taixi Township"
-            },
-            {
-                "zip_code": "637",
-                "area_name": "崙背鄉",
-                "area_name_en": "Lunbei Township"
-            },
-            {
-                "zip_code": "638",
-                "area_name": "麥寮鄉",
-                "area_name_en": "Mailiao Township"
-            },
-            {
-                "zip_code": "640",
-                "area_name": "斗六市",
-                "area_name_en": "Douliu City"
-            },
-            {
-                "zip_code": "643",
-                "area_name": "林內鄉",
-                "area_name_en": "Linnei Township"
-            },
-            {
-                "zip_code": "646",
-                "area_name": "古坑鄉",
-                "area_name_en": "Gukeng Township"
-            },
-            {
-                "zip_code": "647",
-                "area_name": "莿桐鄉",
-                "area_name_en": "Citong Township"
-            },
-            {
-                "zip_code": "648",
-                "area_name": "西螺鎮",
-                "area_name_en": "Xiluo Township"
-            },
-            {
-                "zip_code": "649",
-                "area_name": "二崙鄉",
-                "area_name_en": "Erlun Township"
-            },
-            {
-                "zip_code": "651",
-                "area_name": "北港鎮",
-                "area_name_en": "Beigang Township"
-            },
-            {
-                "zip_code": "652",
-                "area_name": "水林鄉",
-                "area_name_en": "Shuilin Township"
-            },
-            {
-                "zip_code": "653",
-                "area_name": "口湖鄉",
-                "area_name_en": "Kouhu Township"
-            },
-            {
-                "zip_code": "654",
-                "area_name": "四湖鄉",
-                "area_name_en": "Sihu Township"
-            },
-            {
-                "zip_code": "655",
-                "area_name": "元長鄉",
-                "area_name_en": "Yuanchang Township"
-            }
-        ]
-    },
-    {
-        "city_name": "臺南市",
-        "city_name_en": "Tainan City",
-        "area_list": [
-            {
-                "zip_code": "700",
-                "area_name": "中西區",
-                "area_name_en": "West Central District"
-            },
-            {
-                "zip_code": "701",
-                "area_name": "東區",
-                "area_name_en": "East District"
-            },
-            {
-                "zip_code": "702",
-                "area_name": "南區",
-                "area_name_en": "South District"
-            },
-            {
-                "zip_code": "704",
-                "area_name": "北區",
-                "area_name_en": "North District"
-            },
-            {
-                "zip_code": "708",
-                "area_name": "安平區",
-                "area_name_en": "Anping District"
-            },
-            {
-                "zip_code": "709",
-                "area_name": "安南區",
-                "area_name_en": "Annan District"
-            },
-            {
-                "zip_code": "710",
-                "area_name": "永康區",
-                "area_name_en": "Yongkang District"
-            },
-            {
-                "zip_code": "711",
-                "area_name": "歸仁區",
-                "area_name_en": "Guiren District"
-            },
-            {
-                "zip_code": "712",
-                "area_name": "新化區",
-                "area_name_en": "Xinhua District"
-            },
-            {
-                "zip_code": "713",
-                "area_name": "左鎮區",
-                "area_name_en": "Zuozhen District"
-            },
-            {
-                "zip_code": "714",
-                "area_name": "玉井區",
-                "area_name_en": "Yujing District"
-            },
-            {
-                "zip_code": "715",
-                "area_name": "楠西區",
-                "area_name_en": "Nanxi District"
-            },
-            {
-                "zip_code": "716",
-                "area_name": "南化區",
-                "area_name_en": "Nanhua District"
-            },
-            {
-                "zip_code": "717",
-                "area_name": "仁德區",
-                "area_name_en": "Rende District"
-            },
-            {
-                "zip_code": "718",
-                "area_name": "關廟區",
-                "area_name_en": "Guanmiao District"
-            },
-            {
-                "zip_code": "719",
-                "area_name": "龍崎區",
-                "area_name_en": "Longqi District"
-            },
-            {
-                "zip_code": "720",
-                "area_name": "官田區",
-                "area_name_en": "Guantian District"
-            },
-            {
-                "zip_code": "721",
-                "area_name": "麻豆區",
-                "area_name_en": "Madou District"
-            },
-            {
-                "zip_code": "722",
-                "area_name": "佳里區",
-                "area_name_en": "Jiali District"
-            },
-            {
-                "zip_code": "723",
-                "area_name": "西港區",
-                "area_name_en": "Xigang District"
-            },
-            {
-                "zip_code": "724",
-                "area_name": "七股區",
-                "area_name_en": "Qigu District"
-            },
-            {
-                "zip_code": "725",
-                "area_name": "將軍區",
-                "area_name_en": "Jiangjun District"
-            },
-            {
-                "zip_code": "726",
-                "area_name": "學甲區",
-                "area_name_en": "Xuejia District"
-            },
-            {
-                "zip_code": "727",
-                "area_name": "北門區",
-                "area_name_en": "Beimen District"
-            },
-            {
-                "zip_code": "730",
-                "area_name": "新營區",
-                "area_name_en": "Xinying District"
-            },
-            {
-                "zip_code": "731",
-                "area_name": "後壁區",
-                "area_name_en": "Houbi District"
-            },
-            {
-                "zip_code": "732",
-                "area_name": "白河區",
-                "area_name_en": "Baihe District"
-            },
-            {
-                "zip_code": "733",
-                "area_name": "東山區",
-                "area_name_en": "Dongshan District"
-            },
-            {
-                "zip_code": "734",
-                "area_name": "六甲區",
-                "area_name_en": "Liujia District"
-            },
-            {
-                "zip_code": "735",
-                "area_name": "下營區",
-                "area_name_en": "Xiaying District"
-            },
-            {
-                "zip_code": "736",
-                "area_name": "柳營區",
-                "area_name_en": "Liuying District"
-            },
-            {
-                "zip_code": "737",
-                "area_name": "鹽水區",
-                "area_name_en": "Yanshui District"
-            },
-            {
-                "zip_code": "741",
-                "area_name": "善化區",
-                "area_name_en": "Shanhua District"
-            },
-            {
-                "zip_code": "744",
-                "area_name": "新市區",
-                "area_name_en": "Xinshi District"
-            },
-            {
-                "zip_code": "742",
-                "area_name": "大內區",
-                "area_name_en": "Danei District"
-            },
-            {
-                "zip_code": "743",
-                "area_name": "山上區",
-                "area_name_en": "Shanshang District"
-            },
-            {
-                "zip_code": "745",
-                "area_name": "安定區",
-                "area_name_en": "Anding District"
-            }
-        ]
-    },
-    {
-        "city_name": "高雄市",
-        "city_name_en": "Kaohsiung City",
-        "area_list": [
-            {
-                "zip_code": "800",
-                "area_name": "新興區",
-                "area_name_en": "Xinxing District"
-            },
-            {
-                "zip_code": "801",
-                "area_name": "前金區",
-                "area_name_en": "Qianjin District"
-            },
-            {
-                "zip_code": "802",
-                "area_name": "苓雅區",
-                "area_name_en": "Lingya District"
-            },
-            {
-                "zip_code": "803",
-                "area_name": "鹽埕區",
-                "area_name_en": "Yancheng District"
-            },
-            {
-                "zip_code": "804",
-                "area_name": "鼓山區",
-                "area_name_en": "Gushan District"
-            },
-            {
-                "zip_code": "805",
-                "area_name": "旗津區",
-                "area_name_en": "Qijin District"
-            },
-            {
-                "zip_code": "806",
-                "area_name": "前鎮區",
-                "area_name_en": "Qianzhen District"
-            },
-            {
-                "zip_code": "807",
-                "area_name": "三民區",
-                "area_name_en": "Sanmin District"
-            },
-            {
-                "zip_code": "811",
-                "area_name": "楠梓區",
-                "area_name_en": "Nanzi District"
-            },
-            {
-                "zip_code": "812",
-                "area_name": "小港區",
-                "area_name_en": "Xiaogang District"
-            },
-            {
-                "zip_code": "813",
-                "area_name": "左營區",
-                "area_name_en": "Zuoying District"
-            },
-            {
-                "zip_code": "814",
-                "area_name": "仁武區",
-                "area_name_en": "Renwu District"
-            },
-            {
-                "zip_code": "815",
-                "area_name": "大社區",
-                "area_name_en": "Dashe District"
-            },
-            {
-                "zip_code": "817",
-                "area_name": "東沙群島",
-                "area_name_en": "Dongsha Islands"
-            },
-            {
-                "zip_code": "819",
-                "area_name": "南沙群島",
-                "area_name_en": "Nansha Islands"
-            },
-            {
-                "zip_code": "820",
-                "area_name": "岡山區",
-                "area_name_en": "Gangshan District"
-            },
-            {
-                "zip_code": "821",
-                "area_name": "路竹區",
-                "area_name_en": "Luzhu District"
-            },
-            {
-                "zip_code": "822",
-                "area_name": "阿蓮區",
-                "area_name_en": "Alian District"
-            },
-            {
-                "zip_code": "823",
-                "area_name": "田寮區",
-                "area_name_en": "Tianliao District"
-            },
-            {
-                "zip_code": "824",
-                "area_name": "燕巢區",
-                "area_name_en": "Yanchao District"
-            },
-            {
-                "zip_code": "825",
-                "area_name": "橋頭區",
-                "area_name_en": "Qiaotou District"
-            },
-            {
-                "zip_code": "826",
-                "area_name": "梓官區",
-                "area_name_en": "Ziguan District"
-            },
-            {
-                "zip_code": "827",
-                "area_name": "彌陀區",
-                "area_name_en": "Mituo District"
-            },
-            {
-                "zip_code": "828",
-                "area_name": "永安區",
-                "area_name_en": "Yong’an District"
-            },
-            {
-                "zip_code": "829",
-                "area_name": "湖內區",
-                "area_name_en": "Hunei District"
-            },
-            {
-                "zip_code": "830",
-                "area_name": "鳳山區",
-                "area_name_en": "Fengshan District"
-            },
-            {
-                "zip_code": "831",
-                "area_name": "大寮區",
-                "area_name_en": "Daliao District"
-            },
-            {
-                "zip_code": "832",
-                "area_name": "林園區",
-                "area_name_en": "Linyuan District"
-            },
-            {
-                "zip_code": "833",
-                "area_name": "鳥松區",
-                "area_name_en": "Niaosong District"
-            },
-            {
-                "zip_code": "840",
-                "area_name": "大樹區",
-                "area_name_en": "Dashu District"
-            },
-            {
-                "zip_code": "842",
-                "area_name": "旗山區",
-                "area_name_en": "Qishan District"
-            },
-            {
-                "zip_code": "843",
-                "area_name": "美濃區",
-                "area_name_en": "Meinong District"
-            },
-            {
-                "zip_code": "844",
-                "area_name": "六龜區",
-                "area_name_en": "Liugui District"
-            },
-            {
-                "zip_code": "845",
-                "area_name": "內門區",
-                "area_name_en": "Neimen District"
-            },
-            {
-                "zip_code": "846",
-                "area_name": "杉林區",
-                "area_name_en": "Shanlin District"
-            },
-            {
-                "zip_code": "847",
-                "area_name": "甲仙區",
-                "area_name_en": "Jiaxian District"
-            },
-            {
-                "zip_code": "848",
-                "area_name": "桃源區",
-                "area_name_en": "Taoyuan District"
-            },
-            {
-                "zip_code": "849",
-                "area_name": "那瑪夏區",
-                "area_name_en": "Namaxia District"
-            },
-            {
-                "zip_code": "851",
-                "area_name": "茂林區",
-                "area_name_en": "Maolin District"
-            },
-            {
-                "zip_code": "852",
-                "area_name": "茄萣區",
-                "area_name_en": "Qieding District"
-            }
-        ]
-    },
-    {
-        "city_name": "南海島",
-        "city_name_en": "Nanhai",
-        "area_list": [
-            {
-                "zip_code": "817",
-                "area_name": "東沙群島",
-                "area_name_en": "Dongsha Islands"
-            },
-            {
-                "zip_code": "819",
-                "area_name": "南沙群島",
-                "area_name_en": "Nansha Islands"
-            }
-        ]
-    },
-    {
-        "city_name": "澎湖縣",
-        "city_name_en": "Penghu County",
-        "area_list": [
-            {
-                "zip_code": "880",
-                "area_name": "馬公市",
-                "area_name_en": "Magong City"
-            },
-            {
-                "zip_code": "881",
-                "area_name": "西嶼鄉",
-                "area_name_en": "Xiyu Township"
-            },
-            {
-                "zip_code": "882",
-                "area_name": "望安鄉",
-                "area_name_en": "Wang’an Township"
-            },
-            {
-                "zip_code": "883",
-                "area_name": "七美鄉",
-                "area_name_en": "Qimei Township"
-            },
-            {
-                "zip_code": "884",
-                "area_name": "白沙鄉",
-                "area_name_en": "Baisha Township"
-            },
-            {
-                "zip_code": "885",
-                "area_name": "湖西鄉",
-                "area_name_en": "Huxi Township"
-            }
-        ]
-    },
-    {
-        "city_name": "金門縣",
-        "city_name_en": "Kinmen County",
-        "area_list": [
-            {
-                "zip_code": "890",
-                "area_name": "金沙鎮",
-                "area_name_en": "Jinsha Township"
-            },
-            {
-                "zip_code": "891",
-                "area_name": "金湖鎮",
-                "area_name_en": "Jinhu Township"
-            },
-            {
-                "zip_code": "892",
-                "area_name": "金寧鄉",
-                "area_name_en": "Jinning Township"
-            },
-            {
-                "zip_code": "893",
-                "area_name": "金城鎮",
-                "area_name_en": "Jincheng Township"
-            },
-            {
-                "zip_code": "894",
-                "area_name": "烈嶼鄉",
-                "area_name_en": "Lieyu Township"
-            },
-            {
-                "zip_code": "896",
-                "area_name": "烏坵鄉",
-                "area_name_en": "Wuqiu Township"
-            }
-        ]
-    },
-    {
-        "city_name": "屏東縣",
-        "city_name_en": "Pingtung County",
-        "area_list": [
-            {
-                "zip_code": "900",
-                "area_name": "屏東市",
-                "area_name_en": "Pingtung City"
-            },
-            {
-                "zip_code": "901",
-                "area_name": "三地門鄉",
-                "area_name_en": "Sandimen Township"
-            },
-            {
-                "zip_code": "902",
-                "area_name": "霧臺鄉",
-                "area_name_en": "Wutai Township"
-            },
-            {
-                "zip_code": "903",
-                "area_name": "瑪家鄉",
-                "area_name_en": "Majia Township"
-            },
-            {
-                "zip_code": "904",
-                "area_name": "九如鄉",
-                "area_name_en": "Jiuru Township"
-            },
-            {
-                "zip_code": "905",
-                "area_name": "里港鄉",
-                "area_name_en": "Ligang Township"
-            },
-            {
-                "zip_code": "906",
-                "area_name": "高樹鄉",
-                "area_name_en": "Gaoshu Township"
-            },
-            {
-                "zip_code": "907",
-                "area_name": "鹽埔鄉",
-                "area_name_en": "Yanpu Township"
-            },
-            {
-                "zip_code": "908",
-                "area_name": "長治鄉",
-                "area_name_en": "Changzhi Township"
-            },
-            {
-                "zip_code": "909",
-                "area_name": "麟洛鄉",
-                "area_name_en": "Linluo Township"
-            },
-            {
-                "zip_code": "911",
-                "area_name": "竹田鄉",
-                "area_name_en": "Zhutian Township"
-            },
-            {
-                "zip_code": "912",
-                "area_name": "內埔鄉",
-                "area_name_en": "Neipu Township"
-            },
-            {
-                "zip_code": "913",
-                "area_name": "萬丹鄉",
-                "area_name_en": "Wandan Township"
-            },
-            {
-                "zip_code": "920",
-                "area_name": "潮州鎮",
-                "area_name_en": "Chaozhou Township"
-            },
-            {
-                "zip_code": "921",
-                "area_name": "泰武鄉",
-                "area_name_en": "Taiwu Township"
-            },
-            {
-                "zip_code": "922",
-                "area_name": "來義鄉",
-                "area_name_en": "Laiyi Township"
-            },
-            {
-                "zip_code": "923",
-                "area_name": "萬巒鄉",
-                "area_name_en": "Wanluan Township"
-            },
-            {
-                "zip_code": "924",
-                "area_name": "崁頂鄉",
-                "area_name_en": "Kanding Township"
-            },
-            {
-                "zip_code": "925",
-                "area_name": "新埤鄉",
-                "area_name_en": "Xinpi Township"
-            },
-            {
-                "zip_code": "926",
-                "area_name": "南州鄉",
-                "area_name_en": "Nanzhou Township"
-            },
-            {
-                "zip_code": "927",
-                "area_name": "林邊鄉",
-                "area_name_en": "Linbian Township"
-            },
-            {
-                "zip_code": "928",
-                "area_name": "東港鎮",
-                "area_name_en": "Donggang Township"
-            },
-            {
-                "zip_code": "929",
-                "area_name": "琉球鄉",
-                "area_name_en": "Liuqiu Township"
-            },
-            {
-                "zip_code": "931",
-                "area_name": "佳冬鄉",
-                "area_name_en": "Jiadong Township"
-            },
-            {
-                "zip_code": "932",
-                "area_name": "新園鄉",
-                "area_name_en": "Xinyuan Township"
-            },
-            {
-                "zip_code": "940",
-                "area_name": "枋寮鄉",
-                "area_name_en": "Fangliao Township"
-            },
-            {
-                "zip_code": "941",
-                "area_name": "枋山鄉",
-                "area_name_en": "Fangshan Township"
-            },
-            {
-                "zip_code": "942",
-                "area_name": "春日鄉",
-                "area_name_en": "Chunri Township"
-            },
-            {
-                "zip_code": "943",
-                "area_name": "獅子鄉",
-                "area_name_en": "Shizi Township"
-            },
-            {
-                "zip_code": "944",
-                "area_name": "車城鄉",
-                "area_name_en": "Checheng Township"
-            },
-            {
-                "zip_code": "945",
-                "area_name": "牡丹鄉",
-                "area_name_en": "Mudan Township"
-            },
-            {
-                "zip_code": "946",
-                "area_name": "恆春鎮",
-                "area_name_en": "Hengchun Township"
-            },
-            {
-                "zip_code": "947",
-                "area_name": "滿州鄉",
-                "area_name_en": "Manzhou Township"
-            }
-        ]
-    },
-    {
-        "city_name": "臺東縣",
-        "city_name_en": "Taitung County",
-        "area_list": [
-            {
-                "zip_code": "950",
-                "area_name": "臺東市",
-                "area_name_en": "Taitung City"
-            },
-            {
-                "zip_code": "951",
-                "area_name": "綠島鄉",
-                "area_name_en": "Ludao Township"
-            },
-            {
-                "zip_code": "952",
-                "area_name": "蘭嶼鄉",
-                "area_name_en": "Lanyu Township"
-            },
-            {
-                "zip_code": "953",
-                "area_name": "延平鄉",
-                "area_name_en": "Yanping Township"
-            },
-            {
-                "zip_code": "954",
-                "area_name": "卑南鄉",
-                "area_name_en": "Beinan Township"
-            },
-            {
-                "zip_code": "955",
-                "area_name": "鹿野鄉",
-                "area_name_en": "Luye Township"
-            },
-            {
-                "zip_code": "956",
-                "area_name": "關山鎮",
-                "area_name_en": "Guanshan Township"
-            },
-            {
-                "zip_code": "957",
-                "area_name": "海端鄉",
-                "area_name_en": "Haiduan Township"
-            },
-            {
-                "zip_code": "958",
-                "area_name": "池上鄉",
-                "area_name_en": "Chishang Township"
-            },
-            {
-                "zip_code": "959",
-                "area_name": "東河鄉",
-                "area_name_en": "Donghe Township"
-            },
-            {
-                "zip_code": "961",
-                "area_name": "成功鎮",
-                "area_name_en": "Chenggong Township"
-            },
-            {
-                "zip_code": "962",
-                "area_name": "長濱鄉",
-                "area_name_en": "Changbin Township"
-            },
-            {
-                "zip_code": "963",
-                "area_name": "太麻里鄉",
-                "area_name_en": "Taimali Township"
-            },
-            {
-                "zip_code": "964",
-                "area_name": "金峰鄉",
-                "area_name_en": "Jinfeng Township"
-            },
-            {
-                "zip_code": "965",
-                "area_name": "大武鄉",
-                "area_name_en": "Dawu Township"
-            },
-            {
-                "zip_code": "966",
-                "area_name": "達仁鄉",
-                "area_name_en": "Daren Township"
-            }
-        ]
-    },
-    {
-        "city_name": "花蓮縣",
-        "city_name_en": "Hualien County",
-        "area_list": [
-            {
-                "zip_code": "970",
-                "area_name": "花蓮市",
-                "area_name_en": "Hualien City"
-            },
-            {
-                "zip_code": "971",
-                "area_name": "新城鄉",
-                "area_name_en": "Xincheng Township"
-            },
-            {
-                "zip_code": "972",
-                "area_name": "秀林鄉",
-                "area_name_en": "Xiulin Township"
-            },
-            {
-                "zip_code": "973",
-                "area_name": "吉安鄉",
-                "area_name_en": "Ji’an Township"
-            },
-            {
-                "zip_code": "974",
-                "area_name": "壽豐鄉",
-                "area_name_en": "Shoufeng Township"
-            },
-            {
-                "zip_code": "975",
-                "area_name": "鳳林鎮",
-                "area_name_en": "Fenglin Township"
-            },
-            {
-                "zip_code": "976",
-                "area_name": "光復鄉",
-                "area_name_en": "Guangfu Township"
-            },
-            {
-                "zip_code": "977",
-                "area_name": "豐濱鄉",
-                "area_name_en": "Fengbin Township"
-            },
-            {
-                "zip_code": "978",
-                "area_name": "瑞穗鄉",
-                "area_name_en": "Ruisui Township"
-            },
-            {
-                "zip_code": "979",
-                "area_name": "萬榮鄉",
-                "area_name_en": "Wanrong Township"
-            },
-            {
-                "zip_code": "981",
-                "area_name": "玉里鎮",
-                "area_name_en": "Yuli Township"
-            },
-            {
-                "zip_code": "982",
-                "area_name": "卓溪鄉",
-                "area_name_en": "Zhuoxi Township"
-            },
-            {
-                "zip_code": "983",
-                "area_name": "富里鄉",
-                "area_name_en": "Fuli Township"
+        "country_name": "臺灣",
+        "country_name_en": "Taiwan",
+        "city_list": [
+            {
+                "city_name": "臺北市",
+                "city_name_en": "Taipei City",
+                "area_list": [
+                    {
+                        "zip_code": "100",
+                        "area_name": "中正區",
+                        "area_name_en": "Zhongzheng District"
+                    },
+                    {
+                        "zip_code": "103",
+                        "area_name": "大同區",
+                        "area_name_en": "Datong District"
+                    },
+                    {
+                        "zip_code": "104",
+                        "area_name": "中山區",
+                        "area_name_en": "Zhongshan District"
+                    },
+                    {
+                        "zip_code": "105",
+                        "area_name": "松山區",
+                        "area_name_en": "Songshan District"
+                    },
+                    {
+                        "zip_code": "106",
+                        "area_name": "大安區",
+                        "area_name_en": "Daan District"
+                    },
+                    {
+                        "zip_code": "108",
+                        "area_name": "萬華區",
+                        "area_name_en": "Wanhua District"
+                    },
+                    {
+                        "zip_code": "110",
+                        "area_name": "信義區",
+                        "area_name_en": "Xinyi District"
+                    },
+                    {
+                        "zip_code": "111",
+                        "area_name": "士林區",
+                        "area_name_en": "Shilin District"
+                    },
+                    {
+                        "zip_code": "112",
+                        "area_name": "北投區",
+                        "area_name_en": "Beitou District"
+                    },
+                    {
+                        "zip_code": "114",
+                        "area_name": "內湖區",
+                        "area_name_en": "Neihu District"
+                    },
+                    {
+                        "zip_code": "115",
+                        "area_name": "南港區",
+                        "area_name_en": "Nangang District"
+                    },
+                    {
+                        "zip_code": "116",
+                        "area_name": "文山區",
+                        "area_name_en": "Wenshan District"
+                    }
+                ]
+            },
+            {
+                "city_name": "基隆市",
+                "city_name_en": "Keelung City",
+                "area_list": [
+                    {
+                        "zip_code": "200",
+                        "area_name": "仁愛區",
+                        "area_name_en": "Renai District"
+                    },
+                    {
+                        "zip_code": "201",
+                        "area_name": "信義區",
+                        "area_name_en": "Xinyi District"
+                    },
+                    {
+                        "zip_code": "202",
+                        "area_name": "中正區",
+                        "area_name_en": "Zhongzheng District"
+                    },
+                    {
+                        "zip_code": "203",
+                        "area_name": "中山區",
+                        "area_name_en": "Zhongshan District"
+                    },
+                    {
+                        "zip_code": "204",
+                        "area_name": "安樂區",
+                        "area_name_en": "Anle District"
+                    },
+                    {
+                        "zip_code": "205",
+                        "area_name": "暖暖區",
+                        "area_name_en": "Nuannuan District"
+                    },
+                    {
+                        "zip_code": "206",
+                        "area_name": "七堵區",
+                        "area_name_en": "Qidu District"
+                    }
+                ]
+            },
+            {
+                "city_name": "新北市",
+                "city_name_en": "New Taipei City",
+                "area_list": [
+                    {
+                        "zip_code": "207",
+                        "area_name": "萬里區",
+                        "area_name_en": "Wanli District"
+                    },
+                    {
+                        "zip_code": "208",
+                        "area_name": "金山區",
+                        "area_name_en": "Jinshan District"
+                    },
+                    {
+                        "zip_code": "220",
+                        "area_name": "板橋區",
+                        "area_name_en": "Banqiao District"
+                    },
+                    {
+                        "zip_code": "221",
+                        "area_name": "汐止區",
+                        "area_name_en": "Xizhi District"
+                    },
+                    {
+                        "zip_code": "222",
+                        "area_name": "深坑區",
+                        "area_name_en": "Shenkeng District"
+                    },
+                    {
+                        "zip_code": "223",
+                        "area_name": "石碇區",
+                        "area_name_en": "Shiding District"
+                    },
+                    {
+                        "zip_code": "224",
+                        "area_name": "瑞芳區",
+                        "area_name_en": "Ruifang District"
+                    },
+                    {
+                        "zip_code": "226",
+                        "area_name": "平溪區",
+                        "area_name_en": "Pingxi District"
+                    },
+                    {
+                        "zip_code": "227",
+                        "area_name": "雙溪區",
+                        "area_name_en": "Shuangxi District"
+                    },
+                    {
+                        "zip_code": "228",
+                        "area_name": "貢寮區",
+                        "area_name_en": "Gongliao District"
+                    },
+                    {
+                        "zip_code": "231",
+                        "area_name": "新店區",
+                        "area_name_en": "Xindian District"
+                    },
+                    {
+                        "zip_code": "232",
+                        "area_name": "坪林區",
+                        "area_name_en": "Pinglin District"
+                    },
+                    {
+                        "zip_code": "233",
+                        "area_name": "烏來區",
+                        "area_name_en": "Wulai District"
+                    },
+                    {
+                        "zip_code": "234",
+                        "area_name": "永和區",
+                        "area_name_en": "Yonghe District"
+                    },
+                    {
+                        "zip_code": "235",
+                        "area_name": "中和區",
+                        "area_name_en": "Zhonghe District"
+                    },
+                    {
+                        "zip_code": "236",
+                        "area_name": "土城區",
+                        "area_name_en": "Tucheng District"
+                    },
+                    {
+                        "zip_code": "237",
+                        "area_name": "三峽區",
+                        "area_name_en": "Sanxia District"
+                    },
+                    {
+                        "zip_code": "238",
+                        "area_name": "樹林區",
+                        "area_name_en": "Shulin District"
+                    },
+                    {
+                        "zip_code": "239",
+                        "area_name": "鶯歌區",
+                        "area_name_en": "Yingge District"
+                    },
+                    {
+                        "zip_code": "241",
+                        "area_name": "三重區",
+                        "area_name_en": "Sanchong District"
+                    },
+                    {
+                        "zip_code": "242",
+                        "area_name": "新莊區",
+                        "area_name_en": "Xinzhuang District"
+                    },
+                    {
+                        "zip_code": "243",
+                        "area_name": "泰山區",
+                        "area_name_en": "Taishan District"
+                    },
+                    {
+                        "zip_code": "244",
+                        "area_name": "林口區",
+                        "area_name_en": "Linkou District"
+                    },
+                    {
+                        "zip_code": "247",
+                        "area_name": "蘆洲區",
+                        "area_name_en": "Luzhou District"
+                    },
+                    {
+                        "zip_code": "248",
+                        "area_name": "五股區",
+                        "area_name_en": "Wugu District"
+                    },
+                    {
+                        "zip_code": "249",
+                        "area_name": "八里區",
+                        "area_name_en": "Bali District"
+                    },
+                    {
+                        "zip_code": "251",
+                        "area_name": "淡水區",
+                        "area_name_en": "Tamsui District"
+                    },
+                    {
+                        "zip_code": "252",
+                        "area_name": "三芝區",
+                        "area_name_en": "Sanzhi District"
+                    },
+                    {
+                        "zip_code": "253",
+                        "area_name": "石門區",
+                        "area_name_en": "Shimen District"
+                    }
+                ]
+            },
+            {
+                "city_name": "連江縣",
+                "city_name_en": "Lienchiang County",
+                "area_list": [
+                    {
+                        "zip_code": "209",
+                        "area_name": "南竿鄉",
+                        "area_name_en": "Nangan Township"
+                    },
+                    {
+                        "zip_code": "210",
+                        "area_name": "北竿鄉",
+                        "area_name_en": "Beigan Township"
+                    },
+                    {
+                        "zip_code": "211",
+                        "area_name": "莒光鄉",
+                        "area_name_en": "Juguang Township"
+                    },
+                    {
+                        "zip_code": "212",
+                        "area_name": "東引鄉",
+                        "area_name_en": "Dongyin Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "宜蘭縣",
+                "city_name_en": "Yilan County",
+                "area_list": [
+                    {
+                        "zip_code": "260",
+                        "area_name": "宜蘭市",
+                        "area_name_en": "Yilan City"
+                    },
+                    {
+                        "zip_code": "263",
+                        "area_name": "壯圍鄉",
+                        "area_name_en": "Zhuangwei Township"
+                    },
+                    {
+                        "zip_code": "261",
+                        "area_name": "頭城鎮",
+                        "area_name_en": "Toucheng Township"
+                    },
+                    {
+                        "zip_code": "262",
+                        "area_name": "礁溪鄉",
+                        "area_name_en": "Jiaoxi Township"
+                    },
+                    {
+                        "zip_code": "264",
+                        "area_name": "員山鄉",
+                        "area_name_en": "Yuanshan Township"
+                    },
+                    {
+                        "zip_code": "265",
+                        "area_name": "羅東鎮",
+                        "area_name_en": "Luodong Township"
+                    },
+                    {
+                        "zip_code": "266",
+                        "area_name": "三星鄉",
+                        "area_name_en": "Sanxing Township"
+                    },
+                    {
+                        "zip_code": "267",
+                        "area_name": "大同鄉",
+                        "area_name_en": "Datong Township"
+                    },
+                    {
+                        "zip_code": "268",
+                        "area_name": "五結鄉",
+                        "area_name_en": "Wujie Township"
+                    },
+                    {
+                        "zip_code": "269",
+                        "area_name": "冬山鄉",
+                        "area_name_en": "Dongshan Township"
+                    },
+                    {
+                        "zip_code": "270",
+                        "area_name": "蘇澳鎮",
+                        "area_name_en": "Suao Township"
+                    },
+                    {
+                        "zip_code": "272",
+                        "area_name": "南澳鄉",
+                        "area_name_en": "Nanao Township"
+                    },
+                    {
+                        "zip_code": "290",
+                        "area_name": "釣魚臺",
+                        "area_name_en": "Diaoyutai"
+                    }
+                ]
+            },
+            {
+                "city_name": "新竹市",
+                "city_name_en": "Hsinchu City",
+                "area_list": [
+                    {
+                        "zip_code": "300",
+                        "area_name": "東區",
+                        "area_name_en": "East District"
+                    },
+                    {
+                        "zip_code": "300",
+                        "area_name": "北區",
+                        "area_name_en": "North District"
+                    },
+                    {
+                        "zip_code": "300",
+                        "area_name": "香山區",
+                        "area_name_en": "Xiangshan District"
+                    }
+                ]
+            },
+            {
+                "city_name": "新竹縣",
+                "city_name_en": "Hsinchu County",
+                "area_list": [
+                    {
+                        "zip_code": "308",
+                        "area_name": "寶山鄉",
+                        "area_name_en": "Baoshan Township"
+                    },
+                    {
+                        "zip_code": "302",
+                        "area_name": "竹北市",
+                        "area_name_en": "Zhubei City"
+                    },
+                    {
+                        "zip_code": "303",
+                        "area_name": "湖口鄉",
+                        "area_name_en": "Hukou Township"
+                    },
+                    {
+                        "zip_code": "304",
+                        "area_name": "新豐鄉",
+                        "area_name_en": "Xinfeng Township"
+                    },
+                    {
+                        "zip_code": "305",
+                        "area_name": "新埔鎮",
+                        "area_name_en": "Xinpu Township"
+                    },
+                    {
+                        "zip_code": "306",
+                        "area_name": "關西鎮",
+                        "area_name_en": "Guanxi Township"
+                    },
+                    {
+                        "zip_code": "307",
+                        "area_name": "芎林鄉",
+                        "area_name_en": "Qionglin Township"
+                    },
+                    {
+                        "zip_code": "310",
+                        "area_name": "竹東鎮",
+                        "area_name_en": "Zhudong Township"
+                    },
+                    {
+                        "zip_code": "311",
+                        "area_name": "五峰鄉",
+                        "area_name_en": "Wufeng Township"
+                    },
+                    {
+                        "zip_code": "312",
+                        "area_name": "橫山鄉",
+                        "area_name_en": "Hengshan Township"
+                    },
+                    {
+                        "zip_code": "313",
+                        "area_name": "尖石鄉",
+                        "area_name_en": "Jianshi Township"
+                    },
+                    {
+                        "zip_code": "314",
+                        "area_name": "北埔鄉",
+                        "area_name_en": "Beipu Township"
+                    },
+                    {
+                        "zip_code": "315",
+                        "area_name": "峨眉鄉",
+                        "area_name_en": "Emei Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "桃園市",
+                "city_name_en": "Taoyuan City",
+                "area_list": [
+                    {
+                        "zip_code": "320",
+                        "area_name": "中壢區",
+                        "area_name_en": "Zhongli District"
+                    },
+                    {
+                        "zip_code": "324",
+                        "area_name": "平鎮區",
+                        "area_name_en": "Pingzhen District"
+                    },
+                    {
+                        "zip_code": "325",
+                        "area_name": "龍潭區",
+                        "area_name_en": "Longtan District"
+                    },
+                    {
+                        "zip_code": "326",
+                        "area_name": "楊梅區",
+                        "area_name_en": "Yangmei District"
+                    },
+                    {
+                        "zip_code": "327",
+                        "area_name": "新屋區",
+                        "area_name_en": "Xinwu District"
+                    },
+                    {
+                        "zip_code": "328",
+                        "area_name": "觀音區",
+                        "area_name_en": "Guanyin District"
+                    },
+                    {
+                        "zip_code": "330",
+                        "area_name": "桃園區",
+                        "area_name_en": "Taoyuan District"
+                    },
+                    {
+                        "zip_code": "333",
+                        "area_name": "龜山區",
+                        "area_name_en": "Guishan District"
+                    },
+                    {
+                        "zip_code": "334",
+                        "area_name": "八德區",
+                        "area_name_en": "Bade District"
+                    },
+                    {
+                        "zip_code": "335",
+                        "area_name": "大溪區",
+                        "area_name_en": "Daxi District"
+                    },
+                    {
+                        "zip_code": "336",
+                        "area_name": "復興區",
+                        "area_name_en": "Fuxing District"
+                    },
+                    {
+                        "zip_code": "337",
+                        "area_name": "大園區",
+                        "area_name_en": "Dayuan District"
+                    },
+                    {
+                        "zip_code": "338",
+                        "area_name": "蘆竹區",
+                        "area_name_en": "Luzhu District"
+                    }
+                ]
+            },
+            {
+                "city_name": "苗栗縣",
+                "city_name_en": "Miaoli County",
+                "area_list": [
+                    {
+                        "zip_code": "350",
+                        "area_name": "竹南鎮",
+                        "area_name_en": "Zhunan Township"
+                    },
+                    {
+                        "zip_code": "351",
+                        "area_name": "頭份市",
+                        "area_name_en": "Toufen City"
+                    },
+                    {
+                        "zip_code": "352",
+                        "area_name": "三灣鄉",
+                        "area_name_en": "Sanwan Township"
+                    },
+                    {
+                        "zip_code": "353",
+                        "area_name": "南庄鄉",
+                        "area_name_en": "Nanzhuang Township"
+                    },
+                    {
+                        "zip_code": "354",
+                        "area_name": "獅潭鄉",
+                        "area_name_en": "Shitan Township"
+                    },
+                    {
+                        "zip_code": "356",
+                        "area_name": "後龍鎮",
+                        "area_name_en": "Houlong Township"
+                    },
+                    {
+                        "zip_code": "357",
+                        "area_name": "通霄鎮",
+                        "area_name_en": "Tongxiao Township"
+                    },
+                    {
+                        "zip_code": "358",
+                        "area_name": "苑裡鎮",
+                        "area_name_en": "Yuanli Township"
+                    },
+                    {
+                        "zip_code": "360",
+                        "area_name": "苗栗市",
+                        "area_name_en": "Miaoli City"
+                    },
+                    {
+                        "zip_code": "361",
+                        "area_name": "造橋鄉",
+                        "area_name_en": "Zaoqiao Township"
+                    },
+                    {
+                        "zip_code": "362",
+                        "area_name": "頭屋鄉",
+                        "area_name_en": "Touwu Township"
+                    },
+                    {
+                        "zip_code": "363",
+                        "area_name": "公館鄉",
+                        "area_name_en": "Gongguan Township"
+                    },
+                    {
+                        "zip_code": "364",
+                        "area_name": "大湖鄉",
+                        "area_name_en": "Dahu Township"
+                    },
+                    {
+                        "zip_code": "365",
+                        "area_name": "泰安鄉",
+                        "area_name_en": "Taian Township"
+                    },
+                    {
+                        "zip_code": "366",
+                        "area_name": "銅鑼鄉",
+                        "area_name_en": "Tongluo Township"
+                    },
+                    {
+                        "zip_code": "367",
+                        "area_name": "三義鄉",
+                        "area_name_en": "Sanyi Township"
+                    },
+                    {
+                        "zip_code": "368",
+                        "area_name": "西湖鄉",
+                        "area_name_en": "Xihu Township"
+                    },
+                    {
+                        "zip_code": "369",
+                        "area_name": "卓蘭鎮",
+                        "area_name_en": "Zhuolan Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "臺中市",
+                "city_name_en": "Taichung City",
+                "area_list": [
+                    {
+                        "zip_code": "400",
+                        "area_name": "中區",
+                        "area_name_en": "Central District"
+                    },
+                    {
+                        "zip_code": "401",
+                        "area_name": "東區",
+                        "area_name_en": "East District"
+                    },
+                    {
+                        "zip_code": "402",
+                        "area_name": "南區",
+                        "area_name_en": "South District"
+                    },
+                    {
+                        "zip_code": "403",
+                        "area_name": "西區",
+                        "area_name_en": "West District"
+                    },
+                    {
+                        "zip_code": "404",
+                        "area_name": "北區",
+                        "area_name_en": "North District"
+                    },
+                    {
+                        "zip_code": "406",
+                        "area_name": "北屯區",
+                        "area_name_en": "Beitun District"
+                    },
+                    {
+                        "zip_code": "407",
+                        "area_name": "西屯區",
+                        "area_name_en": "Xitun District"
+                    },
+                    {
+                        "zip_code": "408",
+                        "area_name": "南屯區",
+                        "area_name_en": "Nantun District"
+                    },
+                    {
+                        "zip_code": "411",
+                        "area_name": "太平區",
+                        "area_name_en": "Taiping District"
+                    },
+                    {
+                        "zip_code": "412",
+                        "area_name": "大里區",
+                        "area_name_en": "Dali District"
+                    },
+                    {
+                        "zip_code": "413",
+                        "area_name": "霧峰區",
+                        "area_name_en": "Wufeng District"
+                    },
+                    {
+                        "zip_code": "414",
+                        "area_name": "烏日區",
+                        "area_name_en": "Wuri District"
+                    },
+                    {
+                        "zip_code": "420",
+                        "area_name": "豐原區",
+                        "area_name_en": "Fengyuan District"
+                    },
+                    {
+                        "zip_code": "421",
+                        "area_name": "后里區",
+                        "area_name_en": "Houli District"
+                    },
+                    {
+                        "zip_code": "422",
+                        "area_name": "石岡區",
+                        "area_name_en": "Shigang District"
+                    },
+                    {
+                        "zip_code": "423",
+                        "area_name": "東勢區",
+                        "area_name_en": "Dongshi District"
+                    },
+                    {
+                        "zip_code": "424",
+                        "area_name": "和平區",
+                        "area_name_en": "Heping District"
+                    },
+                    {
+                        "zip_code": "426",
+                        "area_name": "新社區",
+                        "area_name_en": "Xinshe District"
+                    },
+                    {
+                        "zip_code": "427",
+                        "area_name": "潭子區",
+                        "area_name_en": "Tanzi District"
+                    },
+                    {
+                        "zip_code": "428",
+                        "area_name": "大雅區",
+                        "area_name_en": "Daya District"
+                    },
+                    {
+                        "zip_code": "429",
+                        "area_name": "神岡區",
+                        "area_name_en": "Shengang District"
+                    },
+                    {
+                        "zip_code": "432",
+                        "area_name": "大肚區",
+                        "area_name_en": "Dadu District"
+                    },
+                    {
+                        "zip_code": "433",
+                        "area_name": "沙鹿區",
+                        "area_name_en": "Shalu District"
+                    },
+                    {
+                        "zip_code": "434",
+                        "area_name": "龍井區",
+                        "area_name_en": "Longjing District"
+                    },
+                    {
+                        "zip_code": "435",
+                        "area_name": "梧棲區",
+                        "area_name_en": "Wuqi District"
+                    },
+                    {
+                        "zip_code": "436",
+                        "area_name": "清水區",
+                        "area_name_en": "Qingshui District"
+                    },
+                    {
+                        "zip_code": "437",
+                        "area_name": "大甲區",
+                        "area_name_en": "Dajia District"
+                    },
+                    {
+                        "zip_code": "438",
+                        "area_name": "外埔區",
+                        "area_name_en": "Waipu District"
+                    },
+                    {
+                        "zip_code": "439",
+                        "area_name": "大安區",
+                        "area_name_en": "Daan District"
+                    }
+                ]
+            },
+            {
+                "city_name": "彰化縣",
+                "city_name_en": "Changhua County",
+                "area_list": [
+                    {
+                        "zip_code": "500",
+                        "area_name": "彰化市",
+                        "area_name_en": "Changhua City"
+                    },
+                    {
+                        "zip_code": "502",
+                        "area_name": "芬園鄉",
+                        "area_name_en": "Fenyuan Township"
+                    },
+                    {
+                        "zip_code": "503",
+                        "area_name": "花壇鄉",
+                        "area_name_en": "Huatan Township"
+                    },
+                    {
+                        "zip_code": "504",
+                        "area_name": "秀水鄉",
+                        "area_name_en": "Xiushui Township"
+                    },
+                    {
+                        "zip_code": "505",
+                        "area_name": "鹿港鎮",
+                        "area_name_en": "Lukang Township"
+                    },
+                    {
+                        "zip_code": "506",
+                        "area_name": "福興鄉",
+                        "area_name_en": "Fuxing Township"
+                    },
+                    {
+                        "zip_code": "507",
+                        "area_name": "線西鄉",
+                        "area_name_en": "Xianxi Township"
+                    },
+                    {
+                        "zip_code": "508",
+                        "area_name": "和美鎮",
+                        "area_name_en": "Hemei Township"
+                    },
+                    {
+                        "zip_code": "509",
+                        "area_name": "伸港鄉",
+                        "area_name_en": "Shengang Township"
+                    },
+                    {
+                        "zip_code": "510",
+                        "area_name": "員林市",
+                        "area_name_en": "Yuanlin City"
+                    },
+                    {
+                        "zip_code": "511",
+                        "area_name": "社頭鄉",
+                        "area_name_en": "Shetou Township"
+                    },
+                    {
+                        "zip_code": "512",
+                        "area_name": "永靖鄉",
+                        "area_name_en": "Yongjing Township"
+                    },
+                    {
+                        "zip_code": "513",
+                        "area_name": "埔心鄉",
+                        "area_name_en": "Puxin Township"
+                    },
+                    {
+                        "zip_code": "514",
+                        "area_name": "溪湖鎮",
+                        "area_name_en": "Xihu Township"
+                    },
+                    {
+                        "zip_code": "515",
+                        "area_name": "大村鄉",
+                        "area_name_en": "Dacun Township"
+                    },
+                    {
+                        "zip_code": "516",
+                        "area_name": "埔鹽鄉",
+                        "area_name_en": "Puyan Township"
+                    },
+                    {
+                        "zip_code": "520",
+                        "area_name": "田中鎮",
+                        "area_name_en": "Tianzhong Township"
+                    },
+                    {
+                        "zip_code": "521",
+                        "area_name": "北斗鎮",
+                        "area_name_en": "Beidou Township"
+                    },
+                    {
+                        "zip_code": "522",
+                        "area_name": "田尾鄉",
+                        "area_name_en": "Tianwei Township"
+                    },
+                    {
+                        "zip_code": "523",
+                        "area_name": "埤頭鄉",
+                        "area_name_en": "Pitou Township"
+                    },
+                    {
+                        "zip_code": "524",
+                        "area_name": "溪州鄉",
+                        "area_name_en": "Xizhou Township"
+                    },
+                    {
+                        "zip_code": "525",
+                        "area_name": "竹塘鄉",
+                        "area_name_en": "Zhutang Township"
+                    },
+                    {
+                        "zip_code": "526",
+                        "area_name": "二林鎮",
+                        "area_name_en": "Erlin Township"
+                    },
+                    {
+                        "zip_code": "527",
+                        "area_name": "大城鄉",
+                        "area_name_en": "Dacheng Township"
+                    },
+                    {
+                        "zip_code": "528",
+                        "area_name": "芳苑鄉",
+                        "area_name_en": "Fangyuan Township"
+                    },
+                    {
+                        "zip_code": "530",
+                        "area_name": "二水鄉",
+                        "area_name_en": "Ershui Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "南投縣",
+                "city_name_en": "Nantou County",
+                "area_list": [
+                    {
+                        "zip_code": "540",
+                        "area_name": "南投市",
+                        "area_name_en": "Nantou City"
+                    },
+                    {
+                        "zip_code": "541",
+                        "area_name": "中寮鄉",
+                        "area_name_en": "Zhongliao Township"
+                    },
+                    {
+                        "zip_code": "542",
+                        "area_name": "草屯鎮",
+                        "area_name_en": "Caotun Township"
+                    },
+                    {
+                        "zip_code": "544",
+                        "area_name": "國姓鄉",
+                        "area_name_en": "Guoxing Township"
+                    },
+                    {
+                        "zip_code": "545",
+                        "area_name": "埔里鎮",
+                        "area_name_en": "Puli Township"
+                    },
+                    {
+                        "zip_code": "546",
+                        "area_name": "仁愛鄉",
+                        "area_name_en": "Renai Township"
+                    },
+                    {
+                        "zip_code": "551",
+                        "area_name": "名間鄉",
+                        "area_name_en": "Mingjian Township"
+                    },
+                    {
+                        "zip_code": "552",
+                        "area_name": "集集鎮",
+                        "area_name_en": "Jiji Township"
+                    },
+                    {
+                        "zip_code": "553",
+                        "area_name": "水里鄉",
+                        "area_name_en": "Shuili Township"
+                    },
+                    {
+                        "zip_code": "555",
+                        "area_name": "魚池鄉",
+                        "area_name_en": "Yuchi Township"
+                    },
+                    {
+                        "zip_code": "556",
+                        "area_name": "信義鄉",
+                        "area_name_en": "Xinyi Township"
+                    },
+                    {
+                        "zip_code": "557",
+                        "area_name": "竹山鎮",
+                        "area_name_en": "Zhushan Township"
+                    },
+                    {
+                        "zip_code": "558",
+                        "area_name": "鹿谷鄉",
+                        "area_name_en": "Lugu Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "嘉義市",
+                "city_name_en": "Chiayi City",
+                "area_list": [
+                    {
+                        "zip_code": "600",
+                        "area_name": "西區",
+                        "area_name_en": "West District"
+                    },
+                    {
+                        "zip_code": "600",
+                        "area_name": "東區",
+                        "area_name_en": "East District"
+                    }
+                ]
+            },
+            {
+                "city_name": "嘉義縣",
+                "city_name_en": "Chiayi County",
+                "area_list": [
+                    {
+                        "zip_code": "602",
+                        "area_name": "番路鄉",
+                        "area_name_en": "Fanlu Township"
+                    },
+                    {
+                        "zip_code": "603",
+                        "area_name": "梅山鄉",
+                        "area_name_en": "Meishan Township"
+                    },
+                    {
+                        "zip_code": "604",
+                        "area_name": "竹崎鄉",
+                        "area_name_en": "Zhuqi Township"
+                    },
+                    {
+                        "zip_code": "605",
+                        "area_name": "阿里山鄉",
+                        "area_name_en": "Alishan Township"
+                    },
+                    {
+                        "zip_code": "606",
+                        "area_name": "中埔鄉",
+                        "area_name_en": "Zhongpu Township"
+                    },
+                    {
+                        "zip_code": "607",
+                        "area_name": "大埔鄉",
+                        "area_name_en": "Dapu Township"
+                    },
+                    {
+                        "zip_code": "608",
+                        "area_name": "水上鄉",
+                        "area_name_en": "Shuishang Township"
+                    },
+                    {
+                        "zip_code": "611",
+                        "area_name": "鹿草鄉",
+                        "area_name_en": "Lucao Township"
+                    },
+                    {
+                        "zip_code": "612",
+                        "area_name": "太保市",
+                        "area_name_en": "Taibao City"
+                    },
+                    {
+                        "zip_code": "613",
+                        "area_name": "朴子市",
+                        "area_name_en": "Puzi City"
+                    },
+                    {
+                        "zip_code": "614",
+                        "area_name": "東石鄉",
+                        "area_name_en": "Dongshi Township"
+                    },
+                    {
+                        "zip_code": "615",
+                        "area_name": "六腳鄉",
+                        "area_name_en": "Liujiao Township"
+                    },
+                    {
+                        "zip_code": "616",
+                        "area_name": "新港鄉",
+                        "area_name_en": "Xingang Township"
+                    },
+                    {
+                        "zip_code": "621",
+                        "area_name": "民雄鄉",
+                        "area_name_en": "Minxiong Township"
+                    },
+                    {
+                        "zip_code": "622",
+                        "area_name": "大林鎮",
+                        "area_name_en": "Dalin Township"
+                    },
+                    {
+                        "zip_code": "623",
+                        "area_name": "溪口鄉",
+                        "area_name_en": "Xikou Township"
+                    },
+                    {
+                        "zip_code": "624",
+                        "area_name": "義竹鄉",
+                        "area_name_en": "Yizhu Township"
+                    },
+                    {
+                        "zip_code": "625",
+                        "area_name": "布袋鎮",
+                        "area_name_en": "Budai Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "雲林縣",
+                "city_name_en": "Yunlin County",
+                "area_list": [
+                    {
+                        "zip_code": "630",
+                        "area_name": "斗南鎮",
+                        "area_name_en": "Dounan Township"
+                    },
+                    {
+                        "zip_code": "631",
+                        "area_name": "大埤鄉",
+                        "area_name_en": "Dapi Township"
+                    },
+                    {
+                        "zip_code": "632",
+                        "area_name": "虎尾鎮",
+                        "area_name_en": "Huwei Township"
+                    },
+                    {
+                        "zip_code": "633",
+                        "area_name": "土庫鎮",
+                        "area_name_en": "Tuku Township"
+                    },
+                    {
+                        "zip_code": "634",
+                        "area_name": "褒忠鄉",
+                        "area_name_en": "Baozhong Township"
+                    },
+                    {
+                        "zip_code": "635",
+                        "area_name": "東勢鄉",
+                        "area_name_en": "Dongshi Township"
+                    },
+                    {
+                        "zip_code": "636",
+                        "area_name": "臺西鄉",
+                        "area_name_en": "Taixi Township"
+                    },
+                    {
+                        "zip_code": "637",
+                        "area_name": "崙背鄉",
+                        "area_name_en": "Lunbei Township"
+                    },
+                    {
+                        "zip_code": "638",
+                        "area_name": "麥寮鄉",
+                        "area_name_en": "Mailiao Township"
+                    },
+                    {
+                        "zip_code": "640",
+                        "area_name": "斗六市",
+                        "area_name_en": "Douliu City"
+                    },
+                    {
+                        "zip_code": "643",
+                        "area_name": "林內鄉",
+                        "area_name_en": "Linnei Township"
+                    },
+                    {
+                        "zip_code": "646",
+                        "area_name": "古坑鄉",
+                        "area_name_en": "Gukeng Township"
+                    },
+                    {
+                        "zip_code": "647",
+                        "area_name": "莿桐鄉",
+                        "area_name_en": "Citong Township"
+                    },
+                    {
+                        "zip_code": "648",
+                        "area_name": "西螺鎮",
+                        "area_name_en": "Xiluo Township"
+                    },
+                    {
+                        "zip_code": "649",
+                        "area_name": "二崙鄉",
+                        "area_name_en": "Erlun Township"
+                    },
+                    {
+                        "zip_code": "651",
+                        "area_name": "北港鎮",
+                        "area_name_en": "Beigang Township"
+                    },
+                    {
+                        "zip_code": "652",
+                        "area_name": "水林鄉",
+                        "area_name_en": "Shuilin Township"
+                    },
+                    {
+                        "zip_code": "653",
+                        "area_name": "口湖鄉",
+                        "area_name_en": "Kouhu Township"
+                    },
+                    {
+                        "zip_code": "654",
+                        "area_name": "四湖鄉",
+                        "area_name_en": "Sihu Township"
+                    },
+                    {
+                        "zip_code": "655",
+                        "area_name": "元長鄉",
+                        "area_name_en": "Yuanchang Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "臺南市",
+                "city_name_en": "Tainan City",
+                "area_list": [
+                    {
+                        "zip_code": "700",
+                        "area_name": "中西區",
+                        "area_name_en": "West Central District"
+                    },
+                    {
+                        "zip_code": "701",
+                        "area_name": "東區",
+                        "area_name_en": "East District"
+                    },
+                    {
+                        "zip_code": "702",
+                        "area_name": "南區",
+                        "area_name_en": "South District"
+                    },
+                    {
+                        "zip_code": "704",
+                        "area_name": "北區",
+                        "area_name_en": "North District"
+                    },
+                    {
+                        "zip_code": "708",
+                        "area_name": "安平區",
+                        "area_name_en": "Anping District"
+                    },
+                    {
+                        "zip_code": "709",
+                        "area_name": "安南區",
+                        "area_name_en": "Annan District"
+                    },
+                    {
+                        "zip_code": "710",
+                        "area_name": "永康區",
+                        "area_name_en": "Yongkang District"
+                    },
+                    {
+                        "zip_code": "711",
+                        "area_name": "歸仁區",
+                        "area_name_en": "Guiren District"
+                    },
+                    {
+                        "zip_code": "712",
+                        "area_name": "新化區",
+                        "area_name_en": "Xinhua District"
+                    },
+                    {
+                        "zip_code": "713",
+                        "area_name": "左鎮區",
+                        "area_name_en": "Zuozhen District"
+                    },
+                    {
+                        "zip_code": "714",
+                        "area_name": "玉井區",
+                        "area_name_en": "Yujing District"
+                    },
+                    {
+                        "zip_code": "715",
+                        "area_name": "楠西區",
+                        "area_name_en": "Nanxi District"
+                    },
+                    {
+                        "zip_code": "716",
+                        "area_name": "南化區",
+                        "area_name_en": "Nanhua District"
+                    },
+                    {
+                        "zip_code": "717",
+                        "area_name": "仁德區",
+                        "area_name_en": "Rende District"
+                    },
+                    {
+                        "zip_code": "718",
+                        "area_name": "關廟區",
+                        "area_name_en": "Guanmiao District"
+                    },
+                    {
+                        "zip_code": "719",
+                        "area_name": "龍崎區",
+                        "area_name_en": "Longqi District"
+                    },
+                    {
+                        "zip_code": "720",
+                        "area_name": "官田區",
+                        "area_name_en": "Guantian District"
+                    },
+                    {
+                        "zip_code": "721",
+                        "area_name": "麻豆區",
+                        "area_name_en": "Madou District"
+                    },
+                    {
+                        "zip_code": "722",
+                        "area_name": "佳里區",
+                        "area_name_en": "Jiali District"
+                    },
+                    {
+                        "zip_code": "723",
+                        "area_name": "西港區",
+                        "area_name_en": "Xigang District"
+                    },
+                    {
+                        "zip_code": "724",
+                        "area_name": "七股區",
+                        "area_name_en": "Qigu District"
+                    },
+                    {
+                        "zip_code": "725",
+                        "area_name": "將軍區",
+                        "area_name_en": "Jiangjun District"
+                    },
+                    {
+                        "zip_code": "726",
+                        "area_name": "學甲區",
+                        "area_name_en": "Xuejia District"
+                    },
+                    {
+                        "zip_code": "727",
+                        "area_name": "北門區",
+                        "area_name_en": "Beimen District"
+                    },
+                    {
+                        "zip_code": "730",
+                        "area_name": "新營區",
+                        "area_name_en": "Xinying District"
+                    },
+                    {
+                        "zip_code": "731",
+                        "area_name": "後壁區",
+                        "area_name_en": "Houbi District"
+                    },
+                    {
+                        "zip_code": "732",
+                        "area_name": "白河區",
+                        "area_name_en": "Baihe District"
+                    },
+                    {
+                        "zip_code": "733",
+                        "area_name": "東山區",
+                        "area_name_en": "Dongshan District"
+                    },
+                    {
+                        "zip_code": "734",
+                        "area_name": "六甲區",
+                        "area_name_en": "Liujia District"
+                    },
+                    {
+                        "zip_code": "735",
+                        "area_name": "下營區",
+                        "area_name_en": "Xiaying District"
+                    },
+                    {
+                        "zip_code": "736",
+                        "area_name": "柳營區",
+                        "area_name_en": "Liuying District"
+                    },
+                    {
+                        "zip_code": "737",
+                        "area_name": "鹽水區",
+                        "area_name_en": "Yanshui District"
+                    },
+                    {
+                        "zip_code": "741",
+                        "area_name": "善化區",
+                        "area_name_en": "Shanhua District"
+                    },
+                    {
+                        "zip_code": "744",
+                        "area_name": "新市區",
+                        "area_name_en": "Xinshi District"
+                    },
+                    {
+                        "zip_code": "742",
+                        "area_name": "大內區",
+                        "area_name_en": "Danei District"
+                    },
+                    {
+                        "zip_code": "743",
+                        "area_name": "山上區",
+                        "area_name_en": "Shanshang District"
+                    },
+                    {
+                        "zip_code": "745",
+                        "area_name": "安定區",
+                        "area_name_en": "Anding District"
+                    }
+                ]
+            },
+            {
+                "city_name": "高雄市",
+                "city_name_en": "Kaohsiung City",
+                "area_list": [
+                    {
+                        "zip_code": "800",
+                        "area_name": "新興區",
+                        "area_name_en": "Xinxing District"
+                    },
+                    {
+                        "zip_code": "801",
+                        "area_name": "前金區",
+                        "area_name_en": "Qianjin District"
+                    },
+                    {
+                        "zip_code": "802",
+                        "area_name": "苓雅區",
+                        "area_name_en": "Lingya District"
+                    },
+                    {
+                        "zip_code": "803",
+                        "area_name": "鹽埕區",
+                        "area_name_en": "Yancheng District"
+                    },
+                    {
+                        "zip_code": "804",
+                        "area_name": "鼓山區",
+                        "area_name_en": "Gushan District"
+                    },
+                    {
+                        "zip_code": "805",
+                        "area_name": "旗津區",
+                        "area_name_en": "Qijin District"
+                    },
+                    {
+                        "zip_code": "806",
+                        "area_name": "前鎮區",
+                        "area_name_en": "Qianzhen District"
+                    },
+                    {
+                        "zip_code": "807",
+                        "area_name": "三民區",
+                        "area_name_en": "Sanmin District"
+                    },
+                    {
+                        "zip_code": "811",
+                        "area_name": "楠梓區",
+                        "area_name_en": "Nanzi District"
+                    },
+                    {
+                        "zip_code": "812",
+                        "area_name": "小港區",
+                        "area_name_en": "Xiaogang District"
+                    },
+                    {
+                        "zip_code": "813",
+                        "area_name": "左營區",
+                        "area_name_en": "Zuoying District"
+                    },
+                    {
+                        "zip_code": "814",
+                        "area_name": "仁武區",
+                        "area_name_en": "Renwu District"
+                    },
+                    {
+                        "zip_code": "815",
+                        "area_name": "大社區",
+                        "area_name_en": "Dashe District"
+                    },
+                    {
+                        "zip_code": "817",
+                        "area_name": "東沙群島",
+                        "area_name_en": "Dongsha Islands"
+                    },
+                    {
+                        "zip_code": "819",
+                        "area_name": "南沙群島",
+                        "area_name_en": "Nansha Islands"
+                    },
+                    {
+                        "zip_code": "820",
+                        "area_name": "岡山區",
+                        "area_name_en": "Gangshan District"
+                    },
+                    {
+                        "zip_code": "821",
+                        "area_name": "路竹區",
+                        "area_name_en": "Luzhu District"
+                    },
+                    {
+                        "zip_code": "822",
+                        "area_name": "阿蓮區",
+                        "area_name_en": "Alian District"
+                    },
+                    {
+                        "zip_code": "823",
+                        "area_name": "田寮區",
+                        "area_name_en": "Tianliao District"
+                    },
+                    {
+                        "zip_code": "824",
+                        "area_name": "燕巢區",
+                        "area_name_en": "Yanchao District"
+                    },
+                    {
+                        "zip_code": "825",
+                        "area_name": "橋頭區",
+                        "area_name_en": "Qiaotou District"
+                    },
+                    {
+                        "zip_code": "826",
+                        "area_name": "梓官區",
+                        "area_name_en": "Ziguan District"
+                    },
+                    {
+                        "zip_code": "827",
+                        "area_name": "彌陀區",
+                        "area_name_en": "Mituo District"
+                    },
+                    {
+                        "zip_code": "828",
+                        "area_name": "永安區",
+                        "area_name_en": "Yongan District"
+                    },
+                    {
+                        "zip_code": "829",
+                        "area_name": "湖內區",
+                        "area_name_en": "Hunei District"
+                    },
+                    {
+                        "zip_code": "830",
+                        "area_name": "鳳山區",
+                        "area_name_en": "Fengshan District"
+                    },
+                    {
+                        "zip_code": "831",
+                        "area_name": "大寮區",
+                        "area_name_en": "Daliao District"
+                    },
+                    {
+                        "zip_code": "832",
+                        "area_name": "林園區",
+                        "area_name_en": "Linyuan District"
+                    },
+                    {
+                        "zip_code": "833",
+                        "area_name": "鳥松區",
+                        "area_name_en": "Niaosong District"
+                    },
+                    {
+                        "zip_code": "840",
+                        "area_name": "大樹區",
+                        "area_name_en": "Dashu District"
+                    },
+                    {
+                        "zip_code": "842",
+                        "area_name": "旗山區",
+                        "area_name_en": "Qishan District"
+                    },
+                    {
+                        "zip_code": "843",
+                        "area_name": "美濃區",
+                        "area_name_en": "Meinong District"
+                    },
+                    {
+                        "zip_code": "844",
+                        "area_name": "六龜區",
+                        "area_name_en": "Liugui District"
+                    },
+                    {
+                        "zip_code": "845",
+                        "area_name": "內門區",
+                        "area_name_en": "Neimen District"
+                    },
+                    {
+                        "zip_code": "846",
+                        "area_name": "杉林區",
+                        "area_name_en": "Shanlin District"
+                    },
+                    {
+                        "zip_code": "847",
+                        "area_name": "甲仙區",
+                        "area_name_en": "Jiaxian District"
+                    },
+                    {
+                        "zip_code": "848",
+                        "area_name": "桃源區",
+                        "area_name_en": "Taoyuan District"
+                    },
+                    {
+                        "zip_code": "849",
+                        "area_name": "那瑪夏區",
+                        "area_name_en": "Namaxia District"
+                    },
+                    {
+                        "zip_code": "851",
+                        "area_name": "茂林區",
+                        "area_name_en": "Maolin District"
+                    },
+                    {
+                        "zip_code": "852",
+                        "area_name": "茄萣區",
+                        "area_name_en": "Qieding District"
+                    }
+                ]
+            },
+            {
+                "city_name": "澎湖縣",
+                "city_name_en": "Penghu County",
+                "area_list": [
+                    {
+                        "zip_code": "880",
+                        "area_name": "馬公市",
+                        "area_name_en": "Magong City"
+                    },
+                    {
+                        "zip_code": "881",
+                        "area_name": "西嶼鄉",
+                        "area_name_en": "Xiyu Township"
+                    },
+                    {
+                        "zip_code": "882",
+                        "area_name": "望安鄉",
+                        "area_name_en": "Wangan Township"
+                    },
+                    {
+                        "zip_code": "883",
+                        "area_name": "七美鄉",
+                        "area_name_en": "Qimei Township"
+                    },
+                    {
+                        "zip_code": "884",
+                        "area_name": "白沙鄉",
+                        "area_name_en": "Baisha Township"
+                    },
+                    {
+                        "zip_code": "885",
+                        "area_name": "湖西鄉",
+                        "area_name_en": "Huxi Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "金門縣",
+                "city_name_en": "Kinmen County",
+                "area_list": [
+                    {
+                        "zip_code": "890",
+                        "area_name": "金沙鎮",
+                        "area_name_en": "Jinsha Township"
+                    },
+                    {
+                        "zip_code": "891",
+                        "area_name": "金湖鎮",
+                        "area_name_en": "Jinhu Township"
+                    },
+                    {
+                        "zip_code": "892",
+                        "area_name": "金寧鄉",
+                        "area_name_en": "Jinning Township"
+                    },
+                    {
+                        "zip_code": "893",
+                        "area_name": "金城鎮",
+                        "area_name_en": "Jincheng Township"
+                    },
+                    {
+                        "zip_code": "894",
+                        "area_name": "烈嶼鄉",
+                        "area_name_en": "Lieyu Township"
+                    },
+                    {
+                        "zip_code": "896",
+                        "area_name": "烏坵鄉",
+                        "area_name_en": "Wuqiu Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "屏東縣",
+                "city_name_en": "Pingtung County",
+                "area_list": [
+                    {
+                        "zip_code": "900",
+                        "area_name": "屏東市",
+                        "area_name_en": "Pingtung City"
+                    },
+                    {
+                        "zip_code": "901",
+                        "area_name": "三地門鄉",
+                        "area_name_en": "Sandimen Township"
+                    },
+                    {
+                        "zip_code": "902",
+                        "area_name": "霧臺鄉",
+                        "area_name_en": "Wutai Township"
+                    },
+                    {
+                        "zip_code": "903",
+                        "area_name": "瑪家鄉",
+                        "area_name_en": "Majia Township"
+                    },
+                    {
+                        "zip_code": "904",
+                        "area_name": "九如鄉",
+                        "area_name_en": "Jiuru Township"
+                    },
+                    {
+                        "zip_code": "905",
+                        "area_name": "里港鄉",
+                        "area_name_en": "Ligang Township"
+                    },
+                    {
+                        "zip_code": "906",
+                        "area_name": "高樹鄉",
+                        "area_name_en": "Gaoshu Township"
+                    },
+                    {
+                        "zip_code": "907",
+                        "area_name": "鹽埔鄉",
+                        "area_name_en": "Yanpu Township"
+                    },
+                    {
+                        "zip_code": "908",
+                        "area_name": "長治鄉",
+                        "area_name_en": "Changzhi Township"
+                    },
+                    {
+                        "zip_code": "909",
+                        "area_name": "麟洛鄉",
+                        "area_name_en": "Linluo Township"
+                    },
+                    {
+                        "zip_code": "911",
+                        "area_name": "竹田鄉",
+                        "area_name_en": "Zhutian Township"
+                    },
+                    {
+                        "zip_code": "912",
+                        "area_name": "內埔鄉",
+                        "area_name_en": "Neipu Township"
+                    },
+                    {
+                        "zip_code": "913",
+                        "area_name": "萬丹鄉",
+                        "area_name_en": "Wandan Township"
+                    },
+                    {
+                        "zip_code": "920",
+                        "area_name": "潮州鎮",
+                        "area_name_en": "Chaozhou Township"
+                    },
+                    {
+                        "zip_code": "921",
+                        "area_name": "泰武鄉",
+                        "area_name_en": "Taiwu Township"
+                    },
+                    {
+                        "zip_code": "922",
+                        "area_name": "來義鄉",
+                        "area_name_en": "Laiyi Township"
+                    },
+                    {
+                        "zip_code": "923",
+                        "area_name": "萬巒鄉",
+                        "area_name_en": "Wanluan Township"
+                    },
+                    {
+                        "zip_code": "924",
+                        "area_name": "崁頂鄉",
+                        "area_name_en": "Kanding Township"
+                    },
+                    {
+                        "zip_code": "925",
+                        "area_name": "新埤鄉",
+                        "area_name_en": "Xinpi Township"
+                    },
+                    {
+                        "zip_code": "926",
+                        "area_name": "南州鄉",
+                        "area_name_en": "Nanzhou Township"
+                    },
+                    {
+                        "zip_code": "927",
+                        "area_name": "林邊鄉",
+                        "area_name_en": "Linbian Township"
+                    },
+                    {
+                        "zip_code": "928",
+                        "area_name": "東港鎮",
+                        "area_name_en": "Donggang Township"
+                    },
+                    {
+                        "zip_code": "929",
+                        "area_name": "琉球鄉",
+                        "area_name_en": "Liuqiu Township"
+                    },
+                    {
+                        "zip_code": "931",
+                        "area_name": "佳冬鄉",
+                        "area_name_en": "Jiadong Township"
+                    },
+                    {
+                        "zip_code": "932",
+                        "area_name": "新園鄉",
+                        "area_name_en": "Xinyuan Township"
+                    },
+                    {
+                        "zip_code": "940",
+                        "area_name": "枋寮鄉",
+                        "area_name_en": "Fangliao Township"
+                    },
+                    {
+                        "zip_code": "941",
+                        "area_name": "枋山鄉",
+                        "area_name_en": "Fangshan Township"
+                    },
+                    {
+                        "zip_code": "942",
+                        "area_name": "春日鄉",
+                        "area_name_en": "Chunri Township"
+                    },
+                    {
+                        "zip_code": "943",
+                        "area_name": "獅子鄉",
+                        "area_name_en": "Shizi Township"
+                    },
+                    {
+                        "zip_code": "944",
+                        "area_name": "車城鄉",
+                        "area_name_en": "Checheng Township"
+                    },
+                    {
+                        "zip_code": "945",
+                        "area_name": "牡丹鄉",
+                        "area_name_en": "Mudan Township"
+                    },
+                    {
+                        "zip_code": "946",
+                        "area_name": "恆春鎮",
+                        "area_name_en": "Hengchun Township"
+                    },
+                    {
+                        "zip_code": "947",
+                        "area_name": "滿州鄉",
+                        "area_name_en": "Manzhou Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "臺東縣",
+                "city_name_en": "Taitung County",
+                "area_list": [
+                    {
+                        "zip_code": "950",
+                        "area_name": "臺東市",
+                        "area_name_en": "Taitung City"
+                    },
+                    {
+                        "zip_code": "951",
+                        "area_name": "綠島鄉",
+                        "area_name_en": "Ludao Township"
+                    },
+                    {
+                        "zip_code": "952",
+                        "area_name": "蘭嶼鄉",
+                        "area_name_en": "Lanyu Township"
+                    },
+                    {
+                        "zip_code": "953",
+                        "area_name": "延平鄉",
+                        "area_name_en": "Yanping Township"
+                    },
+                    {
+                        "zip_code": "954",
+                        "area_name": "卑南鄉",
+                        "area_name_en": "Beinan Township"
+                    },
+                    {
+                        "zip_code": "955",
+                        "area_name": "鹿野鄉",
+                        "area_name_en": "Luye Township"
+                    },
+                    {
+                        "zip_code": "956",
+                        "area_name": "關山鎮",
+                        "area_name_en": "Guanshan Township"
+                    },
+                    {
+                        "zip_code": "957",
+                        "area_name": "海端鄉",
+                        "area_name_en": "Haiduan Township"
+                    },
+                    {
+                        "zip_code": "958",
+                        "area_name": "池上鄉",
+                        "area_name_en": "Chishang Township"
+                    },
+                    {
+                        "zip_code": "959",
+                        "area_name": "東河鄉",
+                        "area_name_en": "Donghe Township"
+                    },
+                    {
+                        "zip_code": "961",
+                        "area_name": "成功鎮",
+                        "area_name_en": "Chenggong Township"
+                    },
+                    {
+                        "zip_code": "962",
+                        "area_name": "長濱鄉",
+                        "area_name_en": "Changbin Township"
+                    },
+                    {
+                        "zip_code": "963",
+                        "area_name": "太麻里鄉",
+                        "area_name_en": "Taimali Township"
+                    },
+                    {
+                        "zip_code": "964",
+                        "area_name": "金峰鄉",
+                        "area_name_en": "Jinfeng Township"
+                    },
+                    {
+                        "zip_code": "965",
+                        "area_name": "大武鄉",
+                        "area_name_en": "Dawu Township"
+                    },
+                    {
+                        "zip_code": "966",
+                        "area_name": "達仁鄉",
+                        "area_name_en": "Daren Township"
+                    }
+                ]
+            },
+            {
+                "city_name": "花蓮縣",
+                "city_name_en": "Hualien County",
+                "area_list": [
+                    {
+                        "zip_code": "970",
+                        "area_name": "花蓮市",
+                        "area_name_en": "Hualien City"
+                    },
+                    {
+                        "zip_code": "971",
+                        "area_name": "新城鄉",
+                        "area_name_en": "Xincheng Township"
+                    },
+                    {
+                        "zip_code": "972",
+                        "area_name": "秀林鄉",
+                        "area_name_en": "Xiulin Township"
+                    },
+                    {
+                        "zip_code": "973",
+                        "area_name": "吉安鄉",
+                        "area_name_en": "Jian Township"
+                    },
+                    {
+                        "zip_code": "974",
+                        "area_name": "壽豐鄉",
+                        "area_name_en": "Shoufeng Township"
+                    },
+                    {
+                        "zip_code": "975",
+                        "area_name": "鳳林鎮",
+                        "area_name_en": "Fenglin Township"
+                    },
+                    {
+                        "zip_code": "976",
+                        "area_name": "光復鄉",
+                        "area_name_en": "Guangfu Township"
+                    },
+                    {
+                        "zip_code": "977",
+                        "area_name": "豐濱鄉",
+                        "area_name_en": "Fengbin Township"
+                    },
+                    {
+                        "zip_code": "978",
+                        "area_name": "瑞穗鄉",
+                        "area_name_en": "Ruisui Township"
+                    },
+                    {
+                        "zip_code": "979",
+                        "area_name": "萬榮鄉",
+                        "area_name_en": "Wanrong Township"
+                    },
+                    {
+                        "zip_code": "981",
+                        "area_name": "玉里鎮",
+                        "area_name_en": "Yuli Township"
+                    },
+                    {
+                        "zip_code": "982",
+                        "area_name": "卓溪鄉",
+                        "area_name_en": "Zhuoxi Township"
+                    },
+                    {
+                        "zip_code": "983",
+                        "area_name": "富里鄉",
+                        "area_name_en": "Fuli Township"
+                    }
+                ]
             }
         ]
     }

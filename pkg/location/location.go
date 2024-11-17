@@ -2,7 +2,6 @@ package location
 
 import (
 	"cake-scraper/pkg/util"
-	"log/slog"
 	"os"
 	"path/filepath"
 	"strings"
@@ -52,29 +51,26 @@ func LoadLocations() []*Location {
 		return locations
 	}
 	data, err := os.ReadFile(jsonPath)
-	if err != nil {
-		slog.Error("failed to read json file", "error", err, "path", jsonPath)
-		return nil
-	}
+	util.PanicError(err)
 	locations = make([]*Location, 0)
-	// Save country
-	const country = "Taiwan"
-	location := NewLocation(country, "", "", "")
-	locations = append(locations, location)
-	// Iterate city
-	gjson.ParseBytes(data).ForEach(func(key, value gjson.Result) bool {
-		var city, area, zipCode string
-		// Save city
-		city = value.Get("city_name_en").String()
-		location = NewLocation(country, city, "", "")
+	// Iterate country
+	gjson.ParseBytes(data).ForEach(func(key, country_node gjson.Result) bool {
+		country := country_node.Get("country_name_en").String()
+		location := NewLocation(country, "", "", "")
 		locations = append(locations, location)
-		// Iterate area
-		value.Get("area_list").ForEach(func(key, value gjson.Result) bool {
-			// Save area, zipCode
-			area = value.Get("area_name_en").String()
-			zipCode = value.Get("zip_code").String()
-			location = NewLocation(country, city, area, zipCode)
+		// Iterate city
+		country_node.Get("city_list").ForEach(func(key, city_node gjson.Result) bool {
+			city := city_node.Get("city_name_en").String()
+			location = NewLocation(country, city, "", "")
 			locations = append(locations, location)
+			// Iterate area
+			city_node.Get("area_list").ForEach(func(key, area_node gjson.Result) bool {
+				area := area_node.Get("area_name_en").String()
+				zipCode := area_node.Get("zip_code").String()
+				location = NewLocation(country, city, area, zipCode)
+				locations = append(locations, location)
+				return true
+			})
 			return true
 		})
 		return true
