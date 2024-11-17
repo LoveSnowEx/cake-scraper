@@ -48,3 +48,12 @@ CREATE TABLE IF NOT EXISTS locations (
     zip_code TEXT NOT NULL DEFAULT ''
 );
 CREATE UNIQUE INDEX IF NOT EXISTS uq_locations_address ON locations (address);
+
+-- Create jobs_locations table
+CREATE TABLE IF NOT EXISTS jobs_locations (
+    job_id INTEGER NOT NULL,
+    location_id INTEGER NOT NULL,
+    FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE CASCADE,
+    FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE,
+    PRIMARY KEY (job_id, location_id)
+);
