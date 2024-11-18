@@ -4,6 +4,7 @@ go 1.23.2
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
+	github.com/a-h/templ v0.2.793
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/gofiber/fiber/v3 v3.0.0-beta.3
 	github.com/jmoiron/sqlx v1.4.0

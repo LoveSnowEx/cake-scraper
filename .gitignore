@@ -44,3 +44,6 @@ log/*.log
 
 # Database files
 *.db
+
+# template files
+**/*_templ.go

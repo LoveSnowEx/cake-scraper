@@ -4,8 +4,11 @@ import (
 	"cake-scraper/pkg/job"
 	"cake-scraper/pkg/repo/jobrepo"
 	"cake-scraper/pkg/util"
+	"cake-scraper/view"
 
+	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/adaptor"
 )
 
 type App struct {
@@ -19,9 +22,9 @@ func New(app *fiber.App) *App {
 		jobrepo.NewJobRepo(),
 	}
 
-	app.Get("/", func(c fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	app.Get("/", adaptor.HTTPHandler(
+		templ.Handler(view.Index()),
+	))
 
 	api := app.Group("/api")
 	api.Get("/jobs", a.Jobs)
