@@ -12,9 +12,11 @@ import (
 var jobJsonPath = filepath.Join(util.ProjectRoot, "out/jobs.json")
 
 func main() {
-	const maxPage = 100
+	const maxPage = 15
 	professions := []scraper.Profession{
 		scraper.BackendDeveloper,
+		scraper.DataEngineer,
+		scraper.FrontendDeveloper,
 	}
 	sc := scraper.NewScraper(maxPage, professions...)
 	if err := sc.Update(); err != nil {
