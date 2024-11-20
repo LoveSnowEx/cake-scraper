@@ -9,6 +9,7 @@ import (
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/adaptor"
+	"github.com/gofiber/fiber/v3/middleware/static"
 )
 
 type App struct {
@@ -25,6 +26,7 @@ func New(app *fiber.App) *App {
 	app.Get("/", adaptor.HTTPHandler(
 		templ.Handler(view.Index()),
 	))
+	app.Use("/*", static.New("./assets"))
 
 	api := app.Group("/api")
 	api.Get("/jobs", a.Jobs)

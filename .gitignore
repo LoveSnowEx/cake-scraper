@@ -47,3 +47,4 @@ log/*.log
 
 # template files
 **/*_templ.go
+**/*_templ.txt

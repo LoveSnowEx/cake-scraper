@@ -1,0 +1,28 @@
+package layout
+
+templ Layout(title string) {
+<!DOCTYPE html>
+<html>
+@Head(title)
+
+<body>
+    <section class="hero is-fullheight">
+        <!-- Hero head: will stick at the top -->
+        <div class="hero-head">
+            @Navbar()
+        </div>
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+            @Main() {
+                { children... }
+            }
+        </div>
+        <!-- Hero footer: will stick at the bottom -->
+        <div class="hero-foot">
+            @Footer()
+        </div>
+    </section>
+</body>
+
+</html>
+}
