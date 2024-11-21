@@ -1,6 +1,7 @@
 package app
 
 import (
+	"cake-scraper/pkg/dto"
 	"cake-scraper/pkg/job"
 	"cake-scraper/pkg/repo/jobrepo"
 	"cake-scraper/pkg/util"
@@ -43,8 +44,8 @@ func (a *App) Jobs(c fiber.Ctx) error {
 	}
 	jobsDTO := util.Map(
 		jobs,
-		func(j *job.Job) *Job {
-			return NewJob(j)
+		func(j *job.Job) *dto.Job {
+			return parseJob(j)
 		},
 	)
 	return c.JSON(fiber.Map{
