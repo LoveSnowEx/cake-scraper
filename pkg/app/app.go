@@ -6,6 +6,7 @@ import (
 	"cake-scraper/pkg/repo/jobrepo"
 	"cake-scraper/pkg/util"
 	"cake-scraper/view"
+	jobcomponent "cake-scraper/view/components/jobs"
 
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v3"
@@ -28,6 +29,7 @@ func New(app *fiber.App) *App {
 		templ.Handler(view.Index()),
 	))
 	app.Use("/assets/*", static.New("./assets"))
+	app.Get("/components/jobs", a.JobsComponent)
 
 	api := app.Group("/api")
 	api.Get("/jobs", a.Jobs)
@@ -51,4 +53,20 @@ func (a *App) Jobs(c fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"jobs": jobsDTO,
 	})
+}
+
+func (a *App) JobsComponent(c fiber.Ctx) error {
+	jobs, err := a.jobRepo.Find(nil)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+	jobsDTO := util.Map(
+		jobs,
+		func(j *job.Job) *dto.Job {
+			return parseJob(j)
+		},
+	)
+	return jobcomponent.List(jobsDTO).Render(c.Context(), c)
 }
