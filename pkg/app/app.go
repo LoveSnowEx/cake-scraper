@@ -27,7 +27,7 @@ func New(app *fiber.App) *App {
 	app.Get("/", adaptor.HTTPHandler(
 		templ.Handler(view.Index()),
 	))
-	app.Use("/*", static.New("./assets"))
+	app.Use("/assets/*", static.New("./assets"))
 
 	api := app.Group("/api")
 	api.Get("/jobs", a.Jobs)
