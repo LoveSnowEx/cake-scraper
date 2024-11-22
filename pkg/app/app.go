@@ -100,6 +100,6 @@ func (a *App) JobsComponent(c fiber.Ctx) error {
 				},
 			)
 			return jobsDTO
-		}, paginatior.CurrentPage(), paginatior.Total(), paginatior.PerPage())).
+		}, paginatior.CurrentPage(), paginatior.PerPage(), paginatior.Total())).
 		Render(c.Context(), c)
 }

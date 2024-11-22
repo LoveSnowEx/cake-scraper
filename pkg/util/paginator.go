@@ -30,12 +30,12 @@ type Paginator[T any] interface {
 type paginator[T any] struct {
 	slice       func(offset, limit int64) []T
 	currentPage int64
-	total       int64
 	perPage     int64
+	total       int64
 }
 
-func NewPaginator[T any](slice func(offset, limit int64) []T, currentPage, total, perPage int64) Paginator[T] {
-	return &paginator[T]{slice: slice, currentPage: currentPage, total: total, perPage: perPage}
+func NewPaginator[T any](slice func(offset, limit int64) []T, currentPage, perPage, total int64) Paginator[T] {
+	return &paginator[T]{slice: slice, currentPage: currentPage, perPage: perPage, total: total}
 }
 
 func (p *paginator[T]) Slice(offset, limit int64) []T {
@@ -49,7 +49,7 @@ func (p *paginator[T]) CurrentPage() int64 {
 }
 
 func (p *paginator[T]) Items() []T {
-	return p.slice((p.currentPage-1)*p.perPage, p.perPage)
+	return p.slice(p.Offset(), p.Count())
 }
 
 func (p *paginator[T]) HasPrev() bool {
@@ -88,5 +88,5 @@ func (p *paginator[T]) TotalPage() int64 {
 	if p.total == 0 {
 		return 0
 	}
-	return (p.total + p.perPage - 1) / p.perPage
+	return (p.total-1)/p.perPage + 1
 }
