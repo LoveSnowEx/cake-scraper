@@ -5,8 +5,8 @@ import "cake-scraper/view/layout"
 templ Index() {
 @layout.Layout("Cake Scraper") {
 <div class="container is-align-self-flex-start">
-<button hx-get="/components/jobs" hx-target="#job" hx-swap="innerHTML">Get Job</button>
-<div id="job">
+<button hx-get="/components/jobs" hx-target="#job-component" hx-swap="innerHTML">Get Job</button>
+<div id="job-component">
 </div>
 </div>
 }
