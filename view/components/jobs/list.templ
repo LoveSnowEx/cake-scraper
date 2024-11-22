@@ -57,8 +57,24 @@ templ List(jobsPaginator dto.JobsPaginator) {
         </table>
     </div>
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <a class="pagination-previous is-disabled" title="This is the first page">Previous</a>
-        <a href="#" class="pagination-next">Next page</a>
+        {{ isFirstPage := jobsPaginator.CurrentPage() == 1 }}
+        {{ isLastPage := jobsPaginator.CurrentPage() == jobsPaginator.TotalPage() }}
+        <button class={ "pagination-previous", templ.KV("is-disabled", isFirstPage) }
+            hx-get={ "/components/jobs?page=" + strconv.FormatInt(jobsPaginator.CurrentPage()-1, 10) }
+            hx-target="#jobs-list"
+            hx-swap="outerHTML"
+            disabled?={ isFirstPage }
+            title="This is the first page">
+            Prev
+        </button>
+        <button class={ "pagination-next", templ.KV("is-disabled", isLastPage) }
+            hx-get={ "/components/jobs?page=" + strconv.FormatInt(jobsPaginator.CurrentPage()+1, 10) }
+            hx-target="#jobs-list"
+            hx-swap="outerHTML"
+            disabled?={ isLastPage }
+            title="This is the last page">
+            Next
+        </button>
         <ul class="pagination-list">
             {{
                 displayPage := int64(9)
