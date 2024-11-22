@@ -1,5 +1,7 @@
 package dto
 
+import "cake-scraper/pkg/util"
+
 type Job struct {
 	Company          string   `json:"company"`
 	Title            string   `json:"title"`
@@ -18,3 +20,5 @@ type Job struct {
 	Requirements     string   `json:"requirements"`
 	Tags             []string `json:"tags"`
 }
+
+type JobsPaginator = util.Paginator[*Job]

@@ -2,7 +2,7 @@ package job
 
 import "cake-scraper/pkg/dto"
 
-templ List(jobs []*dto.Job) {
+templ List(jobsPaginator dto.JobsPaginator) {
 <div class="table-container">
     <table class="table is-bordered is-hoverable is-fullwidth">
         <thead>
@@ -22,7 +22,7 @@ templ List(jobs []*dto.Job) {
             </tr>
         </thead>
         <tbody>
-            for _, job := range jobs {
+            for _, job := range jobsPaginator.Items() {
             <tr>
                 <td>{ job.Company }</td>
                 <td>{ job.Title }</td>
