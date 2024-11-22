@@ -65,8 +65,8 @@ func (c Conditions) Tags(tags ...string) Conditions {
 	return c
 }
 
-func (c Conditions) ToSelectBuilder() sq.SelectBuilder {
-	builder := sq.Select("j.*").
+func (c Conditions) ToSelectBuilder(columns ...string) sq.SelectBuilder {
+	builder := sq.Select(columns...).
 		From("jobs AS j").
 		Join("jobs_tags AS jt ON j.id = jt.job_id").
 		Join("tags AS t ON jt.tag_id = t.id")

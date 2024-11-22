@@ -6,6 +6,7 @@ import (
 	"cake-scraper/pkg/location"
 	"cake-scraper/pkg/util"
 	"fmt"
+	"log"
 	"time"
 
 	sq "github.com/Masterminds/squirrel"
@@ -133,16 +134,16 @@ func (r *jobRepoImpl) findTags(jobID int64) ([]string, error) {
 }
 
 func (r *jobRepoImpl) FindPaginated(conditions Conditions, page, perPage int64) util.Paginator[*job.Job] {
-	builder := conditions.ToSelectBuilder()
 	var total int64
-	sql, args, err := builder.Columns("COUNT(*)").
+	sql, args, err := conditions.ToSelectBuilder("COUNT(*)").
 		ToSql()
 	util.PanicError(err)
 	err = r.db.Get(&total, sql, args...)
 	util.PanicError(err)
 	return util.NewPaginator(func(offset, limit int64) []*job.Job {
 		var jobPos []*JobPo
-		sql, args, err := builder.Limit(uint64(limit)).Offset(uint64(offset)).ToSql()
+		sql, args, err := conditions.ToSelectBuilder("j.*").Offset(uint64(offset)).Limit(uint64(limit)).ToSql()
+		log.Println(sql, args)
 		util.PanicError(err)
 		err = r.db.Select(&jobPos, sql, args...)
 		util.PanicError(err)
