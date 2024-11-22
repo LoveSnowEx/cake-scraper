@@ -56,11 +56,16 @@ templ List(jobsPaginator dto.JobsPaginator) {
             </tbody>
         </table>
     </div>
-    <nav class="pagination" role="navigation" aria-label="pagination">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <a class="pagination-previous is-disabled" title="This is the first page">Previous</a>
         <a href="#" class="pagination-next">Next page</a>
         <ul class="pagination-list">
-            for i := int64(1); i <= jobsPaginator.TotalPage(); i++ {
+            {{
+                displayPage := int64(9)
+                minDisplayPage := min(max(jobsPaginator.CurrentPage()-4, 1), jobsPaginator.TotalPage()-displayPage+1)
+                maxDisplayPage := max(min(jobsPaginator.CurrentPage()+4, jobsPaginator.TotalPage()), displayPage)
+            }}
+            for i := minDisplayPage; i <= maxDisplayPage; i++ {
                 if i == jobsPaginator.CurrentPage() {
                     <li>
                         <button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link is-current">{ strconv.FormatInt(i, 10) }</button>
