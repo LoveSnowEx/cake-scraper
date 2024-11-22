@@ -34,20 +34,9 @@ type JobPo struct {
 	UpdatedAt        Time   `db:"updated_at"`
 }
 
-type TagPo struct {
-	ID  int64  `db:"id"`
-	Tag string `db:"tag"`
-}
-
-type JobContentPo struct {
-	ID      int64  `db:"id"`
-	JobID   int64  `db:"job_id"`
-	Type    string `db:"type"`
-	Content string `db:"content"`
-}
-
 type JobRepo interface {
 	Find(conditions map[string]interface{}) ([]*job.Job, error)
+	FindPaginated(conditions Conditions, page, perPage int64) util.Paginator[*job.Job]
 	Save(j *job.Job) error
 	Delete(conditions map[string]interface{}) error
 }
@@ -71,6 +60,24 @@ func (t *Time) Scan(v interface{}) error {
 	}
 	*t = Time(tp)
 	return nil
+}
+
+func (j *JobPo) ToJob() *job.Job {
+	return &job.Job{
+		Company:          j.Company,
+		Title:            j.Title,
+		Link:             j.Link,
+		EmploymentType:   job.EmploymentType(j.EmploymentType),
+		Seniority:        job.Seniority(j.Seniority),
+		Location:         j.Location,
+		NumberToHire:     int(j.NumberToHire),
+		Experience:       j.Experience,
+		Salary:           j.Salary,
+		Remote:           job.Remote(j.Remote),
+		InterviewProcess: j.InterviewProcess,
+		JobDescription:   j.JobDescription,
+		Requirements:     j.Requirements,
+	}
 }
 
 func NewJobRepo() *jobRepoImpl {
@@ -97,35 +104,58 @@ func (r *jobRepoImpl) Find(conditions map[string]interface{}) ([]*job.Job, error
 	}
 	var result []*job.Job
 	for _, jobPo := range jobPos {
-		j := job.New()
-		j.Company = jobPo.Company
-		j.Title = jobPo.Title
-		j.Link = jobPo.Link
-		j.EmploymentType = job.EmploymentType(jobPo.EmploymentType)
-		j.Seniority = job.Seniority(jobPo.Seniority)
-		j.Location = jobPo.Location
-		j.NumberToHire = int(jobPo.NumberToHire)
-		j.Experience = jobPo.Experience
-		j.Salary = jobPo.Salary
-		j.Remote = job.Remote(jobPo.Remote)
-		j.InterviewProcess = jobPo.InterviewProcess
-		j.JobDescription = jobPo.JobDescription
-		j.Requirements = jobPo.Requirements
-		sql, args, err := sq.Select("tag").
-			From("jobs_tags").
-			Join("tags ON jobs_tags.tag_id = tags.id").
-			Where(sq.Eq{"job_id": jobPo.ID}).
-			ToSql()
+		j := jobPo.ToJob()
+		tags, err := r.findTags(jobPo.ID)
 		if err != nil {
 			return nil, err
 		}
-		err = r.db.Select(&j.Tags, sql, args...)
-		if err != nil {
-			return nil, fmt.Errorf("failed to select tags: %w", err)
-		}
+		j.Tags = tags
 		result = append(result, j)
 	}
 	return result, nil
+}
+
+func (r *jobRepoImpl) findTags(jobID int64) ([]string, error) {
+	sql, args, err := sq.Select("tag").
+		From("jobs_tags").
+		Join("tags ON jobs_tags.tag_id = tags.id").
+		Where(sq.Eq{"job_id": jobID}).
+		ToSql()
+	if err != nil {
+		return nil, err
+	}
+	var tags []string
+	err = r.db.Select(&tags, sql, args...)
+	if err != nil {
+		return nil, fmt.Errorf("failed to select tags: %w", err)
+	}
+	return tags, nil
+}
+
+func (r *jobRepoImpl) FindPaginated(conditions Conditions, page, perPage int64) util.Paginator[*job.Job] {
+	builder := conditions.ToSelectBuilder()
+	var total int64
+	sql, args, err := builder.Columns("COUNT(*)").
+		ToSql()
+	util.PanicError(err)
+	err = r.db.Get(&total, sql, args...)
+	util.PanicError(err)
+	return util.NewPaginator(func(offset, limit int64) []*job.Job {
+		var jobPos []*JobPo
+		sql, args, err := builder.Limit(uint64(limit)).Offset(uint64(offset)).ToSql()
+		util.PanicError(err)
+		err = r.db.Select(&jobPos, sql, args...)
+		util.PanicError(err)
+		var result []*job.Job
+		for _, jobPo := range jobPos {
+			j := jobPo.ToJob()
+			tags, err := r.findTags(jobPo.ID)
+			util.PanicError(err)
+			j.Tags = tags
+			result = append(result, j)
+		}
+		return result
+	}, int64(page), int64(perPage), total)
 }
 
 func (r *jobRepoImpl) Save(j *job.Job) (err error) {
