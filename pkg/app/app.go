@@ -7,6 +7,7 @@ import (
 	"cake-scraper/pkg/util"
 	"cake-scraper/view"
 	jobcomponent "cake-scraper/view/components/jobs"
+	"strconv"
 	"strings"
 
 	"github.com/a-h/templ"
@@ -89,7 +90,21 @@ func (a *App) JobsComponent(c fiber.Ctx) error {
 	if tags, ok := queries["tags"]; ok {
 		conditions.Tags(tags)
 	}
-	paginatior := a.jobRepo.FindPaginated(conditions, 1, 10)
+	var page, perPage int64 = 1, 10
+	if p, ok := queries["page"]; ok {
+		i, err := strconv.ParseInt(p, 10, 64)
+		if err == nil {
+			page = i
+		}
+	}
+	if pp, ok := queries["per_page"]; ok {
+		i, err := strconv.ParseInt(pp, 10, 64)
+		if err == nil {
+			perPage = i
+		}
+	}
+
+	paginatior := a.jobRepo.FindPaginated(conditions, page, perPage)
 	return jobcomponent.
 		List(util.NewPaginator(func(offset, limit int64) []*dto.Job {
 			jobs := paginatior.Slice(offset, limit)

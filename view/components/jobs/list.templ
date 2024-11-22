@@ -1,50 +1,72 @@
 package job
 
-import "cake-scraper/pkg/dto"
+import (
+    "strconv"
+    "cake-scraper/pkg/dto"
+)
 
 templ List(jobsPaginator dto.JobsPaginator) {
-<div class="table-container">
-    <table class="table is-bordered is-hoverable is-fullwidth">
-        <thead>
-            <tr>
-                <th>Company</th>
-                <th>Title</th>
-                <th>Main Category</th>
-                <th>Sub Category</th>
-                <th>Employment Type</th>
-                <th>Seniority</th>
-                <th>Location</th>
-                <th>Number to Hire</th>
-                <th>Experience</th>
-                <th>Salary</th>
-                <th>Remote</th>
-                <th>Tags</th>
-            </tr>
-        </thead>
-        <tbody>
-            for _, job := range jobsPaginator.Items() {
-            <tr>
-                <td>{ job.Company }</td>
-                <td>{ job.Title }</td>
-                <td>{ job.MainCategory }</td>
-                <td>{ job.SubCategory }</td>
-                <td>{ job.EmploymentType }</td>
-                <td>{ job.Seniority }</td>
-                <td>{ job.Location }</td>
-                <td>{ string(job.NumberToHire) }</td>
-                <td>{ job.Experience }</td>
-                <td>{ job.Salary }</td>
-                <td>{ job.Remote }</td>
-                <td>
-                    <ul>
-                        for _, tag := range job.Tags {
-                        <li>{ tag }</li>
-                        }
-                    </ul>
-                </td>
-            </tr>
+<div id="jobs-list">
+    <div class="table-container">
+        <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Title</th>
+                    <th>Main Category</th>
+                    <th>Sub Category</th>
+                    <th>Employment Type</th>
+                    <th>Seniority</th>
+                    <th>Location</th>
+                    <th>Number to Hire</th>
+                    <th>Experience</th>
+                    <th>Salary</th>
+                    <th>Remote</th>
+                    <th>Tags</th>
+                </tr>
+            </thead>
+            <tbody>
+                for _, job := range jobsPaginator.Items() {
+                <tr>
+                    <td>{ job.Company }</td>
+                    <td>{ job.Title }</td>
+                    <td>{ job.MainCategory }</td>
+                    <td>{ job.SubCategory }</td>
+                    <td>{ job.EmploymentType }</td>
+                    <td>{ job.Seniority }</td>
+                    <td>{ job.Location }</td>
+                    <td>{ strconv.Itoa(job.NumberToHire) }</td>
+                    <td>{ job.Experience }</td>
+                    <td>{ job.Salary }</td>
+                    <td>{ job.Remote }</td>
+                    <td>
+                        <ul>
+                            for _, tag := range job.Tags {
+                            <li>{ tag }</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <nav class="pagination" role="navigation" aria-label="pagination">
+        <a class="pagination-previous is-disabled" title="This is the first page">Previous</a>
+        <a href="#" class="pagination-next">Next page</a>
+        <ul class="pagination-list">
+            for i := int64(1); i <= jobsPaginator.TotalPage(); i++ {
+                if i == jobsPaginator.CurrentPage() {
+                    <li>
+                        <button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link is-current">{ strconv.FormatInt(i, 10) }</button>
+                    </li>
+                } else {
+                    <li>
+                        <button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link">{ strconv.FormatInt(i, 10) }</button>
+                    </li>
+                }
             }
-        </tbody>
-    </table>
+        </ul>
+    </nav>
 </div>
 }
