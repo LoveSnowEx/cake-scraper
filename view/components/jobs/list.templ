@@ -1,98 +1,102 @@
 package job
 
 import (
-    "strconv"
-    "cake-scraper/pkg/dto"
+	"cake-scraper/pkg/dto"
+	"strconv"
 )
 
 templ List(jobsPaginator dto.JobsPaginator) {
-<style>
+	<style>
     .table-container * {
         white-space: nowrap;
     }
 </style>
-<div id="jobs-list" class="is-flex is-flex-direction-column is-justify-content-space-between">
-    <div class="table-container" style="min-height: 80vh;">
-        <table class="table is-bordered is-narrow is-hoverable is-fullwidth">
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Title</th>
-                    <th>Main Category</th>
-                    <th>Sub Category</th>
-                    <th>Employment Type</th>
-                    <th>Seniority</th>
-                    <th>Location</th>
-                    <th>Number to Hire</th>
-                    <th>Experience</th>
-                    <th>Salary</th>
-                    <th>Remote</th>
-                    <th>Tags</th>
-                </tr>
-            </thead>
-            <tbody>
-                for _, job := range jobsPaginator.Items() {
-                <tr>
-                    <td>{ job.Company }</td>
-                    <td>{ job.Title }</td>
-                    <td>{ job.MainCategory }</td>
-                    <td>{ job.SubCategory }</td>
-                    <td>{ job.EmploymentType }</td>
-                    <td>{ job.Seniority }</td>
-                    <td>{ job.Location }</td>
-                    <td>{ strconv.Itoa(job.NumberToHire) }</td>
-                    <td>{ job.Experience }</td>
-                    <td>{ job.Salary }</td>
-                    <td>{ job.Remote }</td>
-                    <td>
-                        <ul>
-                            for _, tag := range job.Tags {
-                            <li>{ tag }</li>
-                            }
-                        </ul>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        {{ isFirstPage := jobsPaginator.CurrentPage() == 1 }}
-        {{ isLastPage := jobsPaginator.CurrentPage() == jobsPaginator.TotalPage() }}
-        <button class={ "pagination-previous", templ.KV("is-disabled", isFirstPage) }
-            hx-get={ "/components/jobs?page=" + strconv.FormatInt(jobsPaginator.CurrentPage()-1, 10) }
-            hx-target="#jobs-list"
-            hx-swap="outerHTML"
-            disabled?={ isFirstPage }
-            title="This is the first page">
-            Prev
-        </button>
-        <button class={ "pagination-next", templ.KV("is-disabled", isLastPage) }
-            hx-get={ "/components/jobs?page=" + strconv.FormatInt(jobsPaginator.CurrentPage()+1, 10) }
-            hx-target="#jobs-list"
-            hx-swap="outerHTML"
-            disabled?={ isLastPage }
-            title="This is the last page">
-            Next
-        </button>
-        <ul class="pagination-list">
-            {{
-                displayPage := int64(9)
-                minDisplayPage := min(max(jobsPaginator.CurrentPage()-4, 1), jobsPaginator.TotalPage()-displayPage+1)
-                maxDisplayPage := max(min(jobsPaginator.CurrentPage()+4, jobsPaginator.TotalPage()), displayPage)
-            }}
-            for i := minDisplayPage; i <= maxDisplayPage; i++ {
-                if i == jobsPaginator.CurrentPage() {
-                    <li>
-                        <button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link is-current">{ strconv.FormatInt(i, 10) }</button>
-                    </li>
-                } else {
-                    <li>
-                        <button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link">{ strconv.FormatInt(i, 10) }</button>
-                    </li>
-                }
-            }
-        </ul>
-    </nav>
-</div>
+	<div id="jobs-list" class="is-flex is-flex-direction-column is-justify-content-space-between">
+		<div class="table-container" style="min-height: 80vh;">
+			<table class="table is-bordered is-narrow is-hoverable is-fullwidth">
+				<thead>
+					<tr>
+						<th>Company</th>
+						<th>Title</th>
+						<th>Main Category</th>
+						<th>Sub Category</th>
+						<th>Employment Type</th>
+						<th>Seniority</th>
+						<th>Location</th>
+						<th>Number to Hire</th>
+						<th>Experience</th>
+						<th>Salary</th>
+						<th>Remote</th>
+						<th>Tags</th>
+					</tr>
+				</thead>
+				<tbody>
+					for _, job := range jobsPaginator.Items() {
+						<tr>
+							<td>{ job.Company }</td>
+							<td>{ job.Title }</td>
+							<td>{ job.MainCategory }</td>
+							<td>{ job.SubCategory }</td>
+							<td>{ job.EmploymentType }</td>
+							<td>{ job.Seniority }</td>
+							<td>{ job.Location }</td>
+							<td>{ strconv.Itoa(job.NumberToHire) }</td>
+							<td>{ job.Experience }</td>
+							<td>{ job.Salary }</td>
+							<td>{ job.Remote }</td>
+							<td>
+								<ul>
+									for _, tag := range job.Tags {
+										<li>{ tag }</li>
+									}
+								</ul>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+		<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+			{{ isFirstPage := jobsPaginator.CurrentPage() == 1 }}
+			{{ isLastPage := jobsPaginator.CurrentPage() == jobsPaginator.TotalPage() }}
+			<button
+				class={ "pagination-previous", templ.KV("is-disabled", isFirstPage) }
+				hx-get={ "/components/jobs?page=" + strconv.FormatInt(jobsPaginator.CurrentPage()-1, 10) }
+				hx-target="#jobs-list"
+				hx-swap="outerHTML"
+				disabled?={ isFirstPage }
+				title="This is the first page"
+			>
+				Prev
+			</button>
+			<button
+				class={ "pagination-next", templ.KV("is-disabled", isLastPage) }
+				hx-get={ "/components/jobs?page=" + strconv.FormatInt(jobsPaginator.CurrentPage()+1, 10) }
+				hx-target="#jobs-list"
+				hx-swap="outerHTML"
+				disabled?={ isLastPage }
+				title="This is the last page"
+			>
+				Next
+			</button>
+			<ul class="pagination-list">
+				{{
+	displayPage := int64(9)
+	minDisplayPage := min(max(jobsPaginator.CurrentPage()-4, 1), jobsPaginator.TotalPage()-displayPage+1)
+	maxDisplayPage := max(min(jobsPaginator.CurrentPage()+4, jobsPaginator.TotalPage()), displayPage)
+				}}
+				for i := minDisplayPage; i <= maxDisplayPage; i++ {
+					if i == jobsPaginator.CurrentPage() {
+						<li>
+							<button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link is-current">{ strconv.FormatInt(i, 10) }</button>
+						</li>
+					} else {
+						<li>
+							<button hx-get={ "/components/jobs?page=" + strconv.FormatInt(i, 10) } hx-target="#jobs-list" hx-swap="outerHTML" class="pagination-link">{ strconv.FormatInt(i, 10) }</button>
+						</li>
+					}
+				}
+			</ul>
+		</nav>
+	</div>
 }
