@@ -111,6 +111,12 @@ func (r *jobRepoImpl) Find(conditions map[string]interface{}) ([]*job.Job, error
 			return nil, err
 		}
 		j.Tags = tags
+		mainCategory, subCategory, err := r.findCategories(jobPo.ID)
+		if err != nil {
+			return nil, err
+		}
+		j.MainCategory = mainCategory
+		j.SubCategory = subCategory
 		result = append(result, j)
 	}
 	return result, nil
@@ -133,6 +139,30 @@ func (r *jobRepoImpl) findTags(jobID int64) ([]string, error) {
 	return tags, nil
 }
 
+func (r *jobRepoImpl) findCategories(jobID int64) (string, string, error) {
+	sql, args, err := sq.Select("main", "sub").
+		From("jobs_categories").
+		Join("categories ON jobs_categories.category_id = categories.id").
+		Where(sq.Eq{"job_id": jobID}).
+		ToSql()
+	if err != nil {
+		return "", "", err
+	}
+	row := r.db.QueryRowx(sql, args...)
+	if row.Err() != nil {
+		return "", "", fmt.Errorf("failed to select category: %w", err)
+	}
+	s := struct {
+		Main string `db:"main"`
+		Sub  string `db:"sub"`
+	}{}
+	err = row.StructScan(&s)
+	if err != nil {
+		return "", "", fmt.Errorf("failed to map scan category: %w", err)
+	}
+	return s.Main, s.Sub, nil
+}
+
 func (r *jobRepoImpl) FindPaginated(conditions Conditions, page, perPage int64) util.Paginator[*job.Job] {
 	var total int64
 	sql, args, err := conditions.ToSelectBuilder("COUNT(*)").
@@ -153,6 +183,10 @@ func (r *jobRepoImpl) FindPaginated(conditions Conditions, page, perPage int64) 
 			tags, err := r.findTags(jobPo.ID)
 			util.PanicError(err)
 			j.Tags = tags
+			mainCategory, subCategory, err := r.findCategories(jobPo.ID)
+			util.PanicError(err)
+			j.MainCategory = mainCategory
+			j.SubCategory = subCategory
 			result = append(result, j)
 		}
 		return result
